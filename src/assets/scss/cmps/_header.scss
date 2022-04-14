@@ -1,0 +1,14 @@
+.main-header{
+    background-color: #2a01ff47;
+}
+
+
+.nav{
+
+    >li{
+        margin-left: 20px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+}

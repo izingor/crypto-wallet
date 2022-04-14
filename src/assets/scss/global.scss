@@ -1,25 +1,24 @@
 // Externals
 
 // Setup
-@import "setup/variables";
-@import "setup/functions";
-@import "setup/mixins";
+@import 'setup/variables';
+@import 'setup/functions';
+@import 'setup/mixins';
 
 // Basics
-@import "basics/typography";
-@import "basics/base";
-@import "basics/helpers";
-@import "basics/layout";
-@import "basics/modals";
-@import "basics/animations";
+@import 'basics/typography';
+@import 'basics/base';
+@import 'basics/helpers';
+@import 'basics/layout';
+@import 'basics/modals';
+@import 'basics/animations';
 
 // Pages
-
-
+@import 'pages/home';
 
 // Components
-
-
-
-
+@import '/src/assets/scss/cmps/contact-list';
+@import '/src/assets/scss/cmps/header';
+@import '/src/assets/scss/cmps/crypto-app';
+@import '/src/assets/scss/cmps/contact-preview';
 

@@ -2,9 +2,7 @@ import React from 'react';
 import { Sparklines, SparklinesLine, SparklinesSpots } from 'react-sparklines';
 
 export function Chart({ yValues }) {
-	console.log(yValues);
     
-
 	return (
 		<>
 			<Sparklines

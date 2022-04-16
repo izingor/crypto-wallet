@@ -1,36 +1,32 @@
-import { Component } from 'react';
-import { UserMenu } from './UserMenu';
-import { ContactsList } from './ContactsList';
-import { userService } from '../services/user.service';
-import { contactService } from '../services/contact.service';
-import { StatisticPage } from './StatisticPage';
-import { Filter } from './Filter';
-
+import { Component } from 'react'
+import { UserMenu } from './UserMenu'
+import { ContactsList } from './ContactsList'
+import { userService } from '../services/user.service'
+import { StatisticPage } from './StatisticPage'
+// import { Filter } from './Filter'
 
 export class Home extends Component {
 	state = {
 		loggedUser: null,
-		contacts: null,
-	};
+		
+	}
 
 	async componentDidMount() {
 		try {
-			const loggedUser = await userService.getUser();
-			const contacts = await contactService.getContacts();	
-			this.setState({ loggedUser, contacts});
-			
+			const loggedUser = await userService.getUser()
+			this.setState({ loggedUser })
 		} catch (err) {
-			console.log('Had a problem while getting user', err.message);
+			console.log('Had a problem while getting user', err.message)
 		}
 	}
 
 	render() {
-		const { loggedUser, contacts } = this.state;
-		const { menuStatus } = this.props;
+		const { loggedUser, contacts } = this.state
+		const { menuStatus } = this.props
 
 		return (
-			<section className="container home-page">
-				<Filter />
+			<section className='container home-page'>
+				{/* <Filter /> */}
 				{loggedUser && menuStatus.user ? (
 					<UserMenu loggedUser={loggedUser} />
 				) : (
@@ -43,6 +39,6 @@ export class Home extends Component {
 				)}
 				{loggedUser && menuStatus.rates ? <StatisticPage /> : ''}
 			</section>
-		);
+		)
 	}
 }

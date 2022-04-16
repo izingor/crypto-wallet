@@ -4,6 +4,8 @@ import { ContactsList } from './ContactsList';
 import { userService } from '../services/user.service';
 import { contactService } from '../services/contact.service';
 import { StatisticPage } from './StatisticPage';
+import { Filter } from './Filter';
+
 
 export class Home extends Component {
 	state = {
@@ -28,6 +30,7 @@ export class Home extends Component {
 
 		return (
 			<section className="container home-page">
+				<Filter />
 				{loggedUser && menuStatus.user ? (
 					<UserMenu loggedUser={loggedUser} />
 				) : (

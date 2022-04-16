@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-import { Component } from 'react';
-
-export class Header extends Component {
-	render() {
-		return (
-			<section className="main-header">
-				<div className="container">I am the header</div>
-			</section>
-		);
-	}
-}
-=======
 import { Component } from 'react'
 
 export class Header extends Component {
@@ -32,4 +19,3 @@ export class Header extends Component {
 		)
 	}
 }
->>>>>>> f6d66b7863c03740ccad012a5dc2684109d2e624

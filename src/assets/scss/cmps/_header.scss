@@ -1,3 +1,19 @@
+<<<<<<< HEAD
 .main-header{
     background-color: #2a01ff47;
+=======
+.main-header{
+    background-color: #2a01ff47;
+}
+
+
+.nav{
+
+    >li{
+        margin-left: 20px;
+        &:hover{
+            cursor: pointer;
+        }
+    }
+>>>>>>> f6d66b7863c03740ccad012a5dc2684109d2e624
 }

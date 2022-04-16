@@ -9,7 +9,7 @@ export function Chart({ yValues }) {
 		<>
 			<Sparklines
 				data={yValues}
-				limit={100}
+				limit={yValues.lenght}
 				width={200}
 				height={50}
 				// margin={10}

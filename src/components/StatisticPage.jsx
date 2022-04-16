@@ -6,14 +6,13 @@ export class StatisticPage extends Component {
 	state = {
 		tradeVolume: null,
 	};
-    
-    yValues = [];
-    
+
+	yValues = [];
+
 	async componentDidMount() {
 		try {
 			const tradeVolume = await cryptoService.getRates();
-			const state = await this.setState({ tradeVolume });
-			await Promise.all([tradeVolume, state]);
+			this.setState({ tradeVolume });
 		} catch (err) {
 			console.log('had an error getting your rates', err.message);
 		}
@@ -21,15 +20,17 @@ export class StatisticPage extends Component {
 
 	render() {
 		const { tradeVolume } = this.state;
-        if(tradeVolume){
-            tradeVolume.values.forEach(item => this.yValues.push(item.y))
-            console.log(tradeVolume.values);
-        }
-
+		if (tradeVolume) {
+			tradeVolume.values.forEach((item) => this.yValues.push(item.y));
+			console.log(tradeVolume.values);
+		}
 
 		return (
 			<section className="statistic-page">
-				{tradeVolume ? <Chart yValues={this.yValues} /> : ''}
+				<div className="trade-volume">
+					<h2>Trade Volume Graph</h2>
+					{tradeVolume ? <Chart yValues={this.yValues} /> : <div>Loading</div>}
+				</div>
 			</section>
 		);
 	}

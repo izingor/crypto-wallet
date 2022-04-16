@@ -618,9 +618,9 @@ const rates = {"status": "ok",
 
 async function getRates() {
     try {
-        // const res = await axios.get(URL_VOLUME);
-        // return res.data;
-        return rates;
+        const res = await axios.get(URL_VOLUME);
+        return res.data;
+        // return rates;
     } catch (err) {
         console.log('Had an error getting your date', err.message);
     }

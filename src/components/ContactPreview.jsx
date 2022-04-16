@@ -1,21 +1,31 @@
-import { Component } from 'react';
+import { Component } from 'react'
 
-export function ContactPreview({ contact }) {
-	// const { contacts } = this.props
-	// console.log(contacts);
-	const contactStyle = {
-		backgroundImage: `url(https://robohash.org/${contact._id}`,
-	};
-	return (
-		<section
-			style={contactStyle}
-			className="contact-preview flex column auto-center"
-		>
-			<div className="user-info">
-				<p>{contact.name}</p>
-				<p>{contact.email}</p>
-				<p>{contact.phone}</p>
-			</div>
-		</section>
-	);
+export class ContactPreview extends Component {
+
+
+	onShowContact = (id) => {
+		console.log('contact id is', id)
+	}
+
+	render() {
+		const { contact } = this.props
+		const contactStyle = {
+			backgroundImage: `url(https://robohash.org/${contact._id}`}
+			
+		return (
+			<section
+				style={contactStyle}
+				className='contact-preview flex column auto-center'
+				onClick={() => this.onShowContact(contact._id)}
+			>
+				<div className='user-info'>
+					<p>{contact.name}</p>
+					<p>{contact.email}</p>
+					<p>{contact.phone}</p>
+				</div>
+
+				
+			</section>
+		)
+	}
 }

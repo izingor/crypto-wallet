@@ -143,7 +143,7 @@ function getContacts(filterBy = null) {
     return new Promise((resolve, reject) => {
         var contactsToReturn = contacts;
         if (filterBy) {
-            const regex = new RegExp(filterBy.name, 'i');
+        const regex = new RegExp(filterBy.name, 'i');
             contactsToReturn = contacts.filter(contact => regex.test(contact.name));
         }
         resolve(sort(contactsToReturn));

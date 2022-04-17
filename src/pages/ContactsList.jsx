@@ -1,6 +1,6 @@
 import { Component } from 'react'
-import { ContactPreview } from './ContactPreview'
-import { Filter } from './Filter'
+import { ContactPreview } from '../components/ContactPreview'
+import { Filter } from '../components/Filter'
 import { contactService } from '../services/contact.service'
 
 export class ContactsList extends Component {
@@ -15,7 +15,6 @@ export class ContactsList extends Component {
 
 	getContacts = async () => {
 		const contacts = await contactService.getContacts(this.state.filterBy)
-		// console.log(contacts);
 		this.setState({ contacts: contacts })
 	}
 

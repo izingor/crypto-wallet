@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { cryptoService } from '../services/crypto.service'
-import { Chart } from './Chart'
+import { Chart } from '../components/Chart'
 
 export class StatisticPage extends Component {
 	state = {

@@ -20,8 +20,7 @@ export class ContactPreview extends Component {
 			>
 				<div className='user-info'>
 					<p>{contact.name}</p>
-					<p>{contact.email}</p>
-					<p>{contact.phone}</p>
+				
 				</div>
 
 				

@@ -25,7 +25,7 @@ export class StatisticPage extends Component {
 		}
 
 		return (
-			<section className='statistic-page'>
+			<section className='statistic-page container'>
 				<div className='trade-volume'>
 					<h2>Trade Volume Graph</h2>
 					{tradeVolume ? <Chart yValues={this.yValues} /> : <div>Loading</div>}

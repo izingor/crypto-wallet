@@ -14,6 +14,7 @@ function _Header() {
 					<NavLink to="/">Home</NavLink>
 					<NavLink to="/contacts">Contacts</NavLink>
 					<NavLink to="/rates">Rates</NavLink>
+					<NavLink to="/signup">Signup</NavLink>
 					{/* <li onClick={() => onUserMenu('rates')}>Rates</li> */}
 				</ul>
 			</div>

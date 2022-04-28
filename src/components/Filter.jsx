@@ -9,7 +9,7 @@ export class Filter extends Component {
 		console.log('handling change', target.value)
 		const field = target.name
 		const value = target.value
-		await this.setState({ [field]: value })
+		this.setState({ [field]: value })
 		this.props.setFilter(this.state)
 	}
 

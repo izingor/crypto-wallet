@@ -1,36 +1,30 @@
-import { Component } from 'react'
 import { cryptoService } from '../services/crypto.service'
 import { Chart } from '../components/Chart'
+import { useEffect, useState } from 'react'
 
-export class StatisticPage extends Component {
-	state = {
-		tradeVolume: null,
-	}
+export function StatisticPage() {
+	const [tradeVolume, setTradeVolume] = useState(null)
 
-	yValues = []
+	const yValues = []
 
-	async componentDidMount() {
-		try {
+	useEffect(() => {
+		const getTradeVolume = async () => {
 			const tradeVolume = await cryptoService.getRates()
-			this.setState({ tradeVolume })
-		} catch (err) {
-			console.log('had an error getting your rates', err.message)
+			setTradeVolume(tradeVolume)
 		}
+		getTradeVolume()
+	})
+
+	if (tradeVolume) {
+		tradeVolume.values.forEach((item) => yValues.push(item.y))
 	}
 
-	render() {
-		const { tradeVolume } = this.state
-		if (tradeVolume) {
-			tradeVolume.values.forEach((item) => this.yValues.push(item.y))
-		}
-
-		return (
-			<section className='statistic-page container'>
-				<div className='trade-volume'>
-					<h2>Trade Volume Graph</h2>
-					{tradeVolume ? <Chart yValues={this.yValues} /> : <div>Loading</div>}
-				</div>
-			</section>
-		)
-	}
+	return (
+		<section className='statistic-page container'>
+			<div className='trade-volume'>
+				<h2>Trade Volume Graph</h2>
+				{tradeVolume ? <Chart yValues={yValues} /> : <div>Loading</div>}
+			</div>
+		</section>
+	)
 }

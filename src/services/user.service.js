@@ -12,7 +12,7 @@ export const userService = {
 
 const user = {
     name: 'Potato Joe',
-    coins: 1000,
+    coins: 100000,
     moves: []
 };
 

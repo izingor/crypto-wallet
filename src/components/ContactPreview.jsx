@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
+
 export function ContactPreview({ contact,removeContact }) {
-	
+
 	const onRemove = async (id) => {
 		removeContact(id)
 	}

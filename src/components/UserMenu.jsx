@@ -3,7 +3,7 @@ export function UserMenu({ loggedUser }) {
 
 	return (
 		<>
-			<section className='crypto-app container'>
+			<section className='user-menu-container container'>
 				{name ? (
 					<div className='user-info'>
 						<p>{name}</p>

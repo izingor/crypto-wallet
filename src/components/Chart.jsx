@@ -10,7 +10,6 @@ export function Chart({ yValues }) {
 				limit={yValues.lenght}
 				width={200}
 				height={50}
-				// margin={10}
 			>
 				<SparklinesLine style={{ fill: 'none' }}  />
 				<SparklinesSpots />

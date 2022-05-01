@@ -24,7 +24,7 @@ export function EditContact(props) {
 
 	return (
 		contact && (
-			<section style = {contactStyle} className='edit-contact container'>{contact.name}</section>
+			<section style = {contactStyle} className='edit-contact-container container'>{contact.name}</section>
 			// <img src="" alt="" />
 		)
 	)

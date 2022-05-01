@@ -32,7 +32,6 @@ function getEmptyUser() {
     return user;
 }
 function saveNewUser(user) {
-    console.log('saving new user', user);
     const savedUser = asyncStorageService.post(USER_DB, user);
     return savedUser;
 }

@@ -14,7 +14,6 @@ export function ContactPreview({ contact,removeContact }) {
 		backgroundImage: `url(https://robohash.org/${contact._id}`,
 	}
 
-
 	return (
 		<section style={contactStyle} className='contact-preview flex column '>
 			<Link to={`/contact/${contact._id}`}>

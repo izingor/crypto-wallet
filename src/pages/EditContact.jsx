@@ -1,26 +1,31 @@
-import { Component } from 'react';
-import { contactService } from '../services/contact.service';
+import { useEffect } from 'react'
+import { useState } from 'react'
+import { Component } from 'react'
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
+import { contactService } from '../services/contact.service'
 
-export class EditContact extends Component {
-	state = {
-		contact: null,
-	};
-	async componentDidMount() {
-		const contact = await contactService.getContactById(
-			this.props.match.params.id
-		);
-		this.setState({ contact });
+export function EditContact(props) {
+	const [contact, setContact] = useState(null)
+	const params = useParams()
+
+	const getContact = async () => {
+		const contact = await contactService.getContactById(params.id)
+		setContact(contact)
 	}
 
-	render() {
-		// const contactId = this.props.match.params.id;
-		const { contact } = this.state;
+	useEffect(() => {
+		getContact()
+		console.log(props);
+	})
 
-		console.log(this.state.contact);
-		return (
-			contact && (
-				<section className="edit-contact container">{contact.name}</section>
-			)
-		);
+	const contactStyle = {
+		backgroundImage: `url(https://robohash.org/${params.id}`
 	}
+
+	return (
+		contact && (
+			<section style = {contactStyle} className='edit-contact container'>{contact.name}</section>
+			// <img src="" alt="" />
+		)
+	)
 }

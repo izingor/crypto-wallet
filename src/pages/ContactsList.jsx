@@ -4,10 +4,6 @@ import { Filter } from '../components/Filter'
 import { contactService } from '../services/contact.service'
 
 export function ContactsList() {
-	// state = {
-	// 	filterBy: null,
-	// 	contacts: null,
-	// }
 
 	const [filterBy, setFilterBy] = useState(null)
 	const [contacts, setContacts] = useState(null)
@@ -29,10 +25,8 @@ export function ContactsList() {
 	const removeContact = async (id) => {
 		const contacts = await contactService.deleteContact(id)
 		setContacts(contacts)
-		// console.log('removing contact from contact list', id)
 	}
 
-	// const { contacts } = this.state
 	return (
 		<>
 			<section className='container'>

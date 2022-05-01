@@ -7,6 +7,7 @@ export function ContactDetails(props) {
 	const [contact, setContact] = useState(null)
 
 	const params = useParams()
+	
 	useEffect(() => {
 		loadContact()
 	},)

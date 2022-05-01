@@ -1,34 +1,24 @@
-import { Component } from 'react'
 
-export class Filter extends Component {
-	state = {
-		name: '',
-	}
-
-	handleChange = async ({ target }) => {
-		console.log('handling change', target.value)
+export function Filter(props) {
+	
+	const handleChange = async ({ target }) => {
 		const field = target.name
 		const value = target.value
-		this.setState({ [field]: value })
-		this.props.setFilter(this.state)
+		props.setFilter({ [field]: value })
 	}
 
-	render() {
-		const { name } = this.state
-		return (
-			<section className='filter-container'>
-				<section>
-					<label htmlFor='name'>Name</label>
-					<input
-						onChange={this.handleChange}
-						type='text'
-						id='name'
-						name='name'
-						value={name}
-					/>
-					<button>Search</button>
-				</section>
+	return (
+		<section className='filter-container'>
+			<section>
+				<label htmlFor='name'>Name</label>
+				<input
+					onChange={handleChange}
+					type='text'
+					id='name'
+					name='name'
+				/>
+				<button>Search</button>
 			</section>
-		)
-	}
+		</section>
+	)
 }

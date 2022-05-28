@@ -15,7 +15,7 @@ export function SignupPage(props) {
 	const handleChange = async ({ target }) => {
 		const value = target.value
 		const field = target.name
-		setUser({ [field]: value })
+		setUser(prevUser => ({...prevUser ,[field]: value }))
 	}
 
 	return (

@@ -10,29 +10,29 @@ export const userService = {
 };
 
 
-const user = {
-    name: 'Potato Joe',
-    coins: 100000,
-    moves: []
-};
 
 
 function getUser() {
-    console.log('hello');
-    return Promise.resolve(user);
+    return Promise.resolve(sessionService.loadFromStorage(SESSION_DB));
 }
 
 function getEmptyUser() {
     const user = {
         name: null,
         password: null,
-        coins: 1000,
+        USD: 1000,
         moves: []
     };
     return user;
 }
-function saveNewUser(user) {
-    const savedUser = asyncStorageService.post(USER_DB, user);
+function saveNewUser(userData) {
+    const newUser = {
+        ...userData,
+        usdBalance: 1000,
+        coins:[], 
+
+    }
+    const savedUser = asyncStorageService.post(USER_DB, newUser);
     return savedUser;
 }
 

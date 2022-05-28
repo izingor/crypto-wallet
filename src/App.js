@@ -17,11 +17,11 @@ export class App extends Component {
     return (
       <Router>
         <section className="main-app ">
-          <Header onUserMenu={this.onUserMenu} />
+          <Header />
           <Switch>
-            <Route path='/contacts/edit/:id' component={EditContact} />
-            <Route path='/contact/:id' component={ContactDetails} />
-            <Route path='/contacts' component={ContactsList} />
+            {/* <Route path='/contacts/edit/:id' component={EditContact} /> */}
+            {/* <Route path='/contact/:id' component={ContactDetails} /> */}
+            {/* <Route path='/contacts' component={ContactsList} /> */}
             <Route path = '/signup' component={SignupPage} />
             <Route path='/rates' component={StatisticPage} />
             <Route path='/edit' component={EditContact} />

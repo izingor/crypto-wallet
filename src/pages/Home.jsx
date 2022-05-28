@@ -6,16 +6,9 @@ import { userLogin } from '../store/user.store'
 export function Home() {
 	const [loggedUser, setLoggedUser] = useState(null)
 	const dispatch = useDispatch()
-	// const user = useSelector((state) => state.user)
 
 	useEffect(() => {
-		// dispatch(userLogin())
-		// console.log(user)
-		// const geLoggedtUser = async () => {
-		// 	const loggedUser = await userService.getUser()
-		// 	setLoggedUser(loggedUser)
-		// }
-		// geLoggedtUser()
+	
 	}, [])
 
 	return (

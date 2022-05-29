@@ -1,16 +1,34 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { userService } from '../services/user.service';
+
+
+const initialState = {
+    user: null
+};
+
+export const validateUser = createAsyncThunk('userStatus/loginUser', async (userData) => {
+    const loggedUser = await userService.login(userData);
+    return loggedUser;
+});
 
 
 export const userSlice = createSlice({
-    name: 'loggedUser',
-    initialState: {
-        user: null
-    },
+    name: 'userStatus',
+    initialState,
     reducers: {
-        userLogin: (state) => {
-            state.user = 'logged';
-            console.log('logging from the store', state.user);
+        userLogin: (state, { payload }) => {
+            // state.user = 'logged';
+            console.log('the state', state);
+            console.log('payload', payload);
+            // const loggedUser = userService.login(payload)
+
+            // loggedUser ? state.user = loggedUser : state.user = null; 
         }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(validateUser.fulfilled, (state, {payload}) => {
+            state.user = payload
+        });
     }
 
 });

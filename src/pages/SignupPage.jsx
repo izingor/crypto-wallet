@@ -1,43 +1,53 @@
-import { useState } from 'react'
-import { userService } from '../services/user.service'
-import { sessionService } from '../services/session.service'
+import { useState } from 'react';
+import { userService } from '../services/user.service';
+import { useHandleChange } from '../hooks/useHandleChange';
+import { sessionService } from '../services/session.service';
 export function SignupPage(props) {
-	const [user, setUser] = useState(null)
+	
+	const [userData, handleChange] = useHandleChange({
+		name: '',
+		password: '',
+		passwordConformation: '',
+	});
+	const { name, password, passwordConformation } = userData;
 
 	const onSignup = async (ev) => {
-		ev.preventDefault()
-		const savedUser = await userService.saveNewUser(user)
-		const loggedUser = await userService.login(savedUser)
-		console.log('the user logged successfully', user)
-		if (loggedUser) props.history.push('/')
-	}
-
-	const handleChange = async ({ target }) => {
-		const value = target.value
-		const field = target.name
-		setUser(prevUser => ({...prevUser ,[field]: value }))
-	}
+		ev.preventDefault();
+		if (password !== passwordConformation) return;
+		const savedUser = await userService.saveNewUser({ name, password });
+		const loggedUser = await userService.login(savedUser);
+		if (loggedUser) props.history.push('/');
+	};
 
 	return (
-		<section className='signup-page container app-height flex auto-center column'>
-			<section className='flex column auto-center'>
+		<section className="signup-page container app-height flex auto-center column">
+			<div className="flex column auto-center">
 				<label>Please enter your name</label>
-				<form className='flex column' onSubmit={onSignup}>
+				<form className="flex column" onSubmit={onSignup}>
 					<input
-						type='text'
+						type="text"
 						onChange={handleChange}
-						name='name'
-						placeholder='User name'
+						name="name"
+						placeholder="User name"
+						value={name}
 					/>
 					<input
-						type='text'
+						type="text"
 						onChange={handleChange}
-						name='password'
-						placeholder='Password'
+						name="password"
+						placeholder="Password"
+						value={password}
+					/>
+					<input
+						type="text"
+						onChange={handleChange}
+						name="passwordConformation"
+						placeholder="Password Confirmation"
+						value={passwordConformation}
 					/>
 					<button>Signup</button>
 				</form>
-			</section>
+			</div>
 		</section>
-	)
+	);
 }

@@ -1,7 +1,7 @@
 import { asyncStorageService } from "./async.storage.service";
 import { sessionService } from "./session.service";
 const USER_DB = 'usersDB';
-const SESSION_DB = 'loggedDB'
+const SESSION_DB = 'loggedDB';
 export const userService = {
     getUser,
     getEmptyUser,
@@ -29,21 +29,21 @@ function saveNewUser(userData) {
     const newUser = {
         ...userData,
         usdBalance: 1000,
-        coins:[], 
+        coins: [],
 
-    }
+    };
     const savedUser = asyncStorageService.post(USER_DB, newUser);
     return savedUser;
 }
 
 
 async function login(user) {
-    const loggedUser = await asyncStorageService.get(USER_DB, user._id)
-    console.log(loggedUser);
-    if(loggedUser) {
-        sessionService.saveToStorage(SESSION_DB,loggedUser)
+    const activeUser = await asyncStorageService.get(USER_DB, user.name);
+    if (activeUser.password === user.password) {
+        const { password, ...loggedUser } = activeUser;
+        sessionService.saveToStorage(SESSION_DB, loggedUser);
         return loggedUser;
-    }else{
+    } else {
         console.log('no user');
         return false;
     }

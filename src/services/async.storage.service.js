@@ -12,9 +12,9 @@ function query(entityType) {
     return Promise.resolve(entities);
 }
 
-function get(entityType, entityId) {
+function get(entityType, name) {
     return query(entityType)
-        .then(entities => entities.find(entity => entity._id === entityId))
+        .then(entities => entities.find(entity => entity.name === name))
 }
 
 function post(entityType, newEntity) {

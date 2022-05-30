@@ -10,10 +10,10 @@ function saveToStorage(key,value) {
 
 function loadFromStorage(key) {
     let data = sessionStorage.getItem(key);
-    return data ? JSON.parse(data) : undefined;
+    return data ? JSON.parse(data) : null;
 }
 
 function clearStorage() {
-    sessionStorage.clear()
+   return sessionStorage.clear()
 }
 

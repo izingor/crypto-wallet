@@ -1,22 +1,28 @@
-import { useState } from 'react';
-import { userService } from '../services/user.service';
 import { useHandleChange } from '../hooks/useHandleChange';
-import { sessionService } from '../services/session.service';
+import { useDispatch } from 'react-redux';
+import { signupUser, loginUser } from '../store/user.store';
+
 export function SignupPage(props) {
-	
+	const dispatch = useDispatch();
 	const [userData, handleChange] = useHandleChange({
 		name: '',
+		email: '',
 		password: '',
 		passwordConformation: '',
 	});
-	const { name, password, passwordConformation } = userData;
+	const { name, email, password, passwordConformation } = userData;
 
 	const onSignup = async (ev) => {
 		ev.preventDefault();
 		if (password !== passwordConformation) return;
-		const savedUser = await userService.saveNewUser({ name, password });
-		const loggedUser = await userService.login(savedUser);
-		if (loggedUser) props.history.push('/');
+		try {
+			await dispatch(signupUser({ name, password, email }));
+			const { payload } = await dispatch(loginUser({ name, password, email }));
+			console.log(payload);
+			payload ? props.history.push('/') : alert('Failed to sign up');
+		} catch (err) {
+			console.log(err.message);
+		}
 	};
 
 	return (
@@ -30,6 +36,15 @@ export function SignupPage(props) {
 						name="name"
 						placeholder="User name"
 						value={name}
+						required
+					/>
+					<input
+						type="mail"
+						onChange={handleChange}
+						name="email"
+						placeholder="Email"
+						value={email}
+						required
 					/>
 					<input
 						type="text"
@@ -37,6 +52,7 @@ export function SignupPage(props) {
 						name="password"
 						placeholder="Password"
 						value={password}
+						required
 					/>
 					<input
 						type="text"
@@ -44,6 +60,7 @@ export function SignupPage(props) {
 						name="passwordConformation"
 						placeholder="Password Confirmation"
 						value={passwordConformation}
+						required
 					/>
 					<button>Signup</button>
 				</form>

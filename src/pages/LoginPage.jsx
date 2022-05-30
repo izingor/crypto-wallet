@@ -1,17 +1,23 @@
 import { useHandleChange } from '../hooks/useHandleChange';
 import { NavLink } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { userLogin, user, validateUser } from '../store/user.store';
-export function LoginPage() {
-	const [userData, handleChange] = useHandleChange({ name: '', password: '' });
-	const { name, password } = userData;
+import { useDispatch } from 'react-redux';
+import { loginUser } from '../store/user.store';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
+export function LoginPage() {
+	const [userData, handleChange] = useHandleChange({ email: '', password: '' });
+	const { email, password } = userData;
+	const history = useHistory();
 	const dispatch = useDispatch();
 
 	const onLogin = async (ev) => {
 		ev.preventDefault();
-		await dispatch(validateUser(userData));
-		console.log('logged in');
+		try {
+			const { payload } = await dispatch(loginUser(userData));
+			payload && history.push('/');
+		} catch (err) {
+			console.log(err.message);
+		}
 	};
 
 	return (
@@ -20,18 +26,20 @@ export function LoginPage() {
 				<label>Please enter your name</label>
 				<form className="flex column" onSubmit={onLogin}>
 					<input
-						type="text"
+						type="email"
 						onChange={handleChange}
-						name="name"
-						placeholder="User name"
-						value={name}
+						name="email"
+						placeholder="Your Email"
+						value={email}
+						required
 					/>
 					<input
-						type="text"
+						type="password"
 						onChange={handleChange}
 						name="password"
 						placeholder="Password"
 						value={password}
+						required
 					/>
 					<button>Login</button>
 				</form>

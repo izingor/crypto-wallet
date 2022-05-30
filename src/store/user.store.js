@@ -3,35 +3,74 @@ import { userService } from '../services/user.service';
 
 
 const initialState = {
-    user: null
+    user: null,
+    loginStatus: '',
+    signupStatus: ''
 };
 
-export const validateUser = createAsyncThunk('userStatus/loginUser', async (userData) => {
+export const loginUser = createAsyncThunk('userStatus/loginUser', async (userData) => {
     const loggedUser = await userService.login(userData);
     return loggedUser;
 });
+
+export const signupUser = createAsyncThunk('userStatus/signUpUser', async (userData) => {
+    const newUser = await userService.saveNewUser(userData);
+    return newUser;
+});
+
+export const checkUserSession = createAsyncThunk('userStatus/checkUserSession', async () => {
+    const loggedUser = userService.getUser();
+    return loggedUser;
+});
+
+export const logout = createAsyncThunk('userStatus/logout', async () => {
+    await userService.logout();
+});
+
 
 
 export const userSlice = createSlice({
     name: 'userStatus',
     initialState,
     reducers: {
-        userLogin: (state, { payload }) => {
-            // state.user = 'logged';
-            console.log('the state', state);
-            console.log('payload', payload);
-            // const loggedUser = userService.login(payload)
-
-            // loggedUser ? state.user = loggedUser : state.user = null; 
-        }
+        // checkUserSession: (state) => {
+        //     const userSession = userService.checkActiveUser();
+        //     state.user = userSession;
+        // }
     },
     extraReducers: (builder) => {
-        builder.addCase(validateUser.fulfilled, (state, {payload}) => {
-            state.user = payload
-        });
+        builder.addCase(loginUser.pending, (state) => {
+            state.loginStatus = 'Loading';
+        })
+            .addCase(loginUser.fulfilled, (state, { payload }) => {
+                state.user = payload;
+                state.loginStatus = 'Logged';
+            })
+            .addCase(loginUser.rejected, (state) => {
+                state.loginStatus = 'Failed';
+            })
+            .addCase(signupUser.pending, (state) => {
+                state.signupStatus = 'Loading';
+            })
+            .addCase(signupUser.fulfilled, (state) => {
+                state.signupStatus = 'Successful';
+                console.log('singning up');
+            })
+            .addCase(signupUser.rejected, (state) => {
+                state.signupStatus = 'Failed';
+            })
+            .addCase(checkUserSession.fulfilled, (state, { payload }) => {
+                state.user = payload;
+            })
+            .addCase(logout.fulfilled, (state) => {
+                state.user = null;
+            });
+
+
     }
+
 
 });
 export const user = (state) => state.userStore.user;
-export const { userLogin } = userSlice.actions;
+// export const {  } = userSlice.actions;
 export default userSlice.reducer;

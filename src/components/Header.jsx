@@ -1,8 +1,16 @@
 import { NavLink } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { user } from '../store/user.store';
+import { logout } from '../store/user.store';
+
 export function Header() {
 	const activeUser = useSelector(user);
+	const dispacth = useDispatch();
+
+	const logoutUser = () => {
+		dispacth(logout());
+		console.log('loggin out');
+	};
 
 	return (
 		<section className="main-header">
@@ -14,7 +22,11 @@ export function Header() {
 					</NavLink>
 					{/* <NavLink to='/contacts'>Contacts</NavLink> */}
 					<NavLink to="/rates">Rates</NavLink>
-					<NavLink to="/login">Login</NavLink>
+					{activeUser ? (
+						<a onClick={logoutUser}>Logout</a>
+					) : (
+						<NavLink to="/login">Login</NavLink>
+					)}
 				</ul>
 			</div>
 		</section>

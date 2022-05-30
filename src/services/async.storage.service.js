@@ -12,14 +12,14 @@ function query(entityType) {
     return Promise.resolve(entities);
 }
 
-function get(entityType, name) {
+function get(entityType, email) {
     return query(entityType)
-        .then(entities => entities.find(entity => entity.name === name))
+        .then(entities => entities.find(entity => entity.email === email))
 }
 
 function post(entityType, newEntity) {
     newEntity._id = _makeId()
-    newEntity.createdAt = new Date()
+    newEntity.createdAt = Date.now()
     return query(entityType)
         .then(entities => {
             entities.push(newEntity);

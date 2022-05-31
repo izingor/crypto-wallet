@@ -7,7 +7,6 @@ const options = {
     url: 'https://crypto-pulse.p.rapidapi.com/news',
     headers: {
         'X-RapidAPI-Host': 'crypto-pulse.p.rapidapi.com',
-        'X-RapidAPI-Key': '9948d39de6msh6242314e690f005p133f56jsn4a971bf3973e'
     }
 };
 

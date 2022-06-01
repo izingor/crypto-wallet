@@ -43,12 +43,14 @@ export function LoginPage() {
 						handleChange={handleChange}
 						inputType="email"
 						valueType={email}
+						placeholderText = "Email Address"
 					/>
 
 					<SimpleInput
 						handleChange={handleChange}
 						inputType="password"
 						valueType={password}
+						placeholderText = "Password"
 					/>
 					<SubmitBtn />
 				</form>

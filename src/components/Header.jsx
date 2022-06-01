@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { user } from '../store/modules/user.store';
 import { logout } from '../store/modules/user.store';
-import { newsService } from '../services/news.service'
+import { newsService } from '../services/news.service';
 
 export function Header() {
 	const activeUser = useSelector(user);
@@ -13,26 +13,36 @@ export function Header() {
 		console.log('loggin out');
 	};
 
-	// const onNewsClicked = () => {
-	// 	newsService.getCryptoNews()
-	// }
+	// const onNewsClicked = async () => {
+	// 	// const news = await newsService.getCryptoNews();
+	// 	console.log(news);
+	// };
+	const navTextClass =
+		'hover:cursor-pointer hover:text-amber-500 active:text-amber-800';
 
 	return (
-		<section className="bg-emerald-400">
+		<section className="bg-indigo-600 ">
 			<div className="container flex justify-between py-3 items-center">
-				<h1 className = "text-3xl">Wallet</h1>
-				<nav className="flex justify-center space-x-4">
-					<NavLink exact to="/">
+				<h1 className="text-3xl">Wallet</h1>
+				<nav className="flex justify-center space-x-4 text-amber-200">
+					<NavLink exact to="/" className={navTextClass}>
 						Home
 					</NavLink>
-					{/* <NavLink to='/contacts'>Contacts</NavLink> */}
-					<NavLink to="/rates">Rates</NavLink>
+					<NavLink to="/rates" className={navTextClass}>
+						Rates
+					</NavLink>
+					<NavLink to="/news" className={navTextClass}>
+						News
+					</NavLink>
 					{activeUser ? (
-						<p onClick={logoutUser}>Logout</p>
+						<p onClick={logoutUser} className={navTextClass}>
+							Logout
+						</p>
 					) : (
-						<NavLink to="/login">Login</NavLink>
+						<NavLink to="/login" className={navTextClass}>
+							Login
+						</NavLink>
 					)}
-					{/* <p onClick = {onNewsClicked}>News</p> */}
 				</nav>
 			</div>
 		</section>

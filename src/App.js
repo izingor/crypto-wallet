@@ -10,7 +10,7 @@ import './assets/scss/global.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { checkUserSession } from './store/modules/user.store';
-
+import { NewsPage } from './pages/NewsPage';
 
 export function App() {
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ export function App() {
         <Switch>
           {/* <Route path='/contacts/edit/:id' component={EditContact} /> */}
           {/* <Route path='/contact/:id' component={ContactDetails} /> */}
-          {/* <Route path='/contacts' component={ContactsList} /> */}
+          <Route path='/news' component={NewsPage} />
           <Route path='/signup' component={SignupPage} />
           <Route path='/login' component={LoginPage} />
           <Route path='/rates' component={StatisticPage} />

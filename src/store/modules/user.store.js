@@ -29,8 +29,8 @@ export const logout = createAsyncThunk('userStatus/logout', async () => {
 
 
 
-export const userSlice = createSlice({
-    name: 'userStatus',
+const userSlice = createSlice({
+    name: 'user',
     initialState,
     reducers: {
         // checkUserSession: (state) => {
@@ -40,7 +40,7 @@ export const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.pending, (state) => {
-            state.loginStatus = 'Loading';
+            state.loginStatus = 'Signing in';
         })
             .addCase(loginUser.fulfilled, (state, { payload }) => {
                 state.user = payload;

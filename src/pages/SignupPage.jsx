@@ -1,7 +1,8 @@
 import { useHandleChange } from '../hooks/useHandleChange';
 import { useDispatch } from 'react-redux';
-import { signupUser, loginUser } from '../store/user.store';
-
+import { signupUser, loginUser } from '../store/modules/user.store';
+import { SimpleInput } from '../components/SimpleInput';
+import { SubmitBtn } from '../components/SubmitBtn';
 export function SignupPage(props) {
 	const dispatch = useDispatch();
 	const [userData, handleChange] = useHandleChange({
@@ -18,7 +19,6 @@ export function SignupPage(props) {
 		try {
 			await dispatch(signupUser({ name, password, email }));
 			const { payload } = await dispatch(loginUser({ name, password, email }));
-			console.log(payload);
 			payload ? props.history.push('/') : alert('Failed to sign up');
 		} catch (err) {
 			console.log(err.message);
@@ -26,43 +26,37 @@ export function SignupPage(props) {
 	};
 
 	return (
-		<section className="signup-page container app-height flex auto-center column">
-			<div className="flex column auto-center">
-				<label>Please enter your name</label>
-				<form className="flex column" onSubmit={onSignup}>
-					<input
-						type="text"
-						onChange={handleChange}
-						name="name"
-						placeholder="User name"
-						value={name}
-						required
+		<section className="container flex justify-center items-center">
+			<div className="max-w-md w-full space-y-8">
+				<h5 className="mt-6 text-center text-2xl font-extrabold text-gray-900">
+					Sign Up
+				</h5>
+				<form className="flex flex-col" onSubmit={onSignup}>
+					<SimpleInput
+						handleChange={handleChange}
+						inputType="name"
+						valueType={name}
+						placeholderText="Your name"
 					/>
-					<input
-						type="mail"
-						onChange={handleChange}
-						name="email"
-						placeholder="Email"
-						value={email}
-						required
+					<SimpleInput
+						handleChange={handleChange}
+						inputType="email"
+						valueType={email}
+						placeholderText="Email address"
 					/>
-					<input
-						type="text"
-						onChange={handleChange}
-						name="password"
-						placeholder="Password"
-						value={password}
-						required
+					<SimpleInput
+						handleChange={handleChange}
+						inputType="password"
+						valueType={password}
+						placeholderText="Password"
 					/>
-					<input
-						type="text"
-						onChange={handleChange}
-						name="passwordConformation"
-						placeholder="Password Confirmation"
-						value={passwordConformation}
-						required
+					<SimpleInput
+						handleChange={handleChange}
+						inputType="passwordConformation"
+						valueType={passwordConformation}
+						placeholderText="Password confirmation"
 					/>
-					<button>Signup</button>
+					<SubmitBtn />
 				</form>
 			</div>
 		</section>

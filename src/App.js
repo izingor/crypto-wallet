@@ -9,19 +9,19 @@ import { LoginPage } from './pages/LoginPage';
 import './assets/scss/global.scss';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { checkUserSession } from './store/user.store';
+import { checkUserSession } from './store/modules/user.store';
 
 
 export function App() {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(checkUserSession());
   }, []);
 
   return (
     <Router>
-      <section className="main-app ">
+      <section className="flex flex-col h-screen justify-between">
         <Header />
         <Switch>
           {/* <Route path='/contacts/edit/:id' component={EditContact} /> */}

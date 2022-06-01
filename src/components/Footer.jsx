@@ -1,7 +1,7 @@
 
 export function Footer() {
 	return (
-		<div className='main-footer container flex auto-center'>
+		<div className='bg-emerald-400 flex justify-center py-5'>
 			&copy; coffeerights 2022
 		</div>
 	)

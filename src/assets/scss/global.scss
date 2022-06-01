@@ -1,29 +1,33 @@
 // Externals
 
-// Setup
-@import 'setup/variables';
-@import 'setup/functions';
-@import 'setup/mixins';
+// // Setup
+// @import 'setup/variables';
+// @import 'setup/functions';
+// @import 'setup/mixins';
 
-// Basics
-@import 'basics/typography';
-@import 'basics/base';
-@import 'basics/helpers';
-@import 'basics/layout';
-@import 'basics/modals';
-@import 'basics/animations';
+// // Basics
+// @import 'basics/typography';
+// @import 'basics/base';
+// @import 'basics/helpers';
+// @import 'basics/layout';
+// @import 'basics/modals';
+// @import 'basics/animations';
 
-// Pages
-@import 'pages/home';
-@import 'pages/contact-details';
-@import 'pages/user-menu';
-@import 'pages/contact-edit';
+// // Pages
+// @import 'pages/home';
+// @import 'pages/contact-details';
+// @import 'pages/user-menu';
+// @import 'pages/contact-edit';
 
-// Components
-@import '/src/assets/scss/cmps/contact-list';
-@import '/src/assets/scss/cmps/header';
-@import '/src/assets/scss/cmps/crypto-app';
-@import '/src/assets/scss/cmps/contact-preview';
-@import '/src/assets/scss/cmps/filter';
-@import '/src/assets/scss/cmps/footer';
+// // Components
+// @import '/src/assets/scss/cmps/contact-list';
+// @import '/src/assets/scss/cmps/header';
+// @import '/src/assets/scss/cmps/crypto-app';
+// @import '/src/assets/scss/cmps/contact-preview';
+// @import '/src/assets/scss/cmps/filter';
+// @import '/src/assets/scss/cmps/footer';
 
+//tailwind 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -4,15 +4,16 @@ import { newsService } from '../../services/news.service';
 
 const initialState = {
     news: null,
-    newStatus: ''
+    status: ''
 };
 
 
-export const getNews = async () => {
-
-    const res = newsService.getCryptoNews();
-    console.log('loggin from the new store',res);
-};
+export const getLatestNews = createAsyncThunk('news/getNews', async () => {
+    const res = await newsService.getCryptoNews()
+    console.log(res)
+    return res
+    // console.log('loggin from the new store', latestNews);
+});
 
 const newsSlice = createSlice({
     name: 'news',
@@ -22,18 +23,19 @@ const newsSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            .addCase(getNews.fulfilled, (state, { payload }) => {
+            .addCase(getLatestNews.fulfilled, (state, { payload }) => {
+                
                 state.news = payload;
             })
-            .addCase(getNews.pending, (state) => {
-                state.newStatus = 'Loading';
+            .addCase(getLatestNews.pending, (state) => {
+                state.status = 'Loading';
             })
-            .addCase(getNews.rejected, (state) => {
-                state.newStatus = 'Failed to load, try again later.';
+            .addCase(getLatestNews.rejected, (state) => {
+                state.status = 'Failed to load, try again later.';
             });
     }
 });
 
 
-export const latesNews = (state) => state.newsStore.news
-export const newsReducer = newsSlice.reducer
+export const newsState = (state) => state.newsStore
+export const newsReducer = newsSlice.reducer;

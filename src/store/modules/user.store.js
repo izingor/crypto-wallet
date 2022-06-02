@@ -8,22 +8,22 @@ const initialState = {
     signupStatus: ''
 };
 
-export const loginUser = createAsyncThunk('userStatus/loginUser', async (userData) => {
+export const loginUser = createAsyncThunk('user/loginUser', async (userData) => {
     const loggedUser = await userService.login(userData);
     return loggedUser;
 });
 
-export const signupUser = createAsyncThunk('userStatus/signUpUser', async (userData) => {
+export const signupUser = createAsyncThunk('user/signUpUser', async (userData) => {
     const newUser = await userService.saveNewUser(userData);
     return newUser;
 });
 
-export const checkUserSession = createAsyncThunk('userStatus/checkUserSession', async () => {
+export const checkUserSession = createAsyncThunk('user/checkUserSession', async () => {
     const loggedUser = userService.getUser();
     return loggedUser;
 });
 
-export const logout = createAsyncThunk('userStatus/logout', async () => {
+export const logout = createAsyncThunk('user/logout', async () => {
     await userService.logout();
 });
 

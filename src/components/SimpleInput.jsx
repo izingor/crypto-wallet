@@ -1,9 +1,9 @@
-export const SimpleInput = ({ handleChange, inputType, valueType,placeholderText }) => {
-	
-    
-    // const placeholderText =
-	// 	inputType.charAt(0).toUpperCase() + inputType.slice(1);
-
+export const SimpleInput = ({
+	handleChange,
+	inputType,
+	valueType,
+	placeholderText,
+}) => {
 	return (
 		<div>
 			<label htmlFor={inputType} className="sr-only">

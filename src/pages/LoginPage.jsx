@@ -52,7 +52,7 @@ export function LoginPage() {
 						valueType={password}
 						placeholderText = "Password"
 					/>
-					<SubmitBtn />
+					<SubmitBtn btnText = "Sign in"/>
 				</form>
 			</div>
 		</section>

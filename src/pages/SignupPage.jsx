@@ -56,7 +56,7 @@ export function SignupPage(props) {
 						valueType={passwordConformation}
 						placeholderText="Password confirmation"
 					/>
-					<SubmitBtn />
+					<SubmitBtn btnText = "Sign up"/>
 				</form>
 			</div>
 		</section>

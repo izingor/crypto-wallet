@@ -1,4 +1,4 @@
-export const SubmitBtn = () => {
+export const SubmitBtn = ({btnText}) => {
 	return (
 		<div className="my-8">
 			<button
@@ -20,7 +20,7 @@ export const SubmitBtn = () => {
 						/>
 					</svg>
 				</span>
-				Sign in
+				{btnText}
 			</button>
 		</div>
 	);

@@ -10,9 +10,7 @@ const initialState = {
 
 export const getLatestNews = createAsyncThunk('news/getNews', async () => {
     const res = await newsService.getCryptoNews()
-    console.log(res)
     return res
-    // console.log('loggin from the new store', latestNews);
 });
 
 const newsSlice = createSlice({

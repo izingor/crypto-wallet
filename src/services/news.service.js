@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { sessionService } from './session.service';
-// const axios = require("axios");dd
 
 const LATEST_NEWS = 'latestNews';
 
@@ -15,7 +14,7 @@ const options = {
 };
 
 
-async function getCryptoNews() {
+ async function getCryptoNews() {
     let news = sessionService.loadFromStorage(LATEST_NEWS);
     if (news) {
         console.log('loaded from the db');
@@ -30,7 +29,6 @@ async function getCryptoNews() {
             console.log('had an error getting the latest news',err);
         }
     }
-
 }
 
 export const newsService = {

@@ -1,15 +1,16 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { coinService } from '../../services/coin.service';
 
 
 const initialState = {
     coins: null,
-    status: ''
+    status: '',
+    // updatedAt: null,
 };
 
 export const getCoins = createAsyncThunk('coin/getCoins', async () => {
     const res = await coinService.getRates();
-    console.log(res);
+    return res
 });
 
 
@@ -23,6 +24,7 @@ const coinSlice = createSlice({
         builder
             .addCase(getCoins.fulfilled, (state, { payload }) => {
                 state.coins = payload;
+                
             });
     }
 });

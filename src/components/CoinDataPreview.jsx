@@ -15,7 +15,7 @@ export const CoinDataPreview = ({ coin }) => {
 			<td className='px-6 py-4 text-right'>
 				<a
 					href='#'
-					className='font-medium text-blue-600 dark:text-blue-500 hover:underline'
+					className='font-medium text-yellow-300 dark:text-yellow-500 hover:underline'
 				>
 					Buy
 				</a>

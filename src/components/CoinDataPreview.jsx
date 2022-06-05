@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
+
 export const CoinDataPreview = ({ coin }) => {
 	const { PRICE, LOWDAY, HIGHDAY } = coin[1].USD
-	console.log(coin)
 	return (
 		<tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
 			<th
@@ -20,13 +21,15 @@ export const CoinDataPreview = ({ coin }) => {
 					Buy
 				</a>
 			</td>
+			<td>
+				<Link
+					to={`/coins/${coin[0]}`}
+					className='font-medium text-yellow-300 dark:text-yellow-500 hover:underline'
+				>
+					Info
+				</Link>
+			</td>
 		</tr>
 	)
 }
 
-{
-	/* <td>{coin[0]}</td>
-<td>{PRICE}</td>
-<td>{LOWDAY}</td>
-<td>{HIGHDAY}</td> */
-}

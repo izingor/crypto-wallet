@@ -1,6 +1,6 @@
 export const LoadingSpinner = () => {
 	return (
-		<div className = 'text-center'>
+		<div className = 'flex text-center justify-center'>
 			<svg
 				role='status'
 				className='inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-yellow-400'

@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2'
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -8,7 +8,7 @@ import {
 	Title,
 	Tooltip,
 	Legend,
-} from 'chart.js';
+} from 'chart.js'
 
 ChartJS.register(
 	CategoryScale,
@@ -18,16 +18,16 @@ ChartJS.register(
 	Title,
 	Tooltip,
 	Legend
-);
+)
 
 export const CoinChart = ({ sparkline }) => {
 	const xAxis = () => {
-		const data = [];
+		const data = []
 		sparkline.forEach((price, idx) => {
-			data.push(idx);
-		});
-		return data;
-	};
+			data.push(idx)
+		})
+		return data
+	}
 
 	const coinData = () => {
 		return {
@@ -40,8 +40,8 @@ export const CoinChart = ({ sparkline }) => {
 					backgroundColor: 'rgba(255, 99, 132, 0.5)',
 				},
 			],
-		};
-	};
+		}
+	}
 
 	const options = () => {
 		return {
@@ -72,12 +72,12 @@ export const CoinChart = ({ sparkline }) => {
 					},
 				},
 			},
-		};
-	};
+		}
+	}
 
 	return (
 		<div>
-			sparkline && <Line options={options()} data={coinData()} />
+			<Line options={options()} data={coinData()} />
 		</div>
-	);
-};
+	)
+}

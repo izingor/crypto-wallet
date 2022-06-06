@@ -26,7 +26,7 @@ export function App() {
       <section className="flex flex-col h-screen justify-between">
         <Header />
         <Switch>
-          <Route path='/coins/:coinName' component={CoinDetailsPage} />
+          <Route path='/coins/:coinId' component={CoinDetailsPage} />
           <Route path='/news' component={NewsPage} />
           <Route path='/signup' component={SignupPage} />
           <Route path='/login' component={LoginPage} />

@@ -1,35 +1,53 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 
 export const CoinDataPreview = ({ coin }) => {
-	const { PRICE, LOWDAY, HIGHDAY } = coin[1].USD
+	const { symbol, name, price, iconUrl, uuid, marketCap, change } = coin;
+
+	const marketCapBilions = () => {
+		return (parseInt(marketCap) / 10 ** 9).toFixed(2);
+	};
+
+	const priceFixed = () => {
+		return parseFloat(price).toFixed(5);
+	};
+
+	const changeColor = () => {
+		const parsedChange = parseFloat(change);
+		if (parsedChange > 0) {
+			return { color: '#32CD32' };
+		} else {
+			return { color: 'red' };
+		}
+	};
+
 	return (
-		<tr className='bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600'>
+		<tr className="bg-white border-b  hover:bg-gray-50 ">
 			<th
-				scope='row'
-				className='px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap'
+				scope="row"
+				className="px-6 py-4 font-medium text-gray-900  whitespace-nowrap flex items-center justify-center"
 			>
-				{coin[0]}
+				<img src={iconUrl} alt="" className="w-5 h-5" />
+				{symbol}
 			</th>
-			<td className='px-6 py-4'>{PRICE}</td>
-			<td className='px-6 py-4'>{LOWDAY}</td>
-			<td className='px-6 py-4'>{HIGHDAY}</td>
-			<td className='px-6 py-4 text-right'>
-				<a
-					href='#'
-					className='font-medium text-yellow-300 dark:text-yellow-500 hover:underline'
-				>
+			<td className="px-6 py-4">{name}</td>
+			<td className="px-6 py-4">{priceFixed()}</td>
+			<td className="px-6 py-4">{marketCapBilions()}</td>
+			<td className="px-6 py-4" style={changeColor()}>
+				{change}
+			</td>
+			<td className="px-6 py-4 text-right">
+				<a href="#" className="font-medium text-yellow-500  hover:underline">
 					Buy
 				</a>
 			</td>
 			<td>
 				<Link
-					to={`/coins/${coin[0]}`}
-					className='font-medium text-yellow-300 dark:text-yellow-500 hover:underline'
+					to={`/coins/${uuid}`}
+					className="font-medium text-yellow-500  hover:underline"
 				>
 					Info
 				</Link>
 			</td>
 		</tr>
-	)
-}
-
+	);
+};

@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { user } from '../store/modules/user.store'
 import { logout } from '../store/modules/user.store'
+import Logo from '../assets/images/logo_transparent.png'
 
 export function Header() {
 	const activeUser = useSelector(user)
@@ -18,7 +19,7 @@ export function Header() {
 	return (
 		<section className='sticky top-0 w-full bg-gray-600 z-50'>
 			<div className='container flex justify-between py-3 items-center'>
-				<h1 className='text-3xl'>Wallet</h1>
+				{/* <img src={Logo} alt="" className = ""/> */}
 				<nav className='flex justify-center space-x-4 text-amber-200'>
 					<NavLink exact to='/' className={navTextClass}>
 						Home

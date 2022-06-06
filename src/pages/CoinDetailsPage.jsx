@@ -57,12 +57,12 @@ export const CoinDetailsPage = () => {
 								dd={coin.allTimeHigh.price}
 							/>
 							<CoinDetailsTableRow
-								isGrey={true}
+								isGrey={false}
 								dt='Market Cap'
 								dd={marketCapBil()}
 							/>
 							<CoinDetailsTableRow
-								isGrey={false}
+								isGrey={true}
 								dt='Chart'
 								dd={<CoinChart sparkline={coin.sparkline} />}
 							/>

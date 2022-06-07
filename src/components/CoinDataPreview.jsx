@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export const CoinDataPreview = ({ coin }) => {
+export const CoinDataPreview = ({ coin, onBuyModalClicked }) => {
 	const { symbol, name, price, iconUrl, uuid, marketCap, change } = coin;
 
 	const marketCapBilions = () => {
@@ -31,14 +31,17 @@ export const CoinDataPreview = ({ coin }) => {
 			</th>
 			{/* <td className="px-6 py-4">{name}</td> */}
 			<td className="px-6 py-4">{priceFixed()}</td>
-			<td className="px-3 py-4">{marketCapBilions()}</td>
+			{/* <td className="px-3 py-4">{marketCapBilions()}</td> */}
 			<td className="px-2 py-4" style={changeColor()}>
 				{change}
 			</td>
 			<td className="px-2 py-4 text-left">
-				<a href="#" className="font-medium text-yellow-500  hover:underline">
+				<p 
+					onClick={() => onBuyModalClicked(coin)}
+					className="font-medium text-yellow-500  hover:underline hover:cursor-pointer"
+				>
 					Buy
-				</a>
+				</p>
 			</td>
 			<td className="px-2 py-4 text-left">
 				<Link

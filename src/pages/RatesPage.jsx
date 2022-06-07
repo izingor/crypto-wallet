@@ -1,18 +1,24 @@
 import { coinState, getCoins } from '../store/modules/coin.store';
+import { onBuyModalChanged } from '../store/modules/ui.store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { CoinDataPreview } from '../components/CoinDataPreview';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { BuyModal } from '../components/BuyModal';
+
 export const RatesPage = () => {
 	// const [tradeVolume, setTradeVolume] = useState(null);
 	const { coins, status } = useSelector(coinState);
-	
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getCoins());
 	}, []);
-	// console.log(coins)
+
+	const onBuyModalClicked = ({name,price,iconUrl}) => {
+		console.log('buy modal going to open',);
+		dispatch(onBuyModalChanged({name,price,iconUrl}));
+	};
 
 	return (
 		<section className=" container flex flex-col min-h-fit items-center">
@@ -30,23 +36,29 @@ export const RatesPage = () => {
 								<th scope="col" className="px-6 py-3">
 									Price (USD)
 								</th>
-								<th scope="col" className="px-3 py-3">
+								{/* <th scope="col" className="px-3 py-3">
 									Market cap Billon (USD)
-								</th>
+								</th> */}
 								<th scope="col" className="px-2 py-3">
 									Change (%)
 								</th>
 								<th scope="col" className="px-2 py-3">
-									<span className="sr-only">Buy</span>
+									{/* <span onClick={openBuyModal} className="sr-only"> */}
+
+									{/* </span> */}
 								</th>
 								<th scope="col" className="px-2 py-3">
-									<span className="sr-only">Info</span>
+									{/* <span className="sr-only"></span> */}
 								</th>
 							</tr>
 						</thead>
 						<tbody>
 							{coins.map((coin) => (
-								<CoinDataPreview key={coin.uuid} coin={coin} />
+								<CoinDataPreview
+									key={coin.uuid}
+									coin={coin}
+									onBuyModalClicked={onBuyModalClicked}
+								/>
 							))}
 						</tbody>
 					</table>

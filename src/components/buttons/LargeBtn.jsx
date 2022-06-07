@@ -1,4 +1,4 @@
-export const SubmitBtn = ({btnText}) => {
+export const LargeBtn = ({btnText}) => {
 	return (
 		<div className="my-8">
 			<button

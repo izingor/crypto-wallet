@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { loginUser } from '../store/modules/user.store';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { SimpleInput } from '../components/SimpleInput';
-import { SubmitBtn } from '../components/SubmitBtn';
+import { LargeBtn } from '../components/buttons/LargeBtn';
 
 export function LoginPage() {
 	const [userData, handleChange] = useHandleChange({ email: '', password: '' });
@@ -52,7 +52,7 @@ export function LoginPage() {
 						valueType={password}
 						placeholderText = "Password"
 					/>
-					<SubmitBtn btnText = "Sign in"/>
+					<LargeBtn btnText = "Sign in"/>
 				</form>
 			</div>
 		</section>

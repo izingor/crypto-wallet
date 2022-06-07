@@ -2,7 +2,7 @@ import { useHandleChange } from '../hooks/useHandleChange';
 import { useDispatch } from 'react-redux';
 import { signupUser, loginUser } from '../store/modules/user.store';
 import { SimpleInput } from '../components/SimpleInput';
-import { SubmitBtn } from '../components/SubmitBtn';
+import { LargeBtn } from '../components/buttons/LargeBtn';
 export function SignupPage(props) {
 	const dispatch = useDispatch();
 	const [userData, handleChange] = useHandleChange({
@@ -56,7 +56,7 @@ export function SignupPage(props) {
 						valueType={passwordConformation}
 						placeholderText="Password confirmation"
 					/>
-					<SubmitBtn btnText = "Sign up"/>
+					<LargeBtn btnText = "Sign up"/>
 				</form>
 			</div>
 		</section>

@@ -10,6 +10,7 @@ import { useDispatch } from 'react-redux';
 import { checkUserSession } from './store/modules/user.store';
 import { NewsPage } from './pages/NewsPage';
 import { CoinDetailsPage } from './pages/CoinDetailsPage';
+import { BuyModal } from './components/BuyModal';
 
 import './assets/scss/global.scss';
 
@@ -23,7 +24,7 @@ export function App() {
 
   return (
     <Router>
-      <section className="flex flex-col h-screen justify-between">
+      <section className="flex flex-col h-screen justify-between relative">
         <Header />
         <Switch>
           <Route path='/coins/:coinId' component={CoinDetailsPage} />
@@ -34,6 +35,7 @@ export function App() {
           <Route path='/' component={HomePage} />
         </Switch>
         <Footer />
+        <BuyModal />
       </section>
     </Router>
   );

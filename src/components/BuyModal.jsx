@@ -1,14 +1,19 @@
-import { CloseXBtn } from './buttons/CloseXBtn'
-import { SmallBtn } from './buttons/SmallBtn'
-import { useDispatch, useSelector } from 'react-redux'
-import { uiState, onBuyModalChanged } from '../store/modules/ui.store'
-import { user } from '../store/modules/user.store'
-import { CurrencyInputs } from './inputs/CurrencyInputs'
-
+import { CloseXBtn } from './buttons/CloseXBtn';
+import { SmallBtn } from './buttons/SmallBtn';
+import { useDispatch, useSelector } from 'react-redux';
+import { uiState, onBuyModalChanged } from '../store/modules/ui.store';
+import { user } from '../store/modules/user.store';
+import { CurrencyInputs } from './inputs/CurrencyInputs';
+import { useHandleChange } from '../hooks/useHandleChange';
 export const BuyModal = () => {
-	const { isBuyModaLOpen, clickedCoin } = useSelector(uiState)
-	const activeUser = useSelector(user)
-	const dispatch = useDispatch()
+	const { isBuyModaLOpen, clickedCoin } = useSelector(uiState);
+	const activeUser = useSelector(user);
+	const dispatch = useDispatch();
+	const [currencyValues, setCurrencyValues] = useHandleChange({
+		cryptoValue: null,
+		usdValue: null,
+	});
+
 	const closeModal = () => {
 		dispatch(onBuyModalChanged())
 		// console.log('closing modal');
@@ -38,7 +43,11 @@ export const BuyModal = () => {
 							<p className='text-base leading-relaxed text-gray-500 '>
 								<strong>Your Balance </strong>- ${activeUser.usdBalance}
 							</p>
-							<CurrencyInputs />
+							<CurrencyInputs
+								clickedCoin={clickedCoin}
+								currencyValues={currencyValues}
+								setCurrencyValues={setCurrencyValues}
+							/>
 						</div>
 						<div className='flex items-center p-6 space-x-2 rounded-b border-t border-gray-200'>
 							<SmallBtn txt='Buy' type='buy' handleClick={buyCoins} />

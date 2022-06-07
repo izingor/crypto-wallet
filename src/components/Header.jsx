@@ -19,7 +19,7 @@ export function Header() {
 	return (
 		<section className='sticky top-0 w-full bg-gray-600 z-50'>
 			<div className='container flex justify-between py-3 items-center'>
-				{/* <img src={Logo} alt="" className = ""/> */}
+				<img src={Logo} alt="" className = "w-10 h-10"/>
 				<nav className='flex justify-center space-x-4 text-amber-200'>
 					<NavLink exact to='/' className={navTextClass}>
 						Home

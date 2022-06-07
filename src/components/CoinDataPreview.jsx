@@ -8,7 +8,7 @@ export const CoinDataPreview = ({ coin }) => {
 	};
 
 	const priceFixed = () => {
-		return parseFloat(price).toFixed(5);
+		return parseFloat(price).toFixed(6);
 	};
 
 	const changeColor = () => {
@@ -24,23 +24,23 @@ export const CoinDataPreview = ({ coin }) => {
 		<tr className="bg-white border-b  hover:bg-gray-50 ">
 			<th
 				scope="row"
-				className="px-6 py-4 font-medium text-gray-900  whitespace-nowrap flex items-center justify-center"
+				className="px-6 py-4 font-medium text-gray-900  whitespace-nowrap flex items-center"
 			>
 				<img src={iconUrl} alt="" className="w-5 h-5" />
 				{symbol}
 			</th>
-			<td className="px-6 py-4">{name}</td>
+			{/* <td className="px-6 py-4">{name}</td> */}
 			<td className="px-6 py-4">{priceFixed()}</td>
-			<td className="px-6 py-4">{marketCapBilions()}</td>
-			<td className="px-6 py-4" style={changeColor()}>
+			<td className="px-3 py-4">{marketCapBilions()}</td>
+			<td className="px-2 py-4" style={changeColor()}>
 				{change}
 			</td>
-			<td className="px-6 py-4 text-right">
+			<td className="px-2 py-4 text-left">
 				<a href="#" className="font-medium text-yellow-500  hover:underline">
 					Buy
 				</a>
 			</td>
-			<td>
+			<td className="px-2 py-4 text-left">
 				<Link
 					to={`/coins/${uuid}`}
 					className="font-medium text-yellow-500  hover:underline"

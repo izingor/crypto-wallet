@@ -24,22 +24,22 @@ export const RatesPage = () => {
 								<th scope="col" className="px-6 py-3">
 									Symbol
 								</th>
-								<th scope="col" className="px-6 py-3">
+								{/* <th scope="col" className="px-6 py-3">
 									Name
-								</th>
+								</th> */}
 								<th scope="col" className="px-6 py-3">
 									Price (USD)
 								</th>
-								<th scope="col" className="px-6 py-3">
-									Market cap (USD)
+								<th scope="col" className="px-3 py-3">
+									Market cap Billon (USD)
 								</th>
-								<th scope="col" className="px-6 py-3">
+								<th scope="col" className="px-2 py-3">
 									Change (%)
 								</th>
-								<th scope="col" className="px-6 py-3">
+								<th scope="col" className="px-2 py-3">
 									<span className="sr-only">Buy</span>
 								</th>
-								<th scope="col" className="px-6 py-3">
+								<th scope="col" className="px-2 py-3">
 									<span className="sr-only">Info</span>
 								</th>
 							</tr>

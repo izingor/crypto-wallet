@@ -1,7 +1,7 @@
 import { useHandleChange } from '../hooks/useHandleChange';
 import { useDispatch } from 'react-redux';
 import { signupUser, loginUser } from '../store/modules/user.store';
-import { SimpleInput } from '../components/SimpleInput';
+import { LargeInput } from '../components/inputs/LargeInput';
 import { LargeBtn } from '../components/buttons/LargeBtn';
 export function SignupPage(props) {
 	const dispatch = useDispatch();
@@ -32,25 +32,25 @@ export function SignupPage(props) {
 					Sign Up
 				</h5>
 				<form className="flex flex-col" onSubmit={onSignup}>
-					<SimpleInput
+					<LargeInput
 						handleChange={handleChange}
 						inputType="name"
 						valueType={name}
 						placeholderText="Your name"
 					/>
-					<SimpleInput
+					<LargeInput
 						handleChange={handleChange}
 						inputType="email"
 						valueType={email}
 						placeholderText="Email address"
 					/>
-					<SimpleInput
+					<LargeInput
 						handleChange={handleChange}
 						inputType="password"
 						valueType={password}
 						placeholderText="Password"
 					/>
-					<SimpleInput
+					<LargeInput
 						handleChange={handleChange}
 						inputType="passwordConformation"
 						valueType={passwordConformation}

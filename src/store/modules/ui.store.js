@@ -2,8 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     isDarkMode: false,
-    isBuyModaL: false,
-    chosenCoin: null
+    isBuyModaLOpen: false,
+    clickedCoin: null
 };
 
 
@@ -15,9 +15,10 @@ const uiSlice = createSlice({
             state.isDarkMode = !state.isDarkMode;
             console.log('changed the view mode');
         },
-        onBuyModalChanged: (state, {payload}) => {
-            state.isBuyModaL = !state.isBuyModaL;
-            state.chosenCoin = payload
+        onBuyModalChanged: (state, { payload = null }) => {
+            console.log(payload);
+            state.isBuyModaLOpen = !state.isBuyModaLOpen;
+            state.clickedCoin = payload;
         }
     }
 });

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../store/modules/user.store';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
-import { SimpleInput } from '../components/SimpleInput';
+import { LargeInput } from '../components/inputs/LargeInput';
 import { LargeBtn } from '../components/buttons/LargeBtn';
 
 export function LoginPage() {
@@ -39,14 +39,14 @@ export function LoginPage() {
 					</NavLink>
 				</p>
 				<form className="flex flex-col" onSubmit={onLogin}>
-					<SimpleInput
+					<LargeInput
 						handleChange={handleChange}
 						inputType="email"
 						valueType={email}
 						placeholderText = "Email Address"
 					/>
 
-					<SimpleInput
+					<LargeInput
 						handleChange={handleChange}
 						inputType="password"
 						valueType={password}

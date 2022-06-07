@@ -4,20 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { CoinDataPreview } from '../components/CoinDataPreview';
 import { LoadingSpinner } from '../components/LoadingSpinner';
-import { BuyModal } from '../components/BuyModal';
+import { user } from '../store/modules/user.store';
+import { useHistory } from 'react-router-dom';
 
 export const RatesPage = () => {
-	// const [tradeVolume, setTradeVolume] = useState(null);
-	const { coins, status } = useSelector(coinState);
+	const { coins } = useSelector(coinState);
+	const activeUser = useSelector(user);
+	const history = useHistory();
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getCoins());
 	}, []);
 
-	const onBuyModalClicked = ({name,price,iconUrl}) => {
-		console.log('buy modal going to open',);
-		dispatch(onBuyModalChanged({name,price,iconUrl}));
+	const onBuyModalClicked = ({ name, price, iconUrl }) => {
+		if (!activeUser) {
+			history.push('/login');
+			return;
+		}
+		dispatch(onBuyModalChanged({ name, price, iconUrl }));
 	};
 
 	return (
@@ -30,26 +35,14 @@ export const RatesPage = () => {
 								<th scope="col" className="px-6 py-3">
 									Symbol
 								</th>
-								{/* <th scope="col" className="px-6 py-3">
-									Name
-								</th> */}
 								<th scope="col" className="px-6 py-3">
 									Price (USD)
 								</th>
-								{/* <th scope="col" className="px-3 py-3">
-									Market cap Billon (USD)
-								</th> */}
 								<th scope="col" className="px-2 py-3">
 									Change (%)
 								</th>
-								<th scope="col" className="px-2 py-3">
-									{/* <span onClick={openBuyModal} className="sr-only"> */}
-
-									{/* </span> */}
-								</th>
-								<th scope="col" className="px-2 py-3">
-									{/* <span className="sr-only"></span> */}
-								</th>
+								<th scope="col" className="px-2 py-3"></th>
+								<th scope="col" className="px-2 py-3"></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -69,12 +62,3 @@ export const RatesPage = () => {
 		</section>
 	);
 };
-
-// 	<tr>
-// 		<td>Coin</td>
-// 		<td>Price(USD)</td>
-// 		<td>High day</td>
-// 		<td>Low day</td>
-// 	</tr>
-// </thead>
-// <tbody>

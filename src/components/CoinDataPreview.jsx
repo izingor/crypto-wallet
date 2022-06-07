@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 
 export const CoinDataPreview = ({ coin, onBuyModalClicked }) => {
-	const { symbol, name, price, iconUrl, uuid, marketCap, change } = coin;
+	const { symbol, price, iconUrl, uuid, marketCap, change } = coin;
 
 	const marketCapBilions = () => {
 		return (parseInt(marketCap) / 10 ** 9).toFixed(2);

@@ -1,4 +1,4 @@
-export const SimpleInput = ({
+export const LargeInput = ({
 	handleChange,
 	inputType,
 	valueType,

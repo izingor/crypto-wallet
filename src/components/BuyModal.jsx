@@ -4,15 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { uiState, onBuyModalChanged } from '../store/modules/ui.store';
 import { user } from '../store/modules/user.store';
 import { CurrencyInputs } from './inputs/CurrencyInputs';
-import { useHandleChange } from '../hooks/useHandleChange';
+
 export const BuyModal = () => {
+	const dispatch = useDispatch();
 	const { isBuyModaLOpen, clickedCoin } = useSelector(uiState);
 	const activeUser = useSelector(user);
-	const dispatch = useDispatch();
-	const [currencyValue, setCurrencyValue] = useHandleChange({
-		name: null,
-		value: 0,
-	});
+	
 
 	const closeModal = () => {
 		dispatch(onBuyModalChanged())
@@ -45,8 +42,7 @@ export const BuyModal = () => {
 							</p>
 							<CurrencyInputs
 								clickedCoin={clickedCoin}
-								currencyValue={currencyValue}
-								setCurrencyValues={setCurrencyValue}
+								
 							/>
 						</div>
 						<div className='flex items-center p-6 space-x-2 rounded-b border-t border-gray-200'>

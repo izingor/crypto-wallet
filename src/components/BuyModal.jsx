@@ -9,9 +9,9 @@ export const BuyModal = () => {
 	const { isBuyModaLOpen, clickedCoin } = useSelector(uiState);
 	const activeUser = useSelector(user);
 	const dispatch = useDispatch();
-	const [currencyValues, setCurrencyValues] = useHandleChange({
-		cryptoValue: null,
-		usdValue: null,
+	const [currencyValue, setCurrencyValue] = useHandleChange({
+		name: null,
+		value: 0,
 	});
 
 	const closeModal = () => {
@@ -45,8 +45,8 @@ export const BuyModal = () => {
 							</p>
 							<CurrencyInputs
 								clickedCoin={clickedCoin}
-								currencyValues={currencyValues}
-								setCurrencyValues={setCurrencyValues}
+								currencyValue={currencyValue}
+								setCurrencyValues={setCurrencyValue}
 							/>
 						</div>
 						<div className='flex items-center p-6 space-x-2 rounded-b border-t border-gray-200'>

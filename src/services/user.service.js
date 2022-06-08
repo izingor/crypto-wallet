@@ -1,3 +1,4 @@
+import { getDefaultMiddleware } from "@reduxjs/toolkit";
 import { asyncStorageService } from "./async.storage.service";
 import { sessionService } from "./session.service";
 const USER_DB = 'usersDB';
@@ -8,7 +9,8 @@ export const userService = {
     getEmptyUser,
     saveNewUser,
     login,
-    logout
+    logout,
+    updateUser
 };
 
 
@@ -27,11 +29,14 @@ function getEmptyUser() {
     };
     return user;
 }
-function saveNewUser(userData) {
+function saveNewUser({ name, password, email }) {
     const newUser = {
-        ...userData,
+        name,
+        password,
+        email,
         usdBalance: 1000,
         coins: [],
+        transactions: []
     };
     const savedUser = asyncStorageService.post(USER_DB, newUser);
     return savedUser;
@@ -49,6 +54,18 @@ async function login(user) {
         return false;
     }
 }
+
+async function updateUser(user) {
+    try {
+        const updatedUser = await asyncStorageService.put(USER_DB, user);
+        return sessionService.saveToStorage(USER_DB, updatedUser);
+    } catch (err) {
+        console.log('had an issue updating the user', err.message);
+
+    }
+
+}
+
 
 function logout() {
     return sessionService.clearStorage();

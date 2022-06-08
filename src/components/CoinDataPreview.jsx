@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 export const CoinDataPreview = ({ coin, onBuyModalClicked }) => {
 	const { symbol, price, iconUrl, uuid, marketCap, change } = coin;
 
-	const marketCapBilions = () => {
-		return (parseInt(marketCap) / 10 ** 9).toFixed(2);
-	};
+	// const marketCapBilions = () => {
+	// 	return (parseInt(marketCap) / 10 ** 9).toFixed(2);
+	// };
 
 	const priceFixed = () => {
 		return parseFloat(price).toFixed(6);
@@ -29,14 +29,12 @@ export const CoinDataPreview = ({ coin, onBuyModalClicked }) => {
 				<img src={iconUrl} alt="" className="w-5 h-5" />
 				{symbol}
 			</th>
-			{/* <td className="px-6 py-4">{name}</td> */}
 			<td className="px-6 py-4">{priceFixed()}</td>
-			{/* <td className="px-3 py-4">{marketCapBilions()}</td> */}
 			<td className="px-2 py-4" style={changeColor()}>
 				{change}
 			</td>
 			<td className="px-2 py-4 text-left">
-				<p 
+				<p
 					onClick={() => onBuyModalClicked(coin)}
 					className="font-medium text-yellow-500  hover:underline hover:cursor-pointer"
 				>

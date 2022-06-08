@@ -6,6 +6,7 @@ export const sessionService = {
 
 function saveToStorage(key,value) {
     sessionStorage.setItem(key, JSON.stringify(value) || null);
+    return value;
 }
 
 function loadFromStorage(key) {

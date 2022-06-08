@@ -21,6 +21,12 @@ export const getCoin = createAsyncThunk('coin/getCoin', async (coinId) => {
     return coin;
 });
 
+export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
+    // console.log('coin store res', res);
+    const res = await coinService.buyCoin(purchaseData);
+    return res;
+});
+
 
 const coinSlice = createSlice({
     name: 'coins',
@@ -37,6 +43,10 @@ const coinSlice = createSlice({
             })
             .addCase(getCoin.fulfilled, (state, { payload }) => {
                 state.coin = payload;
+            })
+            .addCase((purchaseCoin.fulfilled), (state, { payload }) => {
+                console.log('printing the action');
+                state.coin = null;
             });
     }
 });

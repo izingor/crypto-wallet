@@ -17,12 +17,12 @@ export const RatesPage = () => {
 		dispatch(getCoins());
 	}, []);
 
-	const onBuyModalClicked = ({ name, price, iconUrl }) => {
+	const onBuyModalClicked = ({ name, price, iconUrl, uuid, symbol }) => {
 		if (!activeUser) {
 			history.push('/login');
 			return;
 		}
-		dispatch(onBuyModalChanged({ name, price, iconUrl }));
+		dispatch(onBuyModalChanged({ name, price, iconUrl, uuid, symbol }));
 	};
 
 	return (

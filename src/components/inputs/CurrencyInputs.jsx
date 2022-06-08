@@ -1,17 +1,8 @@
 import arrow from '../../assets/images/arrow.webp';
-import { useState } from 'react';
-export const CurrencyInputs = ({ clickedCoin }) => {
+import { useState, useEffect } from 'react';
+export const CurrencyInputs = ({ clickedCoin, setCost }) => {
 	const [amount, setAmount] = useState(1);
 	const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
-
-	const handleToAmountChange = ({ target }) => {
-		setAmount(target.value);
-		setAmountInFromCurrency(true);
-	};
-	const handleFromAmountChange = ({ target }) => {
-		setAmount(target.value);
-		setAmountInFromCurrency(false);
-	};
 
 	let toAmount, fromAmount;
 	if (amountInFromCurrency) {
@@ -21,6 +12,19 @@ export const CurrencyInputs = ({ clickedCoin }) => {
 		toAmount = amount;
 		fromAmount = amount / clickedCoin.price;
 	}
+
+	useEffect(() => {
+		setCost({ usdAmount: +toAmount, coinAmount: +fromAmount });
+	}, [toAmount]);
+
+	const handleToAmountChange = ({ target }) => {
+		setAmount(target.value);
+		setAmountInFromCurrency(true);
+	};
+	const handleFromAmountChange = ({ target }) => {
+		setAmount(target.value);
+		setAmountInFromCurrency(false);
+	};
 
 	return (
 		<div className="flex w-full items-center">
@@ -33,6 +37,7 @@ export const CurrencyInputs = ({ clickedCoin }) => {
 					value={fromAmount}
 					onChange={handleToAmountChange}
 					placeholder={clickedCoin.name}
+					min={1}
 					required
 				/>
 			</div>
@@ -46,6 +51,7 @@ export const CurrencyInputs = ({ clickedCoin }) => {
 					value={toAmount}
 					placeholder="USD"
 					onChange={handleFromAmountChange}
+					min={1}
 					required
 				/>
 			</div>

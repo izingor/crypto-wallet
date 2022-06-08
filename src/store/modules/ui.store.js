@@ -13,10 +13,8 @@ const uiSlice = createSlice({
     reducers: {
         onDarkModeChanged: (state) => {
             state.isDarkMode = !state.isDarkMode;
-            console.log('changed the view mode');
         },
         onBuyModalChanged: (state, { payload = null }) => {
-            console.log(payload);
             state.isBuyModaLOpen = !state.isBuyModaLOpen;
             state.clickedCoin = payload;
         }

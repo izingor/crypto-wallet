@@ -1,4 +1,4 @@
-export const CoinDetailsTableRow = ({
+export const DataDisplayRow = ({
 	isGrey,
 	dt ='',
 	dd = null,

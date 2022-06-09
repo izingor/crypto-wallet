@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux';
 import { checkUserSession } from './store/modules/user.store';
 import { NewsPage } from './pages/NewsPage';
 import { CoinDetailsPage } from './pages/CoinDetailsPage';
-import { BuyModal } from './components/BuyModal';
+import { BuyModal } from './components/modals/BuyModal';
 
 import './assets/scss/global.scss';
 
@@ -20,7 +20,6 @@ export function App() {
   useEffect(() => {
     dispatch(checkUserSession());
   }, []);
-
 
   return (
     <Router>

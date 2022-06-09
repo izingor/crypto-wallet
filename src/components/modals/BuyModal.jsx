@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { purchaseCoin } from '../store/modules/coin.store';
-import { uiState, onBuyModalChanged } from '../store/modules/ui.store';
-import { user } from '../store/modules/user.store';
-import { CurrencyInputs } from './inputs/CurrencyInputs';
-import { SmallBtn } from './buttons/SmallBtn';
-import { CloseXBtn } from './buttons/CloseXBtn';
+import { purchaseCoin } from '../../store/modules/coin.store';
+import { uiState, onBuyModalChanged } from '../../store/modules/ui.store';
+import { user } from '../../store/modules/user.store';
+import { CurrencyInputs } from '../inputs/CurrencyInputs';
+import { SmallBtn } from '../buttons/SmallBtn';
+import { CloseXBtn } from '../buttons/CloseXBtn';
 
 export const BuyModal = () => {
 	const dispatch = useDispatch();

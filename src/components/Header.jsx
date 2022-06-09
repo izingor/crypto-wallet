@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { user } from '../store/modules/user.store'
-import { logout } from '../store/modules/user.store'
+import { user, logout } from '../store/modules/user.store'
+import { onWalletModalChanged } from '../store/modules/ui.store'
 import Logo from '../assets/images/logo_transparent.png'
 
 export function Header() {
@@ -19,11 +19,12 @@ export function Header() {
 	return (
 		<section className='sticky top-0 w-full bg-gray-600 z-50'>
 			<div className='container flex justify-between py-3 items-center'>
-				<img src={Logo} alt="" className = "w-10 h-10"/>
+				<img src={Logo} alt='' className='w-10 h-10' />
 				<nav className='flex justify-center space-x-4 text-amber-200'>
 					<NavLink exact to='/' className={navTextClass}>
 						Home
 					</NavLink>
+					<p className={navTextClass}>Wallet</p>
 					<NavLink to='/rates' className={navTextClass}>
 						Rates
 					</NavLink>

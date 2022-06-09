@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { user, logout } from '../store/modules/user.store';
 import { onWalletModalChanged } from '../store/modules/ui.store';
@@ -7,9 +7,11 @@ import Logo from '../assets/images/logo_transparent.png';
 export function Header() {
 	const activeUser = useSelector(user);
 	const dispacth = useDispatch();
+	const history = useHistory();
 
 	const logoutUser = () => {
 		dispacth(logout());
+		history.push('/login')
 		console.log('loggin out');
 	};
 

@@ -44,9 +44,9 @@ function saveNewUser({ name, password, email }) {
 
 
 async function login(user) {
-    const activeUser = await asyncStorageService.get(USER_DB, user.email);
-    if (activeUser.password === user.password) {
-        const { password, ...loggedUser } = activeUser;
+    const storedUser = await asyncStorageService.get(USER_DB, user.email);
+    if (storedUser.password === user.password) {
+        const { password, ...loggedUser } = storedUser;
         sessionService.saveToStorage(SESSION_DB, loggedUser);
         return loggedUser;
     } else {
@@ -58,7 +58,7 @@ async function login(user) {
 async function updateUser(user) {
     try {
         const updatedUser = await asyncStorageService.put(USER_DB, user);
-        return sessionService.saveToStorage(USER_DB, updatedUser);
+        return sessionService.saveToStorage(SESSION_DB, updatedUser);
     } catch (err) {
         console.log('had an issue updating the user', err.message);
 

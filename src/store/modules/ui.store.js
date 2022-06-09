@@ -17,7 +17,7 @@ const uiSlice = createSlice({
         },
         onBuyModalChanged: (state, { payload = null }) => {
             state.isBuyModaLOpen = !state.isBuyModaLOpen;
-            state.clickedCoin = payload;
+            // state.clickedCoin = payload;
         },
         onWalletModalChanged: (state) => {
             state.isWalletModal = !state.isWalletModal;

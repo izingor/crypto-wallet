@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { coinService } from '../../services/coin.service';
+import { setUser } from './user.store';
 
 
 const initialState = {
@@ -24,7 +25,7 @@ export const getCoin = createAsyncThunk('coin/getCoin', async (coinId) => {
 export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
     // console.log('coin store res', res);
     const res = await coinService.buyCoin(purchaseData);
-    return res;
+    setUser(res);
 });
 
 

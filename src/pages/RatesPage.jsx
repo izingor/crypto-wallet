@@ -28,7 +28,7 @@ export const RatesPage = () => {
 	return (
 		<section className=" container flex flex-col min-h-fit items-center">
 			{coins ? (
-				<div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg my-5">
+				<div className="w-full relative overflow-x-auto shadow-md  my-5">
 					<table className="w-full text-sm text-left text-gray-500 ">
 						<thead className="text-xs text-gray-700 uppercase bg-gray-50 ">
 							<tr>
@@ -48,10 +48,7 @@ export const RatesPage = () => {
 						</thead>
 						<tbody>
 							{coins.map((coin) => (
-								<CoinDataPreview
-									key={coin.uuid}
-									coin={coin}									
-								/>
+								<CoinDataPreview key={coin.uuid} coin={coin} />
 							))}
 						</tbody>
 					</table>

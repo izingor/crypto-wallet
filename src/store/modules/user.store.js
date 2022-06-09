@@ -33,6 +33,10 @@ const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        setUser: (state, { payload }) => {
+            console.log('setting use from the user store')
+            state.user = payload;
+        }
         // checkUserSession: (state) => {
         //     const userSession = userService.checkActiveUser();
         //     state.user = userSession;
@@ -72,5 +76,5 @@ const userSlice = createSlice({
 
 });
 export const user = (state) => state.userStore.user;
-// export const {  } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 export default userSlice.reducer;

@@ -1,16 +1,16 @@
 import arrow from '../../assets/images/arrow.webp';
 import { useState, useEffect } from 'react';
-export const CurrencyInputs = ({ clickedCoin, setCost }) => {
+export const CurrencyInputs = ({ coin, setCost }) => {
 	const [amount, setAmount] = useState(1);
 	const [amountInFromCurrency, setAmountInFromCurrency] = useState(true);
 
 	let toAmount, fromAmount;
 	if (amountInFromCurrency) {
 		fromAmount = amount;
-		toAmount = amount * clickedCoin.price;
+		toAmount = amount * coin.price;
 	} else {
 		toAmount = amount;
-		fromAmount = amount / clickedCoin.price;
+		fromAmount = amount / coin.price;
 	}
 
 	useEffect(() => {
@@ -29,14 +29,14 @@ export const CurrencyInputs = ({ clickedCoin, setCost }) => {
 	return (
 		<div className="flex w-full items-center">
 			<div className="w-full">
-				<label htmlFor="fromCurrency">{clickedCoin.name}</label>
+				<label htmlFor="fromCurrency">{coin.name}</label>
 				<input
 					type="number"
 					id="fromCurrency"
 					className="block p-2  w-full text-sm text-gray-900 bg-gray-50  border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
 					value={fromAmount}
 					onChange={handleToAmountChange}
-					placeholder={clickedCoin.name}
+					placeholder={coin.name}
 					min={1}
 					required
 				/>

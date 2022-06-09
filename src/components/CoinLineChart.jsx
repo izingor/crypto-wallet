@@ -1,4 +1,4 @@
-import { Line } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2';
 import {
 	Chart as ChartJS,
 	CategoryScale,
@@ -8,7 +8,7 @@ import {
 	Title,
 	Tooltip,
 	Legend,
-} from 'chart.js'
+} from 'chart.js';
 
 ChartJS.register(
 	CategoryScale,
@@ -18,36 +18,37 @@ ChartJS.register(
 	Title,
 	Tooltip,
 	Legend
-)
+);
 
-export const CoinChart = ({ sparkline }) => {
+export const CoinLineChart = ({ sparkline, isTicksAndBorders = true }) => {
 	const xAxis = () => {
-		const data = []
+		const data = [];
 		sparkline.forEach((price, idx) => {
-			data.push(idx)
-		})
-		return data
-	}
+			data.push(idx);
+		});
+		return data;
+	};
 
 	const coinData = () => {
 		return {
 			labels: xAxis(),
 			datasets: [
 				{
-					label: 'Dataset 1',
 					data: sparkline,
 					borderColor: 'rgb(255, 99, 132)',
 					backgroundColor: 'rgba(255, 99, 132, 0.5)',
+					borderWidth: 1,
 				},
 			],
-		}
-	}
+		};
+	};
 
 	const options = () => {
 		return {
 			elements: {
 				point: {
-					pointStyle: 'dash',
+					pointStyle: 'point',
+					radius: 0,
 				},
 			},
 			layout: {
@@ -64,20 +65,28 @@ export const CoinChart = ({ sparkline }) => {
 					min: Math.min(...sparkline),
 					grid: {
 						display: false,
+						drawBorder: isTicksAndBorders,
+					},
+					ticks: {
+						display: isTicksAndBorders,
 					},
 				},
 				x: {
 					grid: {
 						display: false,
+						drawBorder: isTicksAndBorders,
+					},
+					ticks: {
+						display: isTicksAndBorders,
 					},
 				},
 			},
-		}
-	}
+		};
+	};
 
 	return (
 		<div>
-			<Line options={options()} data={coinData()} />
+			<Line options={options()} data={coinData()} width={74} height={24} />
 		</div>
-	)
-}
+	);
+};

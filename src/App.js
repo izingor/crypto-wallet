@@ -11,7 +11,7 @@ import { checkUserSession } from './store/modules/user.store';
 import { NewsPage } from './pages/NewsPage';
 import { CoinDetailsPage } from './pages/CoinDetailsPage';
 import { BuyModal } from './components/modals/BuyModal';
-
+import { WalletPage } from './pages/WalletPage';
 import './assets/scss/global.scss';
 
 export function App() {
@@ -27,10 +27,11 @@ export function App() {
         <Header />
         <Switch>
           <Route path='/coins/:coinId' component={CoinDetailsPage} />
-          <Route path='/news' component={NewsPage} />
           <Route path='/signup' component={SignupPage} />
+          <Route path='/wallet' component={WalletPage} />
           <Route path='/login' component={LoginPage} />
           <Route path='/rates' component={RatesPage} />
+          <Route path='/news' component={NewsPage} />
           <Route path='/' component={HomePage} />
         </Switch>
         <Footer />

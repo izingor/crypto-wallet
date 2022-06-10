@@ -50,7 +50,6 @@ async function buyCoin(purchaseData) {
 
   const { totalCost, symbol, price, uuid, } = purchaseData;
 
-  console.log('purchase data', purchaseData);
   const user = await userService.getUser();
   if (!user) {
     return 'NO_USER';
@@ -58,7 +57,6 @@ async function buyCoin(purchaseData) {
     if (user.usdBalance < purchaseData.totalCost) {
       return 'NO_FUNDS';
     } else {
-      // user.usdBalance = user.usdBalance - totalCost.usdAmount;
       const transaction = {
         usdAmount: totalCost.usdAmount,
         coinAmount: totalCost.coinAmount,
@@ -74,18 +72,11 @@ async function buyCoin(purchaseData) {
       user.coins.push(coin);
       user.transactions.push(transaction);
       user.usdBalance = user.usdBalance - totalCost.usdAmount;
-
-
-
-
-      // user.coins.push()
     }
-    console.log('updated user', user);
+
     try {
       const updatedUser = await userService.updateUser(user);
-      console.log('the user has updated successfully', updatedUser);
       return updatedUser;
-
     } catch (err) {
       console.log('had an error while getting your data', err.message);
     }

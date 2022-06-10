@@ -15,9 +15,8 @@ const uiSlice = createSlice({
         onDarkModeChanged: (state) => {
             state.isDarkMode = !state.isDarkMode;
         },
-        onBuyModalChanged: (state, { payload = null }) => {
+        onBuyModalChanged: (state) => {
             state.isBuyModaLOpen = !state.isBuyModaLOpen;
-            // state.clickedCoin = payload;
         },
         onWalletModalChanged: (state) => {
             state.isWalletModal = !state.isWalletModal;

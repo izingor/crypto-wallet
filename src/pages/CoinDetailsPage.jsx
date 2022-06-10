@@ -74,6 +74,7 @@ export const CoinDetailsPage = () => {
 							dd={webSiteLink}
 						/>,
 						<DataDisplayRow
+							key="price"
 							isGrey={false}
 							dt="Price(USD)"
 							dd={coin.price}

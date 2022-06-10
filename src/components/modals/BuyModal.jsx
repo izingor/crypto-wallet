@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { purchaseCoin, coinState } from '../../store/modules/coin.store'
+import { coinState } from '../../store/modules/coin.store'
 import { uiState, onBuyModalChanged } from '../../store/modules/ui.store'
-import { user } from '../../store/modules/user.store'
+import { user, purchaseCoin } from '../../store/modules/user.store'
 import { CurrencyInputs } from '../inputs/CurrencyInputs'
 import { SmallBtn } from '../buttons/SmallBtn'
 import { CloseXBtn } from '../buttons/CloseXBtn'
@@ -27,7 +27,7 @@ export const BuyModal = () => {
 	const onBuyCoinClicked = () => {
 		const { uuid, symbol, price } = coin
 		dispatch(purchaseCoin({ totalCost, uuid, symbol, price }))
-		
+
 		closeModal()
 		history.push('/rates')
 	}

@@ -1,4 +1,3 @@
-import { getDefaultMiddleware } from "@reduxjs/toolkit";
 import { asyncStorageService } from "./async.storage.service";
 import { sessionService } from "./session.service";
 const USER_DB = 'usersDB';
@@ -10,10 +9,9 @@ export const userService = {
     saveNewUser,
     login,
     logout,
-    updateUser
+    updateUser,
+    purchaseCoin
 };
-
-
 
 
 function getUser() {
@@ -55,7 +53,7 @@ async function login(user) {
     }
 }
 
-async function buyCoin(purchaseData) {
+async function purchaseCoin(purchaseData) {
 
     const { totalCost, symbol, price, uuid, } = purchaseData;
 
@@ -63,28 +61,33 @@ async function buyCoin(purchaseData) {
     if (!user) {
         return 'NO_USER';
     } else {
-        if (user.usdBalance < purchaseData.totalCost) {
+        if (user.usdBalance < totalCost.usdAmount) {
             return 'NO_FUNDS';
         } else {
-            const transaction = {
-                usdAmount: totalCost.usdAmount,
-                coinAmount: totalCost.coinAmount,
-                coinValue: price,
-                symbol,
-                timestamp: Date.now(),
-            };
-            const coin = {
-                uuid,
-                symbol,
-                amount: totalCost.coinAmount,
-            };
-            user.coins.push(coin);
-            user.transactions.push(transaction);
-            user.usdBalance = user.usdBalance - totalCost.usdAmount;
+            const coinAsset = user.coins.find(asset => asset.uuid === purchaseData.uuid);
+            if (coinAsset) {
+                coinAsset.amount += totalCost.coinAmount;
+            } else {
+                const coin = {
+                    uuid,
+                    symbol,
+                    amount: totalCost.coinAmount,
+                };
+                user.coins.push(coin);
+            }
         }
+        const transaction = {
+            usdAmount: totalCost.usdAmount,
+            coinAmount: totalCost.coinAmount,
+            coinValue: price,
+            symbol,
+            timestamp: Date.now(),
+        };
 
+        user.transactions.unshift(transaction);
+        user.usdBalance = user.usdBalance - totalCost.usdAmount;
         try {
-            const updatedUser = await userService.updateUser(user);
+            const updatedUser = await updateUser(user);
             return updatedUser;
         } catch (err) {
             console.log('had an error while getting your data', err.message);

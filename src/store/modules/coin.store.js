@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { coinService } from '../../services/coin.service';
 import { setUser } from './user.store';
-
+import {userService} from '../../services/user.service';
 
 const initialState = {
     coins: null,
@@ -21,14 +21,14 @@ export const getCoin = createAsyncThunk('coin/getCoin', async (coinId) => {
     return coin;
 });
 
-export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
-    // console.log('coin store res', res);
-    const res = await coinService.buyCoin(purchaseData);
-    console.log('getting the res', res);
-    setUser(res)
-    console.log(setUser(res))
+// export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
+//     // console.log('coin store res', res);
+//     const res = await coinService.buyCoin(purchaseData);
+//     console.log('getting the res', res);
     
-});
+//     console.log(setUser(res))
+    
+// });
 
 
 const coinSlice = createSlice({
@@ -48,10 +48,10 @@ const coinSlice = createSlice({
             .addCase(getCoin.fulfilled, (state, { payload }) => {
                 state.coin = payload;
             })
-            .addCase((purchaseCoin.fulfilled), (state, { payload }) => {
-                state.coin = null;
+            // .addCase((purchaseCoin.fulfilled), (state, { payload }) => {
+            //     state.coin = null;
 
-            });
+            // });
     }
 });
 

@@ -27,14 +27,22 @@ export const logout = createAsyncThunk('user/logout', async () => {
     await userService.logout();
 });
 
+export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
+    // console.log('coin store res', res);
+    const res = await userService.purchaseCoin(purchaseData);
+    console.log('getting the res', res);
+    return res;
+
+
+});
 
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUser: ({payload}) => {
-            console.log('setting use from the user store' ,payload)
+        setUser: ({ payload }) => {
+            console.log('setting use from the user store', payload);
             // state.user = payload;
         }
         // checkUserSession: (state) => {
@@ -68,6 +76,10 @@ const userSlice = createSlice({
             })
             .addCase(logout.fulfilled, (state) => {
                 state.user = null;
+            })
+            .addCase((purchaseCoin.fulfilled), (state, { payload }) => {
+                state.user = payload;
+
             });
 
 

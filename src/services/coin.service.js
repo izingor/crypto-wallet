@@ -46,47 +46,46 @@ async function getCoin(coinId) {
   }
 }
 
-async function buyCoin(purchaseData) {
+// async function buyCoin(purchaseData) {
 
-  const { totalCost, symbol, price, uuid, } = purchaseData;
+//   const { totalCost, symbol, price, uuid, } = purchaseData;
 
-  const user = await userService.getUser();
-  if (!user) {
-    return 'NO_USER';
-  } else {
-    if (user.usdBalance < purchaseData.totalCost) {
-      return 'NO_FUNDS';
-    } else {
-      const transaction = {
-        usdAmount: totalCost.usdAmount,
-        coinAmount: totalCost.coinAmount,
-        coinValue: price,
-        symbol,
-        timestamp: Date.now(),
-      };
-      const coin = {
-        uuid,
-        symbol,
-        amount: totalCost.coinAmount,
-      };
-      user.coins.push(coin);
-      user.transactions.push(transaction);
-      user.usdBalance = user.usdBalance - totalCost.usdAmount;
-    }
+//   const user = await userService.getUser();
+//   if (!user) {
+//     return 'NO_USER';
+//   } else {
+//     if (user.usdBalance < purchaseData.totalCost) {
+//       return 'NO_FUNDS';
+//     } else {
+//       const transaction = {
+//         usdAmount: totalCost.usdAmount,
+//         coinAmount: totalCost.coinAmount,
+//         coinValue: price,
+//         symbol,
+//         timestamp: Date.now(),
+//       };
+//       const coin = {
+//         uuid,
+//         symbol,
+//         amount: totalCost.coinAmount,
+//       };
+//       user.coins.push(coin);
+//       user.transactions.push(transaction);
+//       user.usdBalance = user.usdBalance - totalCost.usdAmount;
+//     }
 
-    try {
-      const updatedUser = await userService.updateUser(user);
-      return updatedUser;
-    } catch (err) {
-      console.log('had an error while getting your data', err.message);
-    }
-  }
+//     try {
+//       const updatedUser = await userService.updateUser(user);
+//       return updatedUser;
+//     } catch (err) {
+//       console.log('had an error while getting your data', err.message);
+//     }
+//   }
 
-}
+// }
 
 
 export const coinService = {
   getCoins,
   getCoin,
-  buyCoin
 };

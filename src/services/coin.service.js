@@ -1,10 +1,11 @@
 import axios from 'axios';
-import { userService } from './user.service';
+import _ from 'lodash';
 
 const API_KEY = process.env.REACT_APP_RAPID_API_KEY;
 
 
-async function getCoins() {
+async function getCoins(coinSymbols = null) {
+  console.log(coinSymbols);
   try {
     const { data } = await axios.request({
       method: 'GET',
@@ -23,7 +24,20 @@ async function getCoins() {
         'X-RapidAPI-Key': API_KEY
       }
     });
-    return data.data;
+    if (coinSymbols) {
+      const walletCoinsValues = {};
+      const walletCoins = data.data.coins.filter(coin => {
+        return coinSymbols.includes(coin.symbol);
+      });
+
+      for (const walletCoin of walletCoins) {
+        walletCoinsValues[walletCoin.symbol] = +walletCoin.price;
+      }
+      return walletCoinsValues;
+    } else {
+      return data.data;
+    }
+
   } catch (err) {
     console.log('Had an error getting your coins', err.message);
   }
@@ -46,46 +60,36 @@ async function getCoin(coinId) {
   }
 }
 
-// async function buyCoin(purchaseData) {
-
-//   const { totalCost, symbol, price, uuid, } = purchaseData;
-
-//   const user = await userService.getUser();
-//   if (!user) {
-//     return 'NO_USER';
-//   } else {
-//     if (user.usdBalance < purchaseData.totalCost) {
-//       return 'NO_FUNDS';
-//     } else {
-//       const transaction = {
-//         usdAmount: totalCost.usdAmount,
-//         coinAmount: totalCost.coinAmount,
-//         coinValue: price,
-//         symbol,
-//         timestamp: Date.now(),
-//       };
-//       const coin = {
-//         uuid,
-//         symbol,
-//         amount: totalCost.coinAmount,
-//       };
-//       user.coins.push(coin);
-//       user.transactions.push(transaction);
-//       user.usdBalance = user.usdBalance - totalCost.usdAmount;
-//     }
-
-//     try {
-//       const updatedUser = await userService.updateUser(user);
-//       return updatedUser;
-//     } catch (err) {
-//       console.log('had an error while getting your data', err.message);
-//     }
-//   }
-
-// }
+async function getWalletCoins(coins) {
+  console.log(coins);
+  try {
+    const { data } = await axios.request({
+      method: 'GET',
+      url: 'https://coinranking1.p.rapidapi.com/coins',
+      params: {
+        referenceCurrencyUuid: 'yhjMzLPhuIDl',
+        timePeriod: '24h',
+        'symbols[0]': coins,
+        'tiers[0]': '1',
+        orderBy: 'marketCap',
+        orderDirection: 'desc',
+        limit: '50',
+        offset: '0'
+      },
+      headers: {
+        'X-RapidAPI-Key': API_KEY,
+        'X-RapidAPI-Host': 'coinranking1.p.rapidapi.com'
+      }
+    });
+    console.log(data);
+  } catch (err) {
+    console.log('had an error', err);
+  }
+}
 
 
 export const coinService = {
   getCoins,
   getCoin,
+  getWalletCoins
 };

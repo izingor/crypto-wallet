@@ -18,7 +18,7 @@ export const CoinDetailsPage = () => {
 	const activeUser = useSelector(user);
 	const dispatch = useDispatch();
 
-
+	console.log(coin)
 	const marketCapBil = () => {
 		return (coin.marketCap / 10e8).toFixed(2) + ' Billion';
 	};
@@ -58,6 +58,7 @@ export const CoinDetailsPage = () => {
 		<section className="container items-center justify-center py-8">
 			{coin ? (
 				<DataDisplayContainer
+				key="coinDisplayContainer"
 					rows={[
 						<DataDisplayRow
 							key="icon"
@@ -104,7 +105,7 @@ export const CoinDetailsPage = () => {
 						<DataDisplayRow
 							key="chart"
 							isGrey={false}
-							chart={<CoinLineChart color={color} sparkline={coin.sparkline} />}
+							lineChart={<CoinLineChart color={color} sparkline={coin.sparkline} />}
 						/>,
 					]}
 				/>

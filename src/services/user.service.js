@@ -54,7 +54,7 @@ async function login(user) {
 
 async function purchaseCoin(purchaseData) {
 
-    const { totalCost, symbol, price, uuid, } = purchaseData;
+    const { totalCost, symbol, price, uuid, color } = purchaseData;
 
     const user = await getUser();
     if (!user) {
@@ -68,6 +68,7 @@ async function purchaseCoin(purchaseData) {
                 coinAsset.amount += totalCost.coinAmount;
             } else {
                 const coin = {
+                    color,
                     uuid,
                     symbol,
                     amount: totalCost.coinAmount,

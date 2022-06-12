@@ -1,6 +1,7 @@
-import { Doughnut } from 'react-chartjs-2';
-import { Chart, ArcElement } from 'chart.js';
-Chart.register(ArcElement);
+import { Doughnut } from 'react-chartjs-2'
+import { Chart, ArcElement } from 'chart.js'
+Chart.register(ArcElement)
+// Chart.overrides[type].plugins.legend
 
 export const DoughnutChart = ({ data, backgroundColor, labels }) => {
 	const coinData = () => {
@@ -12,29 +13,28 @@ export const DoughnutChart = ({ data, backgroundColor, labels }) => {
 					backgroundColor,
 				},
 			],
-		};
-	};
+		}
+	}
 
 	const options = {
-		legend: {
-			// display: true,
-			// position: 'right',
-		},
 		elements: {
 			arc: {
 				borderWidth: 0,
 			},
 		},
 		plugins: {
+			title: {
+				display: false,
+			},
 			legend: {
-				position: 'right',
+				display: false,
 			},
 		},
-	};
+	}
 
 	return (
 		<div>
 			<Doughnut options={options} data={coinData()} />
 		</div>
-	);
-};
+	)
+}

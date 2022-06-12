@@ -13,7 +13,6 @@ export const userService = {
     purchaseCoin
 };
 
-
 function getUser() {
     return Promise.resolve(sessionService.loadFromStorage(SESSION_DB));
 }
@@ -27,6 +26,7 @@ function getEmptyUser() {
     };
     return user;
 }
+
 function saveNewUser({ name, password, email }) {
     const newUser = {
         name,
@@ -39,7 +39,6 @@ function saveNewUser({ name, password, email }) {
     const savedUser = asyncStorageService.post(USER_DB, newUser);
     return savedUser;
 }
-
 
 async function login(user) {
     const storedUser = await asyncStorageService.get(USER_DB, user.email);
@@ -96,10 +95,10 @@ async function purchaseCoin(purchaseData) {
 
 }
 
-
 async function updateUser(user) {
     try {
-        const updatedUser = await asyncStorageService.put(USER_DB, user);
+        const { password } = await asyncStorageService.get(USER_DB, user.email);
+        const updatedUser = await asyncStorageService.put(USER_DB, { ...user, password });
         return sessionService.saveToStorage(SESSION_DB, updatedUser);
     } catch (err) {
         console.log('had an issue updating the user', err.message);
@@ -107,7 +106,6 @@ async function updateUser(user) {
     }
 
 }
-
 
 function logout() {
     return sessionService.clearStorage();

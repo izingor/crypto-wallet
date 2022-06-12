@@ -9,6 +9,7 @@ import { DataDisplayRow } from '../components/DataDisplayRow';
 import { CoinLineChart } from '../components/CoinLineChart';
 import { SmallBtn } from '../components/buttons/SmallBtn';
 import { DataDisplayContainer } from '../components/DataDisplayContainer';
+import { utilsService } from '../services/utils.service';
 
 export const CoinDetailsPage = () => {
 	const { coinId } = useParams();
@@ -17,12 +18,15 @@ export const CoinDetailsPage = () => {
 	const activeUser = useSelector(user);
 	const dispatch = useDispatch();
 
+
 	const marketCapBil = () => {
 		return (coin.marketCap / 10e8).toFixed(2) + ' Billion';
 	};
 	useEffect(() => {
 		dispatch(getCoin(coinId));
 	}, []);
+
+	const color = utilsService.changeColor(coin?.change, true);
 
 	const onBuyBtnClicked = () => {
 		if (!activeUser) {
@@ -100,7 +104,7 @@ export const CoinDetailsPage = () => {
 						<DataDisplayRow
 							key="chart"
 							isGrey={false}
-							chart={<CoinLineChart sparkline={coin.sparkline} />}
+							chart={<CoinLineChart color={color} sparkline={coin.sparkline} />}
 						/>,
 					]}
 				/>

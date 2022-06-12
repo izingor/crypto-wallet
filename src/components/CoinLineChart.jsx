@@ -20,7 +20,11 @@ ChartJS.register(
 	Legend
 );
 
-export const CoinLineChart = ({ sparkline, isTicksAndBorders = true }) => {
+export const CoinLineChart = ({
+	color,
+	sparkline,
+	isTicksAndBorders = true,
+}) => {
 	const xAxis = () => {
 		const data = [];
 		sparkline.forEach((price, idx) => {
@@ -35,8 +39,7 @@ export const CoinLineChart = ({ sparkline, isTicksAndBorders = true }) => {
 			datasets: [
 				{
 					data: sparkline,
-					borderColor: 'rgb(255, 99, 132)',
-					backgroundColor: 'rgba(255, 99, 132, 0.5)',
+					borderColor: color,
 					borderWidth: 1,
 				},
 			],

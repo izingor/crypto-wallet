@@ -1,21 +1,16 @@
-// import { Link } from 'react-router-dom';
 import { CoinLineChart } from './CoinLineChart';
 import { useHistory } from 'react-router';
+import { utilsService } from '../services/utils.service';
 export const CoinDataPreview = ({ coin }) => {
-	const { symbol, price, iconUrl, uuid, marketCap, change, sparkline } = coin;
+	const { symbol, price, iconUrl, uuid, change, sparkline } = coin;
 	const history = useHistory();
 
 	const priceFixed = () => {
 		return parseFloat(price).toFixed(6);
 	};
 
-	const changeColor = () => {
-		const parsedChange = parseFloat(change);
-		if (parsedChange > 0) {
-			return { color: '#32CD32' };
-		} else {
-			return { color: 'red' };
-		}
+	const color = (change, isString) => {
+		return utilsService.changeColor(change, isString);
 	};
 
 	return (
@@ -31,12 +26,16 @@ export const CoinDataPreview = ({ coin }) => {
 				{symbol}
 			</th>
 			<td className="px-4 py-4">{priceFixed()}</td>
-			<td className="px-4 py-4" style={changeColor()}>
+			<td className="px-4 py-4" style={color(change, false)}>
 				{change}
 			</td>
 			<td className="px-2 py-4 text-left">
 				<div className="flex items-center justify-start">
-					<CoinLineChart sparkline={sparkline} isTicksAndBorders={false} />
+					<CoinLineChart
+						color={color(change, true)}
+						sparkline={sparkline}
+						isTicksAndBorders={false}
+					/>
 				</div>
 			</td>
 		</tr>

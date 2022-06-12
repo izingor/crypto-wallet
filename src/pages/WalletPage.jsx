@@ -6,6 +6,7 @@ import { DataDisplayContainer } from '../components/DataDisplayContainer';
 import { DoughnutChart } from '../components/DoughnutChart';
 import { useEffect } from 'react';
 import { LoadingSpinner } from '../components/LoadingSpinner';
+import { WalletCoinList } from '../components/WalletCoinList';
 
 export const WalletPage = () => {
 	const activeUser = useSelector(user);
@@ -19,6 +20,16 @@ export const WalletPage = () => {
 
 	const coinColors =
 		activeUser && activeUser && activeUser.coins.map((coin) => coin.color);
+
+	const assetsMap =
+		walletCoinValues &&
+		activeUser.coins.map((coin) => {
+			return {
+				coinsValue: coin.amount * walletCoinValues[coin.symbol],
+				symbol: coin.symbol,
+				color: coin.color,
+			};
+		});
 
 	const walletValue = () => {
 		return assetsValues.reduce((a, v) => a + v, 0);
@@ -50,6 +61,7 @@ export const WalletPage = () => {
 						/>,
 						<DataDisplayRow
 							key="assetsAllocation"
+							dt={<WalletCoinList assetsMap={assetsMap} />}
 							// dt={['kaka','kakd']}
 							dougnnutChart={
 								<DoughnutChart

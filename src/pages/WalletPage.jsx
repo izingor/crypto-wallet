@@ -11,9 +11,9 @@ export const WalletPage = () => {
 	return (
 		<div className='container'>
 			<DataDisplayContainer
-			rows={<DataDisplayRow  dt={'Assets Allocation'}  />} 
-			 /> 
-			<DoughnutChart coins={activeUser}/>
+				rows={<DataDisplayRow dt={'Assets Allocation'} />}
+			/>
+			{activeUser && <DoughnutChart coins={activeUser.coins} />}
 		</div>
 	)
 }

@@ -20,30 +20,31 @@ ChartJS.register(
 	Legend
 )
 
-export const DoughnutChart = ({ coins, isTicksAndBorders = true }) => {
+export const DoughnutChart = ({ coins }) => {
+	// const { coins } = activeUser
 	console.log(coins)
-	// const labels = () => {
-	// 	const data = coins.map((coin) => {
+	const coinLabels = () => {
+		const data = coins.map((coin) => coin.symbol)
+		return data
+	}
+	const coinAmounts = coins.map((coin) => coin.amount)
 
-	// 	})
-	// 	return data
-	// }
-
-	// const coinData = () => {
-	// 	return {
-	// 		labels,
-	// 		datasets: [
-	// 			{
-	// 				data: sparkline,
-	// 				backgroundColor: [
-	// 					'rgba(255, 99, 132, 0.5)',
-	// 					'rgba(100, 99, 132, 0.5)',
-	// 					'rgba(255, 30, 13, 0.5)',
-	// 				],
-	// 			},
-	// 		],
-	// 	}
-	// }
+	console.log(coinAmounts)
+	const coinData = () => {
+		return {
+			labels: coinLabels(),
+			datasets: [
+				{
+					data: coinAmounts,
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.5)',
+						'rgba(100, 99, 132, 0.5)',
+						'rgba(255, 30, 13, 0.5)',
+					],
+				},
+			],
+		}
+	}
 
 	const options = () => {
 		return {
@@ -62,7 +63,7 @@ export const DoughnutChart = ({ coins, isTicksAndBorders = true }) => {
 
 	return (
 		<div>
-			{/* <Doughnut options={options()} data={coinData()} width={74} height={24} /> */}
+			<Doughnut options={options()} data={coinData()} />
 		</div>
 	)
 }

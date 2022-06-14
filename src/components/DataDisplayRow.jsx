@@ -11,9 +11,9 @@ export const DataDisplayRow = ({
 		: ' bg-white px-4 py-5 grid grid-cols-4 gap-4 px-4  sm:grid sm:grid-cols-5 sm:gap-4 sm:px-6';
 	return (
 		<div className={rowClass}>
-			{dt && <dt className="text-sm font-medium text-gray-500 col-span-4">{dt}</dt>}
+			{dt && <dt className="text-sm font-medium text-gray-500 col-span-4 sm:col-span-2">{dt}</dt>}
 			{lineChart && (
-				<dd className="mt-1 text-sm text-gray-900 col-span-3 sm:mt-0 sm:col-span-4">
+				<dd className="mt-1 text-sm text-gray-900 col-span-4 sm:mt-0 sm:col-span-5">
 					{lineChart}
 				</dd>
 			)}
@@ -28,6 +28,7 @@ export const DataDisplayRow = ({
 				</dd>
 			)}
 			{btn}
+
 		</div>
 	);
 };

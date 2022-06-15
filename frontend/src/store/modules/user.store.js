@@ -8,8 +8,9 @@ const initialState = {
     signupStatus: ''
 };
 
-export const loginUser = createAsyncThunk('user/loginUser', async (userData) => {
-    const loggedUser = await userService.login(userData);
+export const loginUser = createAsyncThunk('user/loginUser', async () => {
+    const loggedUser = await userService.login();
+    console.log(loggedUser);
     return loggedUser;
 });
 

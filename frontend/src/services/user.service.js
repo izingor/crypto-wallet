@@ -1,5 +1,10 @@
-import { asyncStorageService } from "./async.storage.service";
-import { sessionService } from "./session.service";
+import { asyncStorageService } from './async.storage.service';
+import { sessionService } from './session.service';
+import { auth, provider } from '../firebase/firebase.config';
+import { signInWithPopup, signOut } from 'firebase/auth';
+import { addDoc, collection } from '@firebase/firestore';
+import { db } from '../firebase/firebase.config';
+
 const USER_DB = 'usersDB';
 const SESSION_DB = 'loggedDB';
 
@@ -12,6 +17,9 @@ export const userService = {
     updateUser,
     purchaseCoin
 };
+
+const userCollection = collection(db, 'users');
+
 
 function getUser() {
     return Promise.resolve(sessionService.loadFromStorage(SESSION_DB));
@@ -40,16 +48,40 @@ function saveNewUser({ name, password, email }) {
     return savedUser;
 }
 
-async function login(user) {
-    const storedUser = await asyncStorageService.get(USER_DB, user.email);
-    if (storedUser.password === user.password) {
-        const { password, ...loggedUser } = storedUser;
-        sessionService.saveToStorage(SESSION_DB, loggedUser);
-        return loggedUser;
-    } else {
-        console.log('no user');
-        return false;
-    }
+async function login() {
+    console.log('loggin in');
+    const res = await signInWithPopup(auth, provider);
+    // console.log(res);
+    const { uid, email, displayName } = res.user;
+
+
+    const newUser = {
+        uid,
+        email,
+        displayName,
+        usdBalance: 1000,
+        coins: [],
+        transactions: []
+    };
+    console.log(newUser);
+    await addDoc(userCollection, newUser);
+    // console.log(doc);
+    // sessionService.saveToStorage(SESSION_DB, loggedUser);
+    // return loggedUser;
+    // if (res.user) {
+    //     console.log(res.user);
+    //     sessionService.saveToStorage(SESSION_DB, res.user.accessToken);
+    // }
+    // const storedUser = await asyncStorageService.get(USER_DB, user.email);
+    // if (storedUser.password === user.password) {
+    //     const { password, ...loggedUser } = storedUser;
+    //     sessionService.saveToStorage(SESSION_DB, loggedUser);
+    //     return loggedUser;
+    // } else {
+    //     console.log('no user');
+    //     return false;
+    // }
+
 }
 
 async function purchaseCoin(purchaseData) {
@@ -108,6 +140,7 @@ async function updateUser(user) {
 
 }
 
-function logout() {
+async function logout() {
+    await signOut(auth);
     return sessionService.clearStorage();
 }

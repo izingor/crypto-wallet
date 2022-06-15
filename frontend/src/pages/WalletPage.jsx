@@ -12,11 +12,10 @@ export const WalletPage = () => {
 	const activeUser = useSelector(user)
 	const { walletCoinValues } = useSelector(coinState)
 	const dispatch = useDispatch()
-
 	const coinLabels = activeUser && activeUser.coins.map((coin) => coin.symbol)
 
 	const assetsValues =
-		(activeUser && walletCoinValues) &&
+		walletCoinValues &&
 		activeUser.coins.map((coin) => coin.amount * walletCoinValues[coin.symbol])
 
 	const coinColors =
@@ -24,7 +23,6 @@ export const WalletPage = () => {
 
 	const assetsMap =
 		walletCoinValues &&
-		activeUser &&
 		activeUser.coins.map((coin) => {
 			return {
 				coinsValue: coin.amount * walletCoinValues[coin.symbol],
@@ -33,14 +31,15 @@ export const WalletPage = () => {
 			}
 		})
 
-	const walletValue = assetsValues && assetsValues.reduce((a, v) => a + v, 0)
-
-	const coinsPercent = 
+	const walletValue = () => {
+		return assetsValues.reduce((a, v) => a + v, 0)
+	}
 
 	useEffect(() => {
 		dispatch(getWalletCoins(coinLabels))
 	}, [activeUser])
 
+	console.log(activeUser)
 	return (
 		<div className='container'>
 			{activeUser && assetsValues ? (
@@ -57,7 +56,7 @@ export const WalletPage = () => {
 						<DataDisplayRow
 							key='walletValue'
 							dt='Your Wallet Value:'
-							dd={`$${assetsValues && walletValue}`}
+							dd={`$${assetsValues && walletValue()}`}
 							isGrey={false}
 						/>,
 						<DataDisplayRow

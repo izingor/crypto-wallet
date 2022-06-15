@@ -1,29 +1,19 @@
 import { coinState, getCoins } from '../store/modules/coin.store';
-// import { onBuyModalChanged } from '../store/modules/ui.store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { CoinDataPreview } from '../components/CoinDataPreview';
 import { LoadingSpinner } from '../components/LoadingSpinner';
-// import { user } from '../store/modules/user.store';
-// import { useHistory } from 'react-router-dom';
 
 export const RatesPage = () => {
 	const { coins } = useSelector(coinState);
-	// const activeUser = useSelector(user);
-	// const history = useHistory();
+
 	const dispatch = useDispatch();
 
 	useEffect(() => {
 		dispatch(getCoins());
 	}, []);
 
-	// const onBuyModalClicked = ({ name, price, iconUrl, uuid, symbol }) => {
-	// 	if (!activeUser) {
-	// 		history.push('/login');
-	// 		return;
-	// 	}
-	// 	dispatch(onBuyModalChanged({ name, price, iconUrl, uuid, symbol }));
-	// };
+	console.log(coins);
 
 	return (
 		<section className=" container flex flex-col min-h-fit items-center">

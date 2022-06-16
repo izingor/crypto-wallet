@@ -2,8 +2,9 @@ import { asyncStorageService } from './async.storage.service';
 import { sessionService } from './session.service';
 import { auth, provider } from '../firebase/firebase.config';
 import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { addDoc, collection, query, where, getDocs, doc, updateDoc, setDoc } from '@firebase/firestore';
+import { getDoc, collection, query, where, getDocs, doc, updateDoc, setDoc } from '@firebase/firestore';
 import { db } from '../firebase/firebase.config';
+import { firebaseService } from './firebase.service';
 
 const USER_DB = 'usersDB';
 const SESSION_DB = 'loggedDB';
@@ -50,14 +51,11 @@ function saveNewUser({ name, password, email }) {
 }
 
 async function login() {
-    console.log('loggin in', auth.currentUser);
-    const res = await signInWithPopup(auth, provider);
+    const res = await firebaseService.loginWithGoogle();
     const { uid, email, displayName } = res.user;
-    const user = await _findUserById(usersRef, uid);
-    // console.log(res);
-    // const q = query(usersRef, where('uid', '==', uid));
-    // const data = await getDocs(q);
-    // const user = data.docs.map(doc => (doc.data()))[0];
+
+    const userData = await getDoc(doc(db, 'users', uid));
+    const user = userData.data();
 
     if (!user) {
         const newUser = {
@@ -68,8 +66,9 @@ async function login() {
             coins: [],
             transactions: []
         };
-        const dbRes = await setDoc(doc(db, 'users', uid), newUser);
-        console.log(dbRes);
+        // const dbRes = await setDoc(doc(db, 'users', uid), newUser);
+        await firebaseService.setDocument('users', uid, newUser);
+        // console.log(dbRes);
         return sessionService.saveToStorage(SESSION_DB, newUser);
     } else {
         return sessionService.saveToStorage(SESSION_DB, user);
@@ -121,18 +120,13 @@ async function purchaseCoin(purchaseData) {
 }
 
 async function updateUser(user) {
-    console.log('updating the user', user);
-    // console.log(foundUser);
-
     try {
         await updateDoc(doc(db, 'users', user.uid),
             {
                 coins: user.coins,
-                transactions: user.transactions
+                transactions: user.transactions,
+                usdBalance: user.usdBalance
             });
-
-        // const { password } = await asyncStorageService.get(USER_DB, user.email);
-        // const updatedUser = await asyncStorageService.put(USER_DB, { ...user, password });
         return sessionService.saveToStorage(SESSION_DB, user);
     } catch (err) {
         console.log('had an issue updating the user', err.message);
@@ -146,9 +140,9 @@ async function logout() {
     return sessionService.clearStorage();
 }
 
-async function _findUserById(ref, uid) {
-    const q = query(ref, where('uid', '==', uid));
-    const data = await getDocs(q);
-    const user = data.docs.map(doc => (doc.data()))[0];
-    return user;
-}
+// async function _findUserById(ref, uid) {
+//     const q = query(ref, where('uid', '==', uid));
+//     const data = await getDocs(q);
+//     const user = data.docs.map(doc => (doc.data()))[0];
+//     return user;
+// }

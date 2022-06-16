@@ -39,14 +39,17 @@ export const WalletPage = () => {
 		dispatch(getWalletCoins(coinLabels))
 	}, [activeUser])
 
-	console.log(activeUser)
 	return (
 		<div className='container'>
 			{activeUser && assetsValues ? (
 				<DataDisplayContainer
 					key='walletDispalyContainer'
 					rows={[
-						<DataDisplayRow key='userName' dt='Name' dd={activeUser.name} />,
+						<DataDisplayRow
+							key='userName'
+							dt='Name'
+							dd={activeUser.displayName}
+						/>,
 						<DataDisplayRow
 							key='userBalance'
 							dt='Your Currents USD Balance:'

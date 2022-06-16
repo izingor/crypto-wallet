@@ -9,7 +9,6 @@ export function Header() {
 	const dispacth = useDispatch();
 	const history = useHistory();
 
-	console.log(activeUser);
 	const logoutUser = () => {
 		dispacth(logout());
 		history.push('/login');

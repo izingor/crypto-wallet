@@ -20,9 +20,9 @@ export const signupUser = createAsyncThunk('user/signUpUser', async (userData) =
 });
 
 export const checkUserSession = createAsyncThunk('user/checkUserSession', async () => {
-    const loggedUser = userService.getUser();
+    const loggedUser = await userService.getUser();
     console.log(loggedUser);
-return loggedUser;
+    return loggedUser;
 });
 
 export const logout = createAsyncThunk('user/logout', async () => {
@@ -31,9 +31,10 @@ export const logout = createAsyncThunk('user/logout', async () => {
 
 export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
     // console.log('coin store res', res);
+    // console.log(purchaseData);
     const res = await userService.purchaseCoin(purchaseData);
-    console.log('getting the res', res);
     return res;
+    // console.log('getting the res', res);
 
 
 });

@@ -21,7 +21,8 @@ export const signupUser = createAsyncThunk('user/signUpUser', async (userData) =
 
 export const checkUserSession = createAsyncThunk('user/checkUserSession', async () => {
     const loggedUser = userService.getUser();
-    return loggedUser;
+    console.log(loggedUser);
+return loggedUser;
 });
 
 export const logout = createAsyncThunk('user/logout', async () => {

@@ -2,7 +2,7 @@ import { asyncStorageService } from './async.storage.service';
 import { sessionService } from './session.service';
 import { auth, provider } from '../firebase/firebase.config';
 import { signInWithPopup, signOut } from 'firebase/auth';
-import { addDoc, collection } from '@firebase/firestore';
+import { addDoc, collection, query, where, getDocs, getDoc, doc, get } from '@firebase/firestore';
 import { db } from '../firebase/firebase.config';
 
 const USER_DB = 'usersDB';
@@ -18,12 +18,14 @@ export const userService = {
     purchaseCoin
 };
 
-const userCollection = collection(db, 'users');
-
+const usersRef = collection(db, 'users');
 
 function getUser() {
-    return Promise.resolve(sessionService.loadFromStorage(SESSION_DB));
-}
+    const user = sessionService.loadFromStorage(SESSION_DB);
+    console.log('active user', user);
+    console.log('active auth user', auth);
+    // return (auth.currentUser && user) ? user : null;
+};
 
 function getEmptyUser() {
     const user = {
@@ -49,39 +51,28 @@ function saveNewUser({ name, password, email }) {
 }
 
 async function login() {
-    console.log('loggin in');
+    console.log('loggin in', auth.currentUser);
     const res = await signInWithPopup(auth, provider);
     // console.log(res);
     const { uid, email, displayName } = res.user;
-
-
-    const newUser = {
-        uid,
-        email,
-        displayName,
-        usdBalance: 1000,
-        coins: [],
-        transactions: []
-    };
-    console.log(newUser);
-    await addDoc(userCollection, newUser);
-    // console.log(doc);
-    // sessionService.saveToStorage(SESSION_DB, loggedUser);
-    // return loggedUser;
-    // if (res.user) {
-    //     console.log(res.user);
-    //     sessionService.saveToStorage(SESSION_DB, res.user.accessToken);
-    // }
-    // const storedUser = await asyncStorageService.get(USER_DB, user.email);
-    // if (storedUser.password === user.password) {
-    //     const { password, ...loggedUser } = storedUser;
-    //     sessionService.saveToStorage(SESSION_DB, loggedUser);
-    //     return loggedUser;
-    // } else {
-    //     console.log('no user');
-    //     return false;
-    // }
-
+    const q = query(usersRef, where('uid', '==', uid));
+    const data = await getDocs(q);
+    const user = data.docs.map(doc => (doc.data()))[0];
+    if (!user) {
+        const newUser = {
+            uid,
+            email,
+            displayName,
+            usdBalance: 1000,
+            coins: [],
+            transactions: []
+        };
+        const dbRes = await addDoc(usersRef, newUser);
+        console.log(dbRes);
+        return sessionService.saveToStorage(SESSION_DB, newUser);
+    } else {
+        return sessionService.saveToStorage(SESSION_DB, user);
+    }
 }
 
 async function purchaseCoin(purchaseData) {

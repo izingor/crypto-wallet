@@ -16,10 +16,9 @@ import './assets/scss/global.scss';
 
 export function App() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(checkUserSession());
-  }, []);
+  });
 
   return (
     <Router>

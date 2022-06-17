@@ -1,5 +1,4 @@
 import axios from 'axios';
-import _ from 'lodash';
 
 const API_KEY = process.env.REACT_APP_RAPID_API_KEY;
 

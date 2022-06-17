@@ -120,29 +120,11 @@ async function purchaseCoin(purchaseData) {
 }
 
 async function updateUser(user) {
-    try {
-        await updateDoc(doc(db, 'users', user.uid),
-            {
-                coins: user.coins,
-                transactions: user.transactions,
-                usdBalance: user.usdBalance
-            });
-        return sessionService.saveToStorage(SESSION_DB, user);
-    } catch (err) {
-        console.log('had an issue updating the user', err.message);
-
-    }
-
+    await firebaseService.updateUserWallet('users', user.uid, user);
+    return sessionService.saveToStorage(SESSION_DB, user);
 }
 
 async function logout() {
-    await signOut(auth);
+    await firebaseService.logout()
     return sessionService.clearStorage();
 }
-
-// async function _findUserById(ref, uid) {
-//     const q = query(ref, where('uid', '==', uid));
-//     const data = await getDocs(q);
-//     const user = data.docs.map(doc => (doc.data()))[0];
-//     return user;
-// }

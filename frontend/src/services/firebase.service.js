@@ -23,10 +23,30 @@ async function setDocument(collection, id, doc) {
     }
 }
 
+async function updateUserWallet(collection, id, data) {
+    try {
+        await updateDoc(doc(db, collection, id),
+            {
+                coins: data.coins,
+                transactions: data.transactions,
+                usdBalance: data.usdBalance,
+            });
+    } catch (err) {
+        console.log('had an issue updating the user', err.message);
+
+    }
+}
+
+async function logout() {
+    await signOut(auth);
+}
+
 
 export const firebaseService = {
     loginWithGoogle,
     setDocument,
+    updateUserWallet,
+    logout
 };
 
 

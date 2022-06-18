@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
 import { utilsService } from '../services/utils.service'
 
-import { user } from '../store/modules/user.store'
+import { userState } from '../store/modules/user.store'
 import { getWalletCoins, coinState } from '../store/modules/coin.store'
 import { DataDisplayRow } from '../components/DataDisplayRow'
 import { DataDisplayContainer } from '../components/DataDisplayContainer'
@@ -11,23 +11,22 @@ import { LoadingSpinner } from '../components/LoadingSpinner'
 import { WalletCoinList } from '../components/wallet/WalletCoinList'
 
 export const WalletPage = () => {
-	const activeUser = useSelector(user)
+	const { user } = useSelector(userState)
 	const { walletCoinValues } = useSelector(coinState)
 	const dispatch = useDispatch()
-	const coinLabels = activeUser && activeUser.coins.map((coin) => coin.symbol)
+	const coinLabels = user && user.coins.map((coin) => coin.symbol)
 
 	const assetsValues =
 		walletCoinValues &&
-		activeUser.coins.map((coin) => coin.amount * walletCoinValues[coin.symbol])
+		user.coins.map((coin) => coin.amount * walletCoinValues[coin.symbol])
 
-	const coinColors =
-		activeUser && activeUser && activeUser.coins.map((coin) => coin.color)
+	const coinColors = user && user.coins.map((coin) => coin.color)
 
 	const walletValue = assetsValues && assetsValues.reduce((a, v) => a + v, 0)
 
 	const assetsMap =
 		walletCoinValues &&
-		activeUser.coins.map((coin) => {
+		user.coins.map((coin) => {
 			return {
 				coinsValue: utilsService.coinWalletFraction(
 					coin.amount,
@@ -41,23 +40,23 @@ export const WalletPage = () => {
 
 	useEffect(() => {
 		dispatch(getWalletCoins(coinLabels))
-	}, [activeUser])
+	}, [user])
 
 	return (
 		<div className='container'>
-			{activeUser && assetsValues ? (
+			{user && assetsValues ? (
 				<DataDisplayContainer
 					key='walletDispalyContainer'
 					rows={[
 						<DataDisplayRow
 							key='userName'
 							dt='Name'
-							dd={activeUser.displayName}
+							dd={user.displayName}
 						/>,
 						<DataDisplayRow
 							key='userBalance'
 							dt='Your Currents USD Balance:'
-							dd={`$${activeUser.usdBalance}`}
+							dd={`$${user.usdBalance}`}
 							isGrey={true}
 						/>,
 						<DataDisplayRow
@@ -79,10 +78,11 @@ export const WalletPage = () => {
 								/>
 							}
 						/>,
-						<DataDisplayRow key='walletCoins'
-						isGrey={false}
-						dt={<WalletCoinList assetsMap={assetsMap} />}
-						/>
+						<DataDisplayRow
+							key='walletCoins'
+							isGrey={false}
+							dt={<WalletCoinList assetsMap={assetsMap} />}
+						/>,
 					]}
 				/>
 			) : (

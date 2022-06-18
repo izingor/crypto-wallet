@@ -12,7 +12,6 @@ import { NewsPage } from './pages/NewsPage';
 import { CoinDetailsPage } from './pages/CoinDetailsPage';
 import { BuyModal } from './components/modals/BuyModal';
 import { WalletPage } from './pages/WalletPage';
-import { ConfirmationModal } from './components/modals/ConfirmationModal';
 import './assets/scss/global.scss';
 
 export function App() {

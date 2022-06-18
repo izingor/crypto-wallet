@@ -7,7 +7,7 @@ export function PurchaseMenu({
 	coin,
 	closeModal,
 	setCost,
-	activeUser,
+	user,
 	totalCost,
 }) {
 	return (
@@ -21,7 +21,7 @@ export function PurchaseMenu({
 			</div>
 			<div className='p-6 space-y-6'>
 				<p className='text-base leading-relaxed text-gray-500 '>
-					<strong>Your Balance </strong>- ${activeUser?.usdBalance}
+					<strong>Your Balance </strong>- ${user?.usdBalance}
 				</p>
 				<CurrencyInputs coin={coin} setCost={setCost} />
 			</div>

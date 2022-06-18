@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useHistory, useParams } from 'react-router-dom'
 import { onBuyModalChanged } from '../store/modules/ui.store'
 import { coinState, getCoin } from '../store/modules/coin.store'
-import { user } from '../store/modules/user.store'
+import { userState } from '../store/modules/user.store'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { DataDisplayRow } from '../components/DataDisplayRow'
 import { LineChart } from '../components/charts/LineChart'
@@ -15,7 +15,7 @@ export const CoinDetailsPage = () => {
 	const { coinId } = useParams()
 	const history = useHistory()
 	const { coin } = useSelector(coinState)
-	const activeUser = useSelector(user)
+	const { user } = useSelector(userState)
 	const dispatch = useDispatch()
 
 	const marketCapBil = () => {
@@ -28,7 +28,7 @@ export const CoinDetailsPage = () => {
 	const color = utilsService.changeColor(coin?.change, true)
 
 	const onBuyBtnClicked = () => {
-		if (!activeUser) {
+		if (!user) {
 			history.push('/login')
 			return
 		}
@@ -104,9 +104,7 @@ export const CoinDetailsPage = () => {
 						<DataDisplayRow
 							key='chart'
 							isGrey={false}
-							lineChart={
-								<LineChart color={color} sparkline={coin.sparkline} />
-							}
+							lineChart={<LineChart color={color} sparkline={coin.sparkline} />}
 						/>,
 					]}
 				/>

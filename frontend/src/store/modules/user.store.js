@@ -48,6 +48,9 @@ const userSlice = createSlice({
         setUser: ({ payload }) => {
             console.log('setting use from the user store', payload);
             // state.user = payload;
+        },
+        resetPurchaseStatus: (state) => {
+            state.purchaseStatus = '';
         }
         // checkUserSession: (state) => {
         //     const userSession = userService.checkActiveUser();
@@ -97,6 +100,6 @@ const userSlice = createSlice({
 
 
 });
-export const user = (state) => state.userStore.user;
-export const { setUser } = userSlice.actions;
+export const userState = (state) => state.userStore;
+export const { setUser, resetPurchaseStatus } = userSlice.actions;
 export default userSlice.reducer;

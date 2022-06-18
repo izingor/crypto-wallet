@@ -2,11 +2,14 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { coinState } from '../../store/modules/coin.store'
 import { uiState, onBuyModalChanged } from '../../store/modules/ui.store'
-import { user, purchaseCoin } from '../../store/modules/user.store'
-import { CurrencyInputs } from '../inputs/CurrencyInputs'
-import { SmallBtn } from '../buttons/SmallBtn'
-import { CloseXBtn } from '../buttons/CloseXBtn'
+import {
+	userState,
+	purchaseCoin,
+	resetPurchaseStatus,
+} from '../../store/modules/user.store'
+import { ConfirmationModal } from './ConfirmationModal'
 import { useHistory } from 'react-router-dom'
+
 import { LoadingSpinner } from '../LoadingSpinner'
 import { PurchaseMenu } from './PurchaseMenu'
 
@@ -16,7 +19,7 @@ export const BuyModal = () => {
 	const [totalCost, setTotalCost] = useState(null)
 	const { isBuyModaLOpen } = useSelector(uiState)
 	const { coin } = useSelector(coinState)
-	const activeUser = useSelector(user)
+	const { user, purchaseStatus } = useSelector(userState)
 
 	const closeModal = () => {
 		dispatch(onBuyModalChanged())
@@ -40,7 +43,7 @@ export const BuyModal = () => {
 		setCost,
 		onBuyCoinClicked,
 		coin,
-		activeUser,
+		user,
 		totalCost,
 	}
 
@@ -53,7 +56,11 @@ export const BuyModal = () => {
 				>
 					{coin ? (
 						<div className='relative h-full w-full'>
-							<PurchaseMenu {...purchaseMenuProps} />
+							{purchaseStatus ? (
+								<ConfirmationModal purchaseStatus={purchaseStatus} />
+							) : (
+								<PurchaseMenu {...purchaseMenuProps} />
+							)}
 						</div>
 					) : (
 						<LoadingSpinner />

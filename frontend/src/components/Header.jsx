@@ -1,11 +1,11 @@
 import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { user, logout } from '../store/modules/user.store'
+import { userState, logout } from '../store/modules/user.store'
 import { onWalletModalChanged } from '../store/modules/ui.store'
 import Logo from '../assets/images/logo_transparent.png'
 
 export function Header() {
-	const activeUser = useSelector(user)
+	const { user } = useSelector(userState)
 	const dispacth = useDispatch()
 	const history = useHistory()
 
@@ -26,14 +26,14 @@ export function Header() {
 					<NavLink exact to='/' className={navTextClass}>
 						Home
 					</NavLink>
-					{activeUser && <NavLink to='/wallet'>Wallet</NavLink>}
+					{user && <NavLink to='/wallet'>Wallet</NavLink>}
 					<NavLink to='/rates' className={navTextClass}>
 						Rates
 					</NavLink>
 					<NavLink to='/news' className={navTextClass}>
 						News
 					</NavLink>
-					{activeUser ? (
+					{user ? (
 						<p onClick={logoutUser} className={navTextClass}>
 							Logout
 						</p>

@@ -1,6 +1,6 @@
 import { db, auth, provider } from '../firebase/firebase.config';
-import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { getDoc, collection, query, where, getDocs, doc, updateDoc, setDoc } from '@firebase/firestore';
+import { signInWithPopup, signOut } from 'firebase/auth';
+import { doc, updateDoc, setDoc } from '@firebase/firestore';
 
 
 

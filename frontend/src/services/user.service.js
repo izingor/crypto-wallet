@@ -1,8 +1,6 @@
 import { asyncStorageService } from './async.storage.service';
 import { sessionService } from './session.service';
-import { auth, provider } from '../firebase/firebase.config';
-import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
-import { getDoc, collection, query, where, getDocs, doc, updateDoc, setDoc } from '@firebase/firestore';
+import { getDoc, collection, doc } from '@firebase/firestore';
 import { db } from '../firebase/firebase.config';
 import { firebaseService } from './firebase.service';
 

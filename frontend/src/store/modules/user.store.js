@@ -5,7 +5,8 @@ import { userService } from '../../services/user.service';
 const initialState = {
     user: null,
     loginStatus: '',
-    signupStatus: ''
+    signupStatus: '',
+    purchaseStatus: '',
 };
 
 export const loginUser = createAsyncThunk('user/loginUser', async () => {
@@ -82,7 +83,13 @@ const userSlice = createSlice({
             })
             .addCase((purchaseCoin.fulfilled), (state, { payload }) => {
                 state.user = payload;
-
+                state.purchaseStatus = 'success';
+            })
+            .addCase((purchaseCoin.pending), state => {
+                state.purchaseStatus = 'proccessing';
+            })
+            .addCase((purchaseCoin.rejected), state => {
+                state.purchaseStatus = 'failed';
             });
 
 

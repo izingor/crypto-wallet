@@ -6,8 +6,8 @@ export const WalletCoinPreview = ({ assetData }) => {
 				style={{ backgroundColor: assetData.color }}
 			></div>
 			<p>{assetData.symbol}</p>
-			<p>-</p>
-			<p>${assetData.coinsValue.toPrecision(5)}</p>
+			<p className='mx-1'></p>
+			<p>{assetData.coinsValue.toPrecision(5)}%</p>
 		</div>
 	)
 }

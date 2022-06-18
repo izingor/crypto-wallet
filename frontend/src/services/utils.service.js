@@ -9,9 +9,12 @@ const changeColor = (change, isString) => {
     }
 };
 
-
+function coinWalletFraction(coinAmount, coinValue, walletValue) {
+    return ((coinAmount * coinValue) / walletValue) * 100;
+}
 
 
 export const utilsService = {
-    changeColor
+    changeColor,
+    coinWalletFraction,
 };

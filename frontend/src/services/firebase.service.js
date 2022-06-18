@@ -13,10 +13,10 @@ async function loginWithGoogle() {
     }
 }
 
-async function setDocument(collection, id, doc) {
+async function setDocument(collection, id, document) {
     try {
-        const setDoc = await setDoc(doc(db, collection, id), doc);
-        return setDoc;
+        const setDocument = await setDoc(doc(db, collection, id), document);
+        return setDocument;
 
     } catch (err) {
         console.log('Had an error while setting the document', err);

@@ -6,7 +6,7 @@ import { coinState, getCoin } from '../store/modules/coin.store'
 import { user } from '../store/modules/user.store'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { DataDisplayRow } from '../components/DataDisplayRow'
-import { CoinLineChart } from '../components/CoinLineChart'
+import { LineChart } from '../components/charts/LineChart'
 import { SmallBtn } from '../components/buttons/SmallBtn'
 import { DataDisplayContainer } from '../components/DataDisplayContainer'
 import { utilsService } from '../services/utils.service'
@@ -105,7 +105,7 @@ export const CoinDetailsPage = () => {
 							key='chart'
 							isGrey={false}
 							lineChart={
-								<CoinLineChart color={color} sparkline={coin.sparkline} />
+								<LineChart color={color} sparkline={coin.sparkline} />
 							}
 						/>,
 					]}

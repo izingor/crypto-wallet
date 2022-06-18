@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { useEffect } from 'react'
 import { user } from '../store/modules/user.store'
 import { getWalletCoins, coinState } from '../store/modules/coin.store'
 import { DataDisplayRow } from '../components/DataDisplayRow'
 import { DataDisplayContainer } from '../components/DataDisplayContainer'
-import { DoughnutChart } from '../components/DoughnutChart'
-import { useEffect } from 'react'
+import { DoughnutChart } from '../components/charts/DoughnutChart'
 import { LoadingSpinner } from '../components/LoadingSpinner'
 import { WalletCoinList } from '../components/WalletCoinList'
+import { utilsService } from '../services/utils.service'
 
 export const WalletPage = () => {
 	const activeUser = useSelector(user)
@@ -21,19 +22,21 @@ export const WalletPage = () => {
 	const coinColors =
 		activeUser && activeUser && activeUser.coins.map((coin) => coin.color)
 
+	const walletValue = assetsValues && assetsValues.reduce((a, v) => a + v, 0)
+
 	const assetsMap =
 		walletCoinValues &&
 		activeUser.coins.map((coin) => {
 			return {
-				coinsValue: coin.amount * walletCoinValues[coin.symbol],
+				coinsValue: utilsService.coinWalletFraction(
+					coin.amount,
+					walletCoinValues[coin.symbol],
+					walletValue
+				),
 				symbol: coin.symbol,
 				color: coin.color,
 			}
 		})
-
-	const walletValue = () => {
-		return assetsValues.reduce((a, v) => a + v, 0)
-	}
 
 	useEffect(() => {
 		dispatch(getWalletCoins(coinLabels))
@@ -59,7 +62,7 @@ export const WalletPage = () => {
 						<DataDisplayRow
 							key='walletValue'
 							dt='Your Wallet Value:'
-							dd={`$${assetsValues && walletValue()}`}
+							dd={`$${assetsValues && walletValue}`}
 							isGrey={false}
 						/>,
 						<DataDisplayRow
@@ -75,6 +78,10 @@ export const WalletPage = () => {
 								/>
 							}
 						/>,
+						<DataDisplayRow key='walletCoins'
+						isGrey={false}
+						dt={<WalletCoinList assetsMap={assetsMap} />}
+						/>
 					]}
 				/>
 			) : (

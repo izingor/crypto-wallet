@@ -20,7 +20,7 @@ ChartJS.register(
 	Legend
 );
 
-export const CoinLineChart = ({
+export const LineChart = ({
 	color,
 	sparkline,
 	isTicksAndBorders = true,

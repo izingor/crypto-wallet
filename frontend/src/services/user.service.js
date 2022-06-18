@@ -55,24 +55,25 @@ async function login() {
     const { uid, email, displayName } = res.user;
 
     const userData = await getDoc(doc(db, 'users', uid));
-    const user = userData.data();
-
-    if (!user) {
-        const newUser = {
-            uid,
-            email,
-            displayName,
-            usdBalance: 1000,
-            coins: [],
-            transactions: []
-        };
-        // const dbRes = await setDoc(doc(db, 'users', uid), newUser);
-        await firebaseService.setDocument('users', uid, newUser);
-        // console.log(dbRes);
-        return sessionService.saveToStorage(SESSION_DB, newUser);
-    } else {
-        return sessionService.saveToStorage(SESSION_DB, user);
-    }
+    return _processUser(userData.data(), { uid, email, displayName });
+    // const user = userData.data();
+    // console.log(userData.data())
+    // if (!userData.data()) {
+    //     const newUser = {
+    //         uid,
+    //         email,
+    //         displayName,
+    //         usdBalance: 1000,
+    //         coins: [],
+    //         transactions: []
+    //     };
+    //     // const dbRes = await setDoc(doc(db, 'users', uid), newUser);
+    //     await firebaseService.setDocument('users', uid, newUser);
+    //     // console.log(dbRes);
+    //     return sessionService.saveToStorage(SESSION_DB, newUser);
+    // } else {
+    //     return sessionService.saveToStorage(SESSION_DB, userData.data());
+    // }
 }
 
 
@@ -119,12 +120,32 @@ async function purchaseCoin(purchaseData) {
 
 }
 
+async function _processUser(user, { uid, email, displayName }) {
+
+    if (!user) {
+        const newUser = {
+            uid,
+            email,
+            displayName,
+            usdBalance: 1000,
+            coins: [],
+            transactions: []
+        };
+        // const dbRes = await setDoc(doc(db, 'users', uid), newUser);
+        await firebaseService.setDocument('users', uid, newUser);
+        return sessionService.saveToStorage(SESSION_DB, newUser);
+        // console.log(dbRes);
+    } else {
+        return sessionService.saveToStorage(SESSION_DB, user);
+    }
+}
+
 async function updateUser(user) {
     await firebaseService.updateUserWallet('users', user.uid, user);
     return sessionService.saveToStorage(SESSION_DB, user);
 }
 
 async function logout() {
-    await firebaseService.logout()
+    await firebaseService.logout();
     return sessionService.clearStorage();
 }

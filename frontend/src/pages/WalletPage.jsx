@@ -1,13 +1,14 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect } from 'react'
+import { utilsService } from '../services/utils.service'
+
 import { user } from '../store/modules/user.store'
 import { getWalletCoins, coinState } from '../store/modules/coin.store'
 import { DataDisplayRow } from '../components/DataDisplayRow'
 import { DataDisplayContainer } from '../components/DataDisplayContainer'
 import { DoughnutChart } from '../components/charts/DoughnutChart'
 import { LoadingSpinner } from '../components/LoadingSpinner'
-import { WalletCoinList } from '../components/WalletCoinList'
-import { utilsService } from '../services/utils.service'
+import { WalletCoinList } from '../components/wallet/WalletCoinList'
 
 export const WalletPage = () => {
 	const activeUser = useSelector(user)

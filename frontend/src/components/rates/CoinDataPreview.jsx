@@ -1,6 +1,6 @@
-import { LineChart } from './charts/LineChart'
+import { LineChart } from '../charts/LineChart'
 import { useHistory } from 'react-router'
-import { utilsService } from '../services/utils.service'
+import { utilsService } from '../../services/utils.service'
 export const CoinDataPreview = ({ coin }) => {
 	const { symbol, price, iconUrl, uuid, change, sparkline } = coin
 	const history = useHistory()

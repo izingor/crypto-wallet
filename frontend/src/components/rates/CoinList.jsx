@@ -1,6 +1,6 @@
 import { CoinDataPreview } from './CoinDataPreview';
 
-export const CoinList = () => {
+export const CoinList = ({coins,onBuyModalClicked}) => {
 	return (
 		<div className="w-full relative overflow-x-auto shadow-md sm:rounded-lg my-5">
 			<table className="w-full text-sm text-left text-gray-500 ">
@@ -24,7 +24,7 @@ export const CoinList = () => {
 						<CoinDataPreview
 							key={coin.uuid}
 							coin={coin}
-							onBuyModalClicked={onBuyModalClicked}
+							// onBuyModalClicked={onBuyModalClicked}
 						/>
 					))}
 				</tbody>

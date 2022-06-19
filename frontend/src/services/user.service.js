@@ -51,27 +51,9 @@ function saveNewUser({ name, password, email }) {
 async function login() {
     const res = await firebaseService.loginWithGoogle();
     const { uid, email, displayName } = res.user;
-
     const userData = await getDoc(doc(db, 'users', uid));
+
     return _processUser(userData.data(), { uid, email, displayName });
-    // const user = userData.data();
-    // console.log(userData.data())
-    // if (!userData.data()) {
-    //     const newUser = {
-    //         uid,
-    //         email,
-    //         displayName,
-    //         usdBalance: 1000,
-    //         coins: [],
-    //         transactions: []
-    //     };
-    //     // const dbRes = await setDoc(doc(db, 'users', uid), newUser);
-    //     await firebaseService.setDocument('users', uid, newUser);
-    //     // console.log(dbRes);
-    //     return sessionService.saveToStorage(SESSION_DB, newUser);
-    // } else {
-    //     return sessionService.saveToStorage(SESSION_DB, userData.data());
-    // }
 }
 
 
@@ -80,10 +62,10 @@ async function purchaseCoin(purchaseData) {
     const { totalCost, symbol, price, uuid, color } = purchaseData;
     const user = await getUser();
     if (!user) {
-        return 'NO_USER';
+        return Promise.reject('NO_USER')
     } else {
         if (user.usdBalance < totalCost.usdAmount) {
-            return 'NO_FUNDS';
+            return new Promise.reject('NO_FUNDS')
         } else {
             const coinAsset = user.coins.find(asset => asset.uuid === purchaseData.uuid);
             if (coinAsset) {

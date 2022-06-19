@@ -22,7 +22,6 @@ export const signupUser = createAsyncThunk('user/signUpUser', async (userData) =
 
 export const checkUserSession = createAsyncThunk('user/checkUserSession', async () => {
     const loggedUser = await userService.getUser();
-    console.log(loggedUser);
     return loggedUser;
 });
 
@@ -31,11 +30,8 @@ export const logout = createAsyncThunk('user/logout', async () => {
 });
 
 export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
-    // console.log('coin store res', res);
-    // console.log(purchaseData);
     const res = await userService.purchaseCoin(purchaseData);
     return res;
-    // console.log('getting the res', res);
 
 
 });
@@ -91,7 +87,8 @@ const userSlice = createSlice({
             .addCase((purchaseCoin.pending), state => {
                 state.purchaseStatus = 'proccessing';
             })
-            .addCase((purchaseCoin.rejected), state => {
+            .addCase((purchaseCoin.rejected), (state, { payload }) => {
+                console.log(payload);
                 state.purchaseStatus = 'failed';
             });
 

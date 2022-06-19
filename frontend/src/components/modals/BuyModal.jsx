@@ -23,6 +23,11 @@ export const BuyModal = () => {
 
 	const closeModal = () => {
 		dispatch(onBuyModalChanged())
+		dispatch(resetPurchaseStatus())
+	}
+
+	const closeMsgModal = () => {
+		dispatch(resetPurchaseStatus())
 	}
 
 	const setCost = (cost) => {
@@ -32,10 +37,6 @@ export const BuyModal = () => {
 	const onBuyCoinClicked = () => {
 		const { uuid, symbol, price, color } = coin
 		dispatch(purchaseCoin({ totalCost, uuid, symbol, price, color }))
-		// console.log('buying coin')
-
-		// closeModal();
-		// history.push('/rates');
 	}
 
 	const purchaseMenuProps = {
@@ -57,7 +58,11 @@ export const BuyModal = () => {
 					{coin ? (
 						<div className='relative h-full w-full'>
 							{purchaseStatus ? (
-								<ConfirmationModal purchaseStatus={purchaseStatus} />
+								<ConfirmationModal
+									purchaseStatus={purchaseStatus}
+									closeModal={closeModal}
+									closeMsgModal={closeMsgModal}
+								/>
 							) : (
 								<PurchaseMenu {...purchaseMenuProps} />
 							)}

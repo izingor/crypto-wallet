@@ -7,7 +7,7 @@ export const LoadingSpinner = () => {
 	};
 
 	return (
-		<div className="flex text-center justify-cente w-24 h-24">
+		<div className="flex text-center justify-center items-center w-24 h-24">
 			<Lottie {...options} />
 		</div>
 	);

@@ -1,7 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
-import { utilsService } from '../services/utils.service';
-
 import { userState } from '../store/modules/user.store';
 import { getWalletCoins, coinState } from '../store/modules/coin.store';
 import { DataDisplayRow } from '../components/DataDisplayRow';
@@ -11,15 +9,17 @@ import { LoadingSpinner } from '../components/LoadingSpinner';
 import { WalletChartCoinList } from '../components/wallet/WalletChartCoinList';
 import { WalletCoinList } from '../components/wallet/WalletCoinList';
 import { ActionsBar } from '../components/actions-bar/ActionsBar';
-import { SellModal } from '../components/modals/sell/SellModal';
 import { coinService } from '../services/coin.service';
+import { SellModal } from '../components/modals/sell/SellModal';
 
 export const WalletPage = () => {
 	const { user } = useSelector(userState);
 	const { walletCoinValues } = useSelector(coinState);
 	const dispatch = useDispatch();
-	const coinLabels = user && user.coins.map((coin) => coin.symbol);
 
+
+	const coinLabels = user && user.coins.map((coin) => coin.symbol);
+	
 	const assetsValues =
 		walletCoinValues &&
 		user.coins.map((coin) => coin.amount * walletCoinValues[coin.symbol]);
@@ -37,7 +37,7 @@ export const WalletPage = () => {
 	}, [user]);
 
 	return (
-		<div className="container">
+		<div className="container flex flex-col justify-center">
 			{user && assetsValues ? (
 				<DataDisplayContainer
 					key="walletDispalyContainer"
@@ -83,7 +83,7 @@ export const WalletPage = () => {
 			) : (
 				<LoadingSpinner />
 			)}
-			{/* <SellModal /> */}
+			<SellModal user={user} walletCoinValues={walletCoinValues} />
 		</div>
 	);
 };

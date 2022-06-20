@@ -1,6 +1,6 @@
 import { LoadingSpinner } from '../../LoadingSpinner';
 
-export const SellModal = () => {
+export const SellModal = ({ user, walletCoinValues }) => {
 	return (
 		<div
 			id="medium-modal"
@@ -8,7 +8,7 @@ export const SellModal = () => {
 		>
 			<div className="relative h-full w-full">
 				<div className="relative  w-9/12 inset-y-auto right-1/4 t md:w-2/4 md:inset-x-auto bg-white rounded-lg shadow translate-x-1/2 translate-y-1/4">
-				<h1>Hello</h1>
+					<input type="select" />
 				</div>
 			</div>
 		</div>

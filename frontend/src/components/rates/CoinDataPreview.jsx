@@ -20,7 +20,7 @@ export const CoinDataPreview = ({ coin }) => {
 		>
 			<th
 				scope='row'
-				className='px-5 py-4 font-medium text-gray-900  whitespace-nowrap flex'
+				className='px-4 py-4 font-medium text-gray-900  whitespace-nowrap flex'
 			>
 				<img src={iconUrl} alt='' className='w-5 h-5 self-center mr-2' />
 				{symbol}
@@ -29,8 +29,8 @@ export const CoinDataPreview = ({ coin }) => {
 			<td className='px-4 py-4' style={color(change, false)}>
 				{changePrefix + change}
 			</td>
-			<td className='px-2 py-4 text-left'>
-				<div className='flex items-center justify-start'>
+			<td className='px-0 py-4'>
+				<div className='mr-3 flex items-center justify-start'>
 					<LineChart
 						color={color(change, true)}
 						sparkline={sparkline}

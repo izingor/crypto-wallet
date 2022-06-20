@@ -9,13 +9,13 @@ export const CoinList = ({ coins }) => {
 						<th scope='col' className='px-6 py-3'>
 							Symbol
 						</th>
-						<th scope='col' className='px-6 py-3'>
+						<th scope='col' className='px-4 py-3'>
 							Price (USD)
 						</th>
-						<th scope='col' className='px-6 py-3'>
+						<th scope='col' className='px-4 py-3'>
 							Change (%)
 						</th>
-						<th scope='col' className='px-6 py-3'></th>
+						<th scope='col' className='px-4 py-3'></th>
 					</tr>
 				</thead>
 				<tbody>

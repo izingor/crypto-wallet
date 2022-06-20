@@ -9,10 +9,6 @@ export const CoinDataPreview = ({ coin }) => {
 	const parsedChange = parseFloat(change).toFixed(2)
 	const changePrefix = parsedChange > 0 ? '+' : ''
 
-	// const processedChange = () => {
-	// 	return parsedChange > 0 ? '+' : ''
-	// }
-
 	const color = (change, isString) => {
 		return utilsService.changeColor(change, isString)
 	}

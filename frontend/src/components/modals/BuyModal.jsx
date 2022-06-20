@@ -8,14 +8,12 @@ import {
 	resetPurchaseStatus,
 } from '../../store/modules/user.store'
 import { ConfirmationModal } from './ConfirmationModal'
-import { useHistory } from 'react-router-dom'
 
 import { LoadingSpinner } from '../LoadingSpinner'
 import { PurchaseMenu } from './PurchaseMenu'
 
 export const BuyModal = () => {
 	const dispatch = useDispatch()
-	const history = useHistory()
 	const [totalCost, setTotalCost] = useState(null)
 	const { isBuyModaLOpen } = useSelector(uiState)
 	const { coin } = useSelector(coinState)
@@ -35,8 +33,8 @@ export const BuyModal = () => {
 	}
 
 	const onBuyCoinClicked = () => {
-		const { uuid, symbol, price, color } = coin
-		dispatch(purchaseCoin({ totalCost, uuid, symbol, price, color }))
+		const { uuid, symbol, price, color, iconUrl } = coin
+		dispatch(purchaseCoin({ totalCost, uuid, symbol, price, color, iconUrl }))
 	}
 
 	const purchaseMenuProps = {

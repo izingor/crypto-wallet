@@ -1,13 +1,23 @@
-export const WalletCoinPreview = ({ assetData }) => {
+import { useHistory } from 'react-router'
+
+export const WalletCoinPreview = ({ asset }) => {
+	const { iconUrl, symbol, amount, coinsValue, uuid } = asset
+	const history = useHistory()
+
 	return (
-		<div className='w-30 h-6 flex  mb-4 items-center'>
-			<div
-				className=' w-6 h-6 m-6 rounded-full'
-				style={{ backgroundColor: assetData.color }}
-			></div>
-			<p>{assetData.symbol}</p>
-			<p className='mx-1'></p>
-			<p>{assetData.coinsValue.toPrecision(5)}%</p>
-		</div>
+		<tr
+			className='bg-white border-b  hover:bg-gray-50 hover:cursor-pointer'
+			onClick={() => history.push(`coins/${uuid}`)}
+		>
+			<th
+				scope='row'
+				className='px-5 py-4 font-medium text-gray-900  whitespace-nowrap flex'
+			>
+				<img src={iconUrl} alt='' className='w-5 h-5 self-center mr-2' />
+				{symbol}
+			</th>
+			<td className='px-4 py-4'>{amount}</td>
+			<td className='px-4 py-4'>{coinsValue}</td>
+		</tr>
 	)
 }

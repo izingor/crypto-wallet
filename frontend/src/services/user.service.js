@@ -17,7 +17,7 @@ export const userService = {
     purchaseCoin
 };
 
-const usersRef = collection(db, 'users');
+// const usersRef = collection(db, 'users');
 
 async function getUser() {
     const loggedUser = await sessionService.loadFromStorage(SESSION_DB);
@@ -59,19 +59,22 @@ async function login() {
 
 
 async function purchaseCoin(purchaseData) {
-    const { totalCost, symbol, price, uuid, color } = purchaseData;
+    console.log('purchase data', purchaseData);
+    const { totalCost, symbol, price, uuid, color, iconUrl } = purchaseData;
     const user = await getUser();
     if (!user) {
-        return Promise.reject('NO_USER')
+        return Promise.reject('NO_USER');
     } else {
         if (user.usdBalance < totalCost.usdAmount) {
-            return new Promise.reject('NO_FUNDS')
+            return new Promise.reject('NO_FUNDS');
         } else {
             const coinAsset = user.coins.find(asset => asset.uuid === purchaseData.uuid);
             if (coinAsset) {
                 coinAsset.amount += totalCost.coinAmount;
             } else {
                 const coin = {
+                    uuid,
+                    iconUrl,
                     color,
                     uuid,
                     symbol,
@@ -111,10 +114,8 @@ async function _processUser(user, { uid, email, displayName }) {
             coins: [],
             transactions: []
         };
-        // const dbRes = await setDoc(doc(db, 'users', uid), newUser);
         await firebaseService.setDocument('users', uid, newUser);
         return sessionService.saveToStorage(SESSION_DB, newUser);
-        // console.log(dbRes);
     } else {
         return sessionService.saveToStorage(SESSION_DB, user);
     }

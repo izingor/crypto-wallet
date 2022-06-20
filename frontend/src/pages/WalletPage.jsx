@@ -8,6 +8,7 @@ import { DataDisplayRow } from '../components/DataDisplayRow'
 import { DataDisplayContainer } from '../components/DataDisplayContainer'
 import { DoughnutChart } from '../components/charts/DoughnutChart'
 import { LoadingSpinner } from '../components/LoadingSpinner'
+import { WalletChartCoinList } from '../components/wallet/WalletChartCoinList'
 import { WalletCoinList } from '../components/wallet/WalletCoinList'
 
 export const WalletPage = () => {
@@ -28,18 +29,24 @@ export const WalletPage = () => {
 		walletCoinValues &&
 		user.coins.map((coin) => {
 			return {
-				coinsValue: utilsService.coinWalletFraction(
+				coinFraction: utilsService.coinWalletFraction(
 					coin.amount,
 					walletCoinValues[coin.symbol],
 					walletValue
 				),
+				coinsValue: (coin.amount * walletCoinValues[coin.symbol]).toFixed(6),
 				symbol: coin.symbol,
 				color: coin.color,
+				amount: coin.amount,
+				iconUrl: coin.iconUrl,
+				uuid: coin.uuid,
 			}
 		})
 
 	useEffect(() => {
-		dispatch(getWalletCoins(coinLabels))
+		if (user) {
+			dispatch(getWalletCoins(coinLabels))
+		}
 	}, [user])
 
 	return (
@@ -48,11 +55,7 @@ export const WalletPage = () => {
 				<DataDisplayContainer
 					key='walletDispalyContainer'
 					rows={[
-						<DataDisplayRow
-							key='userName'
-							dt='Name'
-							dd={user.displayName}
-						/>,
+						<DataDisplayRow key='userName' dt='Name' dd={user.displayName} />,
 						<DataDisplayRow
 							key='userBalance'
 							dt='Your Currents USD Balance:'
@@ -68,7 +71,7 @@ export const WalletPage = () => {
 						<DataDisplayRow
 							key='assetsAllocation'
 							isGrey={true}
-							dt={<WalletCoinList assetsMap={assetsMap} />}
+							dt={<WalletChartCoinList assetsMap={assetsMap} />}
 							dougnnutChart={
 								<DoughnutChart
 									key='dougnnutChart'
@@ -81,7 +84,7 @@ export const WalletPage = () => {
 						<DataDisplayRow
 							key='walletCoins'
 							isGrey={false}
-							dt={<WalletCoinList assetsMap={assetsMap} />}
+							table={<WalletCoinList assetsMap={assetsMap} />}
 						/>,
 					]}
 				/>

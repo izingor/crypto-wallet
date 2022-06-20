@@ -1,7 +1,6 @@
 import { WalletCoinPreview } from './WalletCoinPreview'
 
 export const WalletCoinList = ({ assetsMap }) => {
-	console.log(assetsMap)
 	return (
 		<div className='w-full relative overflow-x-auto  sm:rounded-lg'>
 			<table className='w-full text-sm text-left text-gray-500 '>

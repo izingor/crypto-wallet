@@ -1,6 +1,6 @@
 import { asyncStorageService } from './async.storage.service';
 import { sessionService } from './session.service';
-import { getDoc, collection, doc } from '@firebase/firestore';
+import { getDoc, doc } from '@firebase/firestore';
 import { db } from '../firebase/firebase.config';
 import { firebaseService } from './firebase.service';
 
@@ -75,7 +75,6 @@ async function purchaseCoin(purchaseData) {
                     uuid,
                     iconUrl,
                     color,
-                    uuid,
                     symbol,
                     amount: totalCost.coinAmount,
                 };

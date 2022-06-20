@@ -4,7 +4,6 @@ const API_KEY = process.env.REACT_APP_RAPID_API_KEY;
 
 
 async function getCoins(coinSymbols = null) {
-  console.log(coinSymbols);
   try {
     const { data } = await axios.request({
       method: 'GET',

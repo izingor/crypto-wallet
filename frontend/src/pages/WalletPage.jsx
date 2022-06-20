@@ -37,7 +37,7 @@ export const WalletPage = () => {
 	}, [user]);
 
 	return (
-		<div className="container flex flex-col justify-center">
+		<div className="container flex flex-col">
 			{user && assetsValues ? (
 				<DataDisplayContainer
 					key="walletDispalyContainer"

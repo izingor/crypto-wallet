@@ -1,108 +1,122 @@
-import { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useHistory, useParams } from 'react-router-dom'
-import { onBuyModalChanged } from '../store/modules/ui.store'
-import { coinState, getCoin } from '../store/modules/coin.store'
-import { userState } from '../store/modules/user.store'
-import { LoadingSpinner } from '../components/LoadingSpinner'
-import { DataDisplayRow } from '../components/DataDisplayRow'
-import { LineChart } from '../components/charts/LineChart'
-import { SmallBtn } from '../components/buttons/SmallBtn'
-import { DataDisplayContainer } from '../components/DataDisplayContainer'
-import { utilsService } from '../services/utils.service'
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import { onBuyModalChanged } from '../store/modules/ui.store';
+import { coinState, getCoin } from '../store/modules/coin.store';
+import { userState } from '../store/modules/user.store';
+import { LoadingSpinner } from '../components/LoadingSpinner';
+import { DataDisplayRow } from '../components/DataDisplayRow';
+import { LineChart } from '../components/charts/LineChart';
+import { SmallBtn } from '../components/buttons/SmallBtn';
+import { DataDisplayContainer } from '../components/DataDisplayContainer';
+import { utilsService } from '../services/utils.service';
 
 export const CoinDetailsPage = () => {
-	const { coinId } = useParams()
-	const history = useHistory()
-	const { coin } = useSelector(coinState)
-	const { user } = useSelector(userState)
-	const dispatch = useDispatch()
+	const { coinId } = useParams();
+	const history = useHistory();
+	const { coin } = useSelector(coinState);
+	const { user } = useSelector(userState);
+	const dispatch = useDispatch();
 
 	const marketCapBil = () => {
-		return (coin.marketCap / 10e8).toFixed(2) + ' Billion'
-	}
+		return (coin.marketCap / 10e8).toFixed(2) + ' Billion';
+	};
 	useEffect(() => {
-		dispatch(getCoin(coinId))
-	}, [])
+		dispatch(getCoin(coinId));
+	}, []);
 
-	const color = utilsService.changeColor(coin?.change, true)
+	const color = utilsService.changeColor(coin?.change, true);
 
 	const onBuyBtnClicked = () => {
 		if (!user) {
-			history.push('/login')
-			return
+			history.push('/login');
+			return;
 		}
-		dispatch(onBuyModalChanged())
+		dispatch(onBuyModalChanged());
+	};
+
+	const onBackBtnClicked = () => {
+		history.push('/rates')
 	}
 
 	const webSiteLink = coin && (
 		<a
 			href={coin.websiteUrl}
-			className='mt-1 text-sm text-blue-500 sm:mt-0 sm:col-span-2'
+			className="mt-1 text-sm text-blue-500 sm:mt-0 sm:col-span-2"
 		>
 			{coin.websiteUrl}
 		</a>
-	)
+	);
 
 	const buyBtn = (
 		<SmallBtn
 			isGrey={false}
-			txt='Buy'
-			type='buy'
+			txt="Buy"
+			type="buy"
 			handleClick={onBuyBtnClicked}
 		/>
-	)
+	);
+
+	const backBtn = (
+		<SmallBtn
+			isGrey={false}
+			txt="Back"
+			type="back"
+			handleClick={onBackBtnClicked}
+		/>
+	);
 
 	return (
-		<section className='container items-center justify-center py-8'>
+		<section className="container items-center justify-center py-8">
 			{coin ? (
 				<DataDisplayContainer
-					key='coinDisplayContainer'
+					key="coinDisplayContainer"
 					rows={[
 						<DataDisplayRow
-							key='icon'
+							key="icon"
 							isGrey={true}
-							dd={<img src={coin.iconUrl} alt='' className='w-8 h-8' />}
-							btn={buyBtn}
+							dd={<img src={coin.iconUrl} alt="" className="w-8 h-8" />}
+							buyBtn={buyBtn}
+							backBtn={backBtn}
 						/>,
 						<DataDisplayRow
-							key='name'
+							key="name"
 							isGrey={false}
-							dt='Name'
+							dt="Name"
 							dd={coin.name}
 						/>,
 						<DataDisplayRow
-							key='website'
+							key="website"
 							isGrey={true}
-							dt='Website'
+							dt="Website"
 							dd={webSiteLink}
 						/>,
 						<DataDisplayRow
-							key='price'
+							key="price"
 							isGrey={false}
-							dt='Price(USD)'
+							dt="Price(USD)"
 							dd={coin.price}
 						/>,
 						<DataDisplayRow
-							key='allTimeHigh'
+							key="allTimeHigh"
 							isGrey={true}
 							dt={`All time high(USD)`}
 							dd={coin.allTimeHigh.price}
 						/>,
 						<DataDisplayRow
-							key='totalSupply'
+							key="totalSupply"
 							isGrey={false}
 							dt={`Total Supply`}
 							dd={coin.supply.total}
 						/>,
 						<DataDisplayRow
-							key='marketCap'
+							key="marketCap"
 							isGrey={true}
-							dt='Market Cap'
+							dt="Market Cap"
 							dd={marketCapBil()}
 						/>,
 						<DataDisplayRow
-							key='chart'
+							key="chart"
 							isGrey={false}
 							lineChart={<LineChart color={color} sparkline={coin.sparkline} />}
 						/>,
@@ -112,5 +126,5 @@ export const CoinDetailsPage = () => {
 				<LoadingSpinner />
 			)}
 		</section>
-	)
-}
+	);
+};

@@ -14,6 +14,8 @@ function coinWalletFraction(coinAmount, coinValue, walletValue) {
 }
 
 
+
+
 export const utilsService = {
     changeColor,
     coinWalletFraction,

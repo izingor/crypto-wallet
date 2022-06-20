@@ -59,14 +59,13 @@ async function login() {
 
 
 async function purchaseCoin(purchaseData) {
-    console.log('purchase data', purchaseData);
     const { totalCost, symbol, price, uuid, color, iconUrl } = purchaseData;
     const user = await getUser();
     if (!user) {
         return Promise.reject('NO_USER');
     } else {
         if (user.usdBalance < totalCost.usdAmount) {
-            return new Promise.reject('NO_FUNDS');
+            return Promise.reject('NO_FUNDS');
         } else {
             const coinAsset = user.coins.find(asset => asset.uuid === purchaseData.uuid);
             if (coinAsset) {

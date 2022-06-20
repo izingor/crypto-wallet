@@ -1,5 +1,5 @@
 import axios from 'axios';
-
+import { utilsService } from './utils.service';
 const API_KEY = process.env.REACT_APP_RAPID_API_KEY;
 
 
@@ -86,9 +86,28 @@ async function getWalletCoins(coins) {
   }
 }
 
+function coinAssetsMap(user, walletCoinValues,walletValue) {
+  return user.coins.map((coin) => {
+    return {
+      coinFraction: utilsService.coinWalletFraction(
+        coin.amount,
+        walletCoinValues[coin.symbol],
+        walletValue
+      ),
+      coinsValue: (coin.amount * walletCoinValues[coin.symbol]).toFixed(6),
+      symbol: coin.symbol,
+      color: coin.color,
+      amount: coin.amount,
+      iconUrl: coin.iconUrl,
+      uuid: coin.uuid,
+    };
+  });
+}
+
 
 export const coinService = {
   getCoins,
   getCoin,
-  getWalletCoins
+  getWalletCoins,
+  coinAssetsMap
 };

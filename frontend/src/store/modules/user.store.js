@@ -48,10 +48,7 @@ const userSlice = createSlice({
         resetPurchaseStatus: (state) => {
             state.purchaseStatus = '';
         }
-        // checkUserSession: (state) => {
-        //     const userSession = userService.checkActiveUser();
-        //     state.user = userSession;
-        // }
+
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.pending, (state) => {
@@ -87,9 +84,11 @@ const userSlice = createSlice({
             .addCase((purchaseCoin.pending), state => {
                 state.purchaseStatus = 'proccessing';
             })
-            .addCase((purchaseCoin.rejected), (state, { payload }) => {
-                console.log(payload);
-                state.purchaseStatus = 'failed';
+            .addCase((purchaseCoin.rejected), (state, { error }) => {
+                // console.log(error.message)
+                // const {error} = action
+                if (error.message === 'NO_FUNDS') state.purchaseStatus = 'funds';
+                else state.purchaseStatus = 'failed';
             });
 
 

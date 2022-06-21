@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { userState } from '../store/modules/user.store'
+import { userState, sellCoins } from '../store/modules/user.store'
 import { getWalletCoins, coinState } from '../store/modules/coin.store'
 import { DataDisplayRow } from '../components/DataDisplayRow'
 import { DataDisplayContainer } from '../components/DataDisplayContainer'
@@ -32,9 +32,14 @@ export const WalletPage = () => {
 		walletCoinValues &&
 		coinService.coinAssetsMap(user, walletCoinValues, walletValue)
 
-	const sellModalClicked = () => {
+	const onSellModalClicked = () => {
 		setIsSellOpen(!isSellOpen)
 		// console.log('sell modal clicked')
+	}
+
+	const onSellCoinsClicked = (sellData) => {
+		// console.log('onSellClicked', sellData)
+		dispatch(sellCoins(sellData))
 	}
 
 	useEffect(() => {
@@ -42,7 +47,7 @@ export const WalletPage = () => {
 	}, [user])
 
 	return (
-		<div className='container flex flex-col'>
+		<div className='container flex flex-col justify-center min-h-fit items-center'>
 			{user && assetsValues ? (
 				<DataDisplayContainer
 					key='walletDispalyContainer'
@@ -50,7 +55,9 @@ export const WalletPage = () => {
 						<DataDisplayRow
 							key='ActionsBar'
 							isGrey={true}
-							actionsBar={<ActionsBar sellModalClicked={sellModalClicked} />}
+							actionsBar={
+								<ActionsBar onSellModalClicked={onSellModalClicked} />
+							}
 						/>,
 						<DataDisplayRow key='userName' dt='Name' dd={user.displayName} />,
 						<DataDisplayRow
@@ -92,7 +99,8 @@ export const WalletPage = () => {
 				<SellModal
 					user={user}
 					walletCoinValues={walletCoinValues}
-					sellModalClicked={sellModalClicked}
+					onSellModalClicked={onSellModalClicked}
+					onSellCoinsClicked={onSellCoinsClicked}
 				/>
 			)}
 		</div>

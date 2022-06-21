@@ -67,7 +67,7 @@ export const CoinDetailsPage = () => {
 	);
 
 	return (
-		<section className="container items-center justify-center py-8">
+		<section className="container flex flex-col justify-center min-h-fit items-center py-8">
 			{coin ? (
 				<DataDisplayContainer
 					key="coinDisplayContainer"

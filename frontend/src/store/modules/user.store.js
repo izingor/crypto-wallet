@@ -36,6 +36,11 @@ export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData
 
 });
 
+export const sellCoins = createAsyncThunk('coin/sellCoins', async (sellData) => {
+    const res = await userService.sellCoins(sellData);
+    return res;
+});
+
 
 const userSlice = createSlice({
     name: 'user',

@@ -1,52 +1,24 @@
-import { asyncStorageService } from './async.storage.service';
 import { sessionService } from './session.service';
 import { getDoc, doc } from '@firebase/firestore';
 import { db } from '../firebase/firebase.config';
 import { firebaseService } from './firebase.service';
 
-const USER_DB = 'usersDB';
 const SESSION_DB = 'loggedDB';
 
 export const userService = {
     getUser,
-    getEmptyUser,
-    saveNewUser,
     login,
     logout,
     updateUser,
-    purchaseCoin
+    purchaseCoin,
+    sellCoins
 };
-
-// const usersRef = collection(db, 'users');
 
 async function getUser() {
     const loggedUser = await sessionService.loadFromStorage(SESSION_DB);
     return loggedUser ? loggedUser : null;
 
 };
-
-function getEmptyUser() {
-    const user = {
-        name: null,
-        password: null,
-        USD: 1000,
-        moves: []
-    };
-    return user;
-}
-
-function saveNewUser({ name, password, email }) {
-    const newUser = {
-        name,
-        password,
-        email,
-        usdBalance: 1000,
-        coins: [],
-        transactions: []
-    };
-    const savedUser = asyncStorageService.post(USER_DB, newUser);
-    return savedUser;
-}
 
 async function login() {
     const res = await firebaseService.loginWithGoogle();
@@ -55,8 +27,6 @@ async function login() {
 
     return _processUser(userData.data(), { uid, email, displayName });
 }
-
-
 
 async function purchaseCoin(purchaseData) {
     const { totalCost, symbol, price, uuid, color, iconUrl } = purchaseData;
@@ -88,7 +58,6 @@ async function purchaseCoin(purchaseData) {
             symbol,
             timestamp: Date.now(),
         };
-
         user.transactions.unshift(transaction);
         user.usdBalance = user.usdBalance - totalCost.usdAmount;
         try {
@@ -99,6 +68,10 @@ async function purchaseCoin(purchaseData) {
         }
     }
 
+}
+
+async function sellCoins(sellData){
+    console.log('service sellcoins',sellData);
 }
 
 async function _processUser(user, { uid, email, displayName }) {

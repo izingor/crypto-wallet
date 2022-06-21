@@ -1,7 +1,7 @@
 import { SmallBtn } from "../buttons/SmallBtn";
 
 
-export const ActionsBar = ({sellModalClicked}) => {
+export const ActionsBar = ({onSellModalClicked}) => {
 	return (
 		<div
 			className="w-full flex justify-between rounded-md  border-gray-200"
@@ -19,7 +19,7 @@ export const ActionsBar = ({sellModalClicked}) => {
 			>
 				Convert
 			</button>
-			<SmallBtn txt='Sell' type='sell' handleClick={sellModalClicked} />
+			<SmallBtn txt='Sell' type='sell' handleClick={onSellModalClicked} />
 		</div>
 	);
 };

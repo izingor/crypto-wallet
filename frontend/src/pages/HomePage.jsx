@@ -1,10 +1,10 @@
 import Lottie from 'lottie-react'
-import SuccessAnimation from '../assets/lottie-animations/success.json'
+import homepageAnimation from '../assets/lottie-animations/homepage.json'
 
 export function HomePage() {
 	return (
 		<section className='container'>
-			{/* <Lottie animationData={SuccessAnimation} /> */}
+			{/* <Lottie animationData={homepageAnimation} loop={true} /> */}
 		</section>
 	)
 }

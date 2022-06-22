@@ -3,8 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@react-three/drei": "^9.11.3",
-    "@react-three/fiber": "^8.0.19",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.0.1",
@@ -12,7 +10,6 @@
     "axios": "^0.26.1",
     "dotenv": "^16.0.1",
     "firebase": "^9.8.3",
-    "lodash": "^4.17.21",
     "lottie-react": "^2.3.0",
     "react": "^18.1.0",
     "react-chartjs-2": "^4.1.0",
@@ -23,8 +20,6 @@
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.50.0",
-    "three": "^0.141.0",
-    "three-stdlib": "^2.10.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

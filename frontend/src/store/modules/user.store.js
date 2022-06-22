@@ -93,8 +93,6 @@ const userSlice = createSlice({
                 state.purchaseStatus = 'proccessing';
             })
             .addCase((purchaseCoin.rejected), (state, { error }) => {
-                // console.log(error.message)
-                // const {error} = action
                 if (error.message === 'NO_FUNDS') state.purchaseStatus = 'funds';
                 else state.purchaseStatus = 'failed';
             })

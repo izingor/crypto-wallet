@@ -1,6 +1,6 @@
 import { db, auth, provider } from '../firebase/firebase.config';
-import { signInWithPopup, signOut } from 'firebase/auth';
-import { doc, updateDoc, setDoc } from '@firebase/firestore';
+import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { doc, updateDoc, setDoc, getDoc } from '@firebase/firestore';
 
 
 
@@ -23,6 +23,15 @@ async function setDocument(collection, id, document) {
     }
 }
 
+async function getCurrUserData(uid) {
+    try {
+        const res = await getDoc(doc(db, 'users', uid));
+        return res.data()
+    } catch (err) {
+        console.log('Had and error while getting the user!', err.message);
+    }
+}
+
 async function updateUserWallet(collection, id, data) {
     try {
         await updateDoc(doc(db, collection, id),
@@ -41,12 +50,24 @@ async function logout() {
     await signOut(auth);
 }
 
+async function checkCurrUser() {
+    let currUser;
+    await onAuthStateChanged(auth, (user) => {
+        if (user) {
+            currUser = user;
+        }
+    });
+    return currUser;
+}
+
 
 export const firebaseService = {
     loginWithGoogle,
     setDocument,
     updateUserWallet,
-    logout
+    logout,
+    checkCurrUser,
+    getCurrUserData
 };
 
 

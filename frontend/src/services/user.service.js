@@ -23,9 +23,10 @@ async function getUser() {
 async function login() {
     const res = await firebaseService.loginWithGoogle();
     const { uid, email, displayName } = res.user;
-    const userData = await getDoc(doc(db, 'users', uid));
+    const userData = await firebaseService.getCurrUserData(uid);
+    // const userData = await getDoc(doc(db, 'users', uid));
 
-    return _processUser(userData.data(), { uid, email, displayName });
+    return _processUser(userData, { uid, email, displayName });
 }
 
 async function purchaseCoin(purchaseData) {
@@ -70,8 +71,32 @@ async function purchaseCoin(purchaseData) {
 
 }
 
-async function sellCoins(sellData){
-    console.log('service sellcoins',sellData);
+async function sellCoins({ uid, amount, symbol, sellValue }) {
+    // console.log('service sellcoins', sellData);
+    console.log('sell value usd', sellValue);
+    try {
+        // const userData = await getDoc(doc(db, 'users', uid));
+        const loggedUser = await firebaseService.checkCurrUser();
+        if (loggedUser.uid === uid && loggedUser.emailVerified) {
+            const userData = await firebaseService.getCurrUserData(loggedUser.uid);
+            const coinToUpdate = userData.coins.find(coin => coin.symbol === symbol);
+            console.log(userData);
+
+            // userData.usdBalance += sellValueUsd;
+            // coinToUpdate.amount -= amount;
+
+            console.log('updated user data', userData);
+            // console.log(coinToUpdate)
+
+        }
+        // console.log('checking user in the fire base', user.data());
+
+
+        // console.log('user data from the data base', userData.data());
+
+    } catch (err) {
+        console.log(err);
+    }
 }
 
 async function _processUser(user, { uid, email, displayName }) {

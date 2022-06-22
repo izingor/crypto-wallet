@@ -12,7 +12,7 @@ export const SellModal = ({
 	onSellCoinsClicked,
 }) => {
 	const [sellInfo, setSellInfo] = useState({
-		coin: user?.coins[0].symbol,
+		symbol: user?.coins[0].symbol,
 		amount: 1,
 	})
 	const handleChange = ({ target }) => {
@@ -22,23 +22,17 @@ export const SellModal = ({
 		}))
 	}
 
-	// const onSellClicked = () => {
-	// 	console.log('sell clicked')
-
-	// }
-
 	const onMaxClicked = () => {
-		console.log('max clicked')
 		setSellInfo((prevInfo) => ({
 			...prevInfo,
 			amount: coinMaxAmount,
 		}))
 	}
 	const coinsSellValue =
-		walletCoinValues && sellInfo.amount * walletCoinValues[sellInfo.coin]
+		walletCoinValues && sellInfo.amount * walletCoinValues[sellInfo.symbol]
 
 	const currCoinIdx =
-		user && user.coins.findIndex((coin) => coin.symbol === sellInfo.coin)
+		user && user.coins.findIndex((coin) => coin.symbol === sellInfo.symbol)
 
 	const currCoinIconUrl = user.coins[currCoinIdx].iconUrl
 
@@ -69,8 +63,8 @@ export const SellModal = ({
 							<select
 								onChange={(e) => handleChange(e)}
 								className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-l focus:ring-blue-500 focus:border-blue-500 block w-2/5 sm:w-1/4 p-2.5 '
-								name='coin'
-								value={sellInfo.coin}
+								name='symbol'
+								value={sellInfo.symbol}
 							>
 								{user &&
 									user.coins.map((coin) => (
@@ -107,7 +101,17 @@ export const SellModal = ({
 					</div>
 
 					<div className='flex items-center p-6 space-x-2 rounded-b border-t border-gray-200'>
-						<SmallBtn type='buy' txt='Sell' handleClick={() => onSellCoinsClicked({uid:user.uid, ...sellInfo})} />
+						<SmallBtn
+							type='buy'
+							txt='Sell'
+							handleClick={() =>
+								onSellCoinsClicked({
+									uid: user.uid,
+									sellValue: coinsSellValue,
+									...sellInfo,
+								})
+							}
+						/>
 						<SmallBtn type='back' txt='Back' handleClick={onSellModalClicked} />
 					</div>
 				</div>

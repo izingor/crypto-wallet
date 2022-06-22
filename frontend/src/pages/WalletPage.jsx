@@ -38,6 +38,7 @@ export const WalletPage = () => {
 	}
 
 	const onSellCoinsClicked = (sellData) => {
+		console.log('wallet page', sellData)
 		// console.log('onSellClicked', sellData)
 		dispatch(sellCoins(sellData))
 	}

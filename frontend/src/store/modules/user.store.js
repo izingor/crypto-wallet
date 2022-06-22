@@ -11,8 +11,7 @@ const initialState = {
 };
 
 export const loginUser = createAsyncThunk('user/loginUser', async () => {
-    const loggedUser = await userService.login();
-    console.log(loggedUser);
+    const loggedUser = await userService.loginWithGoogle();
     return loggedUser;
 });
 

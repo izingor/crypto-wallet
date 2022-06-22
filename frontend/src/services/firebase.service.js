@@ -1,16 +1,48 @@
-import { db, auth, provider } from '../firebase/firebase.config';
-import { signInWithPopup, signOut, onAuthStateChanged } from 'firebase/auth';
+import { db, auth, googleProvider, facebookProvider, githubProvider } from '../firebase/firebase.config';
+import { signInWithPopup, signOut, onAuthStateChanged,linkWithPopup } from 'firebase/auth';
 import { doc, updateDoc, setDoc, getDoc } from '@firebase/firestore';
 
+export const firebaseService = {
+    loginWithGoogle,
+    setDocument,
+    updateUserWallet,
+    logout,
+    checkCurrUser,
+    getCurrUserData,
+    loginWithFacebook,
+    loginWithGithub,
+};
 
+
+async function loginWithGithub() {
+    console.log('logging with gitHub');
+    try {
+        const user = await linkWithPopup(auth.currentUser, githubProvider);
+        console.log(user);
+        return user
+    } catch (err) {
+        console.log('Had an error while logging in with github', err);
+    }
+}
 
 async function loginWithGoogle() {
+    console.log('logging in');
     try {
-        const user = await signInWithPopup(auth, provider);
+        const user = await signInWithPopup(auth, googleProvider);
         return user;
     } catch (err) {
         console.log('Had an error while logging in', err);
     }
+}
+
+async function loginWithFacebook() {
+    try {
+        const user = await signInWithPopup(auth, facebookProvider);
+        return user;
+    } catch (err) {
+        console.log('Had an error while signing in with facebook', err);
+    }
+
 }
 
 async function setDocument(collection, id, document) {
@@ -26,7 +58,7 @@ async function setDocument(collection, id, document) {
 async function getCurrUserData(uid) {
     try {
         const res = await getDoc(doc(db, 'users', uid));
-        return res.data()
+        return res.data();
     } catch (err) {
         console.log('Had and error while getting the user!', err.message);
     }
@@ -61,13 +93,5 @@ async function checkCurrUser() {
 }
 
 
-export const firebaseService = {
-    loginWithGoogle,
-    setDocument,
-    updateUserWallet,
-    logout,
-    checkCurrUser,
-    getCurrUserData
-};
 
 

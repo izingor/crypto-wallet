@@ -4,10 +4,11 @@ import { useDispatch } from 'react-redux'
 import { loginUser } from '../store/modules/user.store'
 import { LargeInput } from '../components/inputs/LargeInput'
 import { LargeBtn } from '../components/buttons/LargeBtn'
+import { GoogleSignInBtn } from '../components/buttons/GoogleSignInBtn'
 
 export function LoginPage() {
-	const [userData, handleChange] = useHandleChange({ email: '', password: '' })
-	const { email, password } = userData
+	// const [userData, handleChange] = useHandleChange({ email: '', password: '' })
+	// const { email, password } = userData
 	const dispatch = useDispatch()
 	const history = useHistory()
 
@@ -16,7 +17,8 @@ export function LoginPage() {
 		// console.log('logging in', res)
 		// ev.preventDefault()
 		// try {
-		dispatch(loginUser())
+		console.log('logging')
+		await dispatch(loginUser())
 		history.push('/home')
 		// payload && history.push('/')
 		// } catch (err) {
@@ -26,10 +28,10 @@ export function LoginPage() {
 
 	return (
 		<section className='container flex justify-center items-center'>
-			<div className='max-w-md w-full space-y-8'>
-				<h5 className='mt-6 text-center text-2xl font-extrabold text-gray-900'>
+			<div className='max-w-md w-full space-y-8 flex flex-col items-center border rounded p-10'>
+				<p className=' text-center text-xl font-extrabold text-gray-700'>
 					Sign in to your account
-				</h5>
+				</p>
 				{/* <p className='mt-2 text-center text-sm text-gray-600'>
 					Or
 					<NavLink
@@ -54,8 +56,8 @@ export function LoginPage() {
 						valueType={password}
 						placeholderText='Password'
 					/> */}
-				<LargeBtn clicked={onLogin} btnText='Sign in With Google' />
-				{/* </form> */}
+				{/* <LargeBtn clicked={onLogin} btnText='Sign in With Google' /> */}
+				<GoogleSignInBtn handleClick={onLogin} />
 			</div>
 		</section>
 	)

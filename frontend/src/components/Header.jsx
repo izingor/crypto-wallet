@@ -1,7 +1,6 @@
 import { NavLink, useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { userState, logout } from '../store/modules/user.store'
-import { onWalletModalChanged } from '../store/modules/ui.store'
 import Logo from '../assets/images/logo_transparent.png'
 
 export function Header() {
@@ -19,14 +18,14 @@ export function Header() {
 		'hover:cursor-pointer hover:text-amber-500 active:text-amber-800'
 
 	return (
-		<section className='sticky top-0 w-full bg-gray-600 z-50'>
+		<section className='sticky top-0 w-full bg-blue-600 z-50'>
 			<div className='container flex justify-between py-3 items-center'>
 				<img src={Logo} alt='' className='w-10 h-10' />
 				<nav className='flex justify-center space-x-4 text-amber-200'>
 					<NavLink exact to='/' className={navTextClass}>
 						Home
 					</NavLink>
-					{user && <NavLink to='/wallet'>Wallet</NavLink>}
+					{user && <NavLink className={navTextClass} to='/wallet'>Wallet</NavLink>}
 					<NavLink to='/rates' className={navTextClass}>
 						Rates
 					</NavLink>

@@ -29,7 +29,7 @@ export const CurrencyInputs = ({ coin, setCost }) => {
 	return (
 		<div className="flex w-full items-center">
 			<div className="w-full">
-				<label htmlFor="fromCurrency">{coin.name}</label>
+				<label htmlFor="fromCurrency">{coin.symbol}</label>
 				<input
 					type="number"
 					id="fromCurrency"

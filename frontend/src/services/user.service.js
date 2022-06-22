@@ -7,11 +7,13 @@ const SESSION_DB = 'loggedDB';
 
 export const userService = {
     getUser,
-    login,
     logout,
     updateUser,
     purchaseCoin,
-    sellCoins
+    sellCoins,
+    loginWithGoogle,
+    loginWithFacebook,
+    loginWithGithub
 };
 
 async function getUser() {
@@ -20,11 +22,22 @@ async function getUser() {
 
 };
 
-async function login() {
+async function loginWithGithub() {
+    const res = await firebaseService.loginWithGithub();
+    console.log(res);
+    return res.user
+}
+
+async function loginWithFacebook() {
+    const res = await firebaseService.loginWithFacebook();
+    console.log(res);
+}
+
+
+async function loginWithGoogle() {
     const res = await firebaseService.loginWithGoogle();
     const { uid, email, displayName } = res.user;
     const userData = await firebaseService.getCurrUserData(uid);
-    // const userData = await getDoc(doc(db, 'users', uid));
 
     return _processUser(userData, { uid, email, displayName });
 }

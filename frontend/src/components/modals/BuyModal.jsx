@@ -7,7 +7,7 @@ import {
 	purchaseCoin,
 	resetPurchaseStatus,
 } from '../../store/modules/user.store';
-import { ConfirmationModal } from './ConfirmationModal';
+import { StatusMsg } from './status-msg/StatusMsg';
 
 import { LoadingSpinner } from '../LoadingSpinner';
 import { PurchaseMenu } from './PurchaseMenu';
@@ -56,8 +56,8 @@ export const BuyModal = () => {
 					{coin ? (
 						<div className="relative h-full w-full">
 							{purchaseStatus ? (
-								<ConfirmationModal
-									purchaseStatus={purchaseStatus}
+								<StatusMsg
+									statusMsg={purchaseStatus}
 									closeModal={closeModal}
 									closeMsgModal={closeMsgModal}
 								/>

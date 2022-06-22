@@ -36,7 +36,7 @@ export const CoinDetailsPage = () => {
 	};
 
 	const onBackBtnClicked = () => {
-		history.push('/rates')
+		history.goBack()
 	}
 
 	const webSiteLink = coin && (

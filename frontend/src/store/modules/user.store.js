@@ -7,6 +7,7 @@ const initialState = {
     loginStatus: '',
     signupStatus: '',
     purchaseStatus: '',
+    sellStatus: ''
 };
 
 export const loginUser = createAsyncThunk('user/loginUser', async () => {
@@ -48,11 +49,13 @@ const userSlice = createSlice({
     reducers: {
         setUser: ({ payload }) => {
             console.log('setting use from the user store', payload);
-            // state.user = payload;
         },
         resetPurchaseStatus: (state) => {
             state.purchaseStatus = '';
-        }
+        },
+        resetSellStatus: (state) => {
+            state.sellStatus = '';
+        },
 
     },
     extraReducers: (builder) => {
@@ -94,6 +97,16 @@ const userSlice = createSlice({
                 // const {error} = action
                 if (error.message === 'NO_FUNDS') state.purchaseStatus = 'funds';
                 else state.purchaseStatus = 'failed';
+            })
+            .addCase((sellCoins.fulfilled), (state, { payload }) => {
+                state.user = payload;
+                state.sellStatus = 'success';
+            })
+            .addCase((sellCoins.pending), state => {
+                state.sellStatus = 'proccessing';
+
+            }).addCase((sellCoins.rejected), state => {
+                state.sellStatus = 'failed';
             });
 
 
@@ -102,5 +115,5 @@ const userSlice = createSlice({
 
 });
 export const userState = (state) => state.userStore;
-export const { setUser, resetPurchaseStatus } = userSlice.actions;
+export const { setUser, resetPurchaseStatus, resetSellStatus } = userSlice.actions;
 export default userSlice.reducer;

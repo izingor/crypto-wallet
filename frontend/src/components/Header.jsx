@@ -15,13 +15,13 @@ export function Header() {
 	}
 
 	const navTextClass =
-		'hover:cursor-pointer hover:text-amber-500 active:text-amber-800'
+		'hover:cursor-pointer hover:text-amber-200 active:text-amber-400'
 
 	return (
 		<section className='sticky top-0 w-full bg-blue-600 z-50'>
 			<div className='container flex justify-between py-3 items-center'>
 				<img src={Logo} alt='' className='w-10 h-10' />
-				<nav className='flex justify-center space-x-4 text-amber-200'>
+				<nav className='flex justify-center space-x-4 text-white'>
 					<NavLink exact to='/' className={navTextClass}>
 						Home
 					</NavLink>

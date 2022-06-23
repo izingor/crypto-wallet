@@ -3,10 +3,8 @@ import { useState } from 'react'
 export const TransactionDataPreview = ({ transaction }) => {
 	const [isExpanded, setIsExpanded] = useState(false)
 
-	console.log(transaction)
 	const handleClick = () => {
 		setIsExpanded(!isExpanded)
-		console.log('i got clicked')
 	}
 
 	const arrowSvg = (
@@ -42,8 +40,8 @@ export const TransactionDataPreview = ({ transaction }) => {
 			className='bg-white border-b relative hover:bg-gray-50 hover:cursor-pointer ease-in-out duration-300'
 			onClick={handleClick}
 		>
-			<td className='pl-4  flex flex-col'>
-				<div className=''>
+			<td className='pl-4 py-5 flex flex-col'>
+				<div>
 					<p className='mb-2'>{date(transaction.timestamp)}</p>
 					{isExpanded && <p>Symbol:{transaction.symbol}</p>}
 				</div>
@@ -52,7 +50,7 @@ export const TransactionDataPreview = ({ transaction }) => {
 				<div>
 					<p className='mb-2'>${transaction.usdAmount.toFixed(3)}</p>
 					{isExpanded && <p className='mb-2'>Coins:{transaction.coinAmount}</p>}
-					{isExpanded && <p>Valued:${transaction.coinValue}</p>}
+					{isExpanded && <p>Value:${transaction.coinValue}</p>}
 				</div>
 			</td>
 			<td className='py-4 flex flex-col'>

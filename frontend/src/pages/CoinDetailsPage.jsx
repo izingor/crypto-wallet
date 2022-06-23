@@ -21,11 +21,6 @@ export const CoinDetailsPage = () => {
 	const marketCapBil = () => {
 		return (coin.marketCap / 10e8).toFixed(2) + ' Billion';
 	};
-	// useEffect(() => {
-	// 	if (history.location.pathname != `/cins/${coinId}`) {
-	// 		console.log('hello');
-	// 	}
-	// }, [history.location.pathname]);
 
 	useEffect(() => {
 		dispatch(getCoin(coinId));

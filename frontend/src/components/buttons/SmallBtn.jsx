@@ -8,6 +8,8 @@ export const SmallBtn = ({ txt = null, type = null, handleClick = null }) => {
 			return 'text-white bg-green-400 rounded hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium  text-sm px-5 py-2.5 text-center'
 		} else if (type === 'walletAction') {
 			return 'text-white bg-blue-600 rounded hover:bg-blue-700 hover:text-amber-200 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium  text-sm px-4 sm:px-10 py-2.5 text-center'
+		} else if (type === 'transactions') {
+			return 'text-white bg-blue-600 rounded hover:bg-blue-700 hover:text-amber-200 focus:ring-4 focus:outline-none focus:ring-yellow-300 font-medium  text-sm px-10 sm:px-10 py-2.5 text-center'
 		}
 	}
 

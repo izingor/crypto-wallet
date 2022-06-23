@@ -19,8 +19,8 @@ export function Header() {
 
 	return (
 		<section className='sticky top-0 w-full bg-blue-600 z-50'>
-			<div className='container flex justify-between py-3 items-center'>
-				<img src={Logo} alt='' className='w-10 h-10' />
+			<div className='container flex justify-between  items-center'>
+				<img src={Logo} alt='' className='w-20 h-20 hover:transition-transform' />
 				<nav className='flex justify-center space-x-4 text-white'>
 					<NavLink exact to='/' className={navTextClass}>
 						Home

@@ -1,6 +1,4 @@
 import { sessionService } from './session.service';
-import { getDoc, doc } from '@firebase/firestore';
-import { db } from '../firebase/firebase.config';
 import { firebaseService } from './firebase.service';
 
 const SESSION_DB = 'loggedDB';
@@ -8,7 +6,7 @@ const SESSION_DB = 'loggedDB';
 export const userService = {
     getUser,
     logout,
-    updateUser,
+    _updateUser,
     purchaseCoin,
     sellCoins,
     loginWithGoogle,
@@ -17,15 +15,22 @@ export const userService = {
 };
 
 async function getUser() {
-    const loggedUser = await sessionService.loadFromStorage(SESSION_DB);
-    return loggedUser ? loggedUser : null;
+    const userSession = sessionService.loadFromStorage(SESSION_DB);
+    // try {
+    //     const loggedUser = await firebaseService.checkCurrUser();
+    //     console.log(loggedUser?.uid);
+
+    // } catch (err) {
+    //     console.log('Had an error while getting user session', err);
+    // }
+    return userSession ? userSession : null;
 
 };
 
 async function loginWithGithub() {
     const res = await firebaseService.loginWithGithub();
     console.log(res);
-    return res.user
+    return res.user;
 }
 
 async function loginWithFacebook() {
@@ -40,6 +45,11 @@ async function loginWithGoogle() {
     const userData = await firebaseService.getCurrUserData(uid);
 
     return _processUser(userData, { uid, email, displayName });
+}
+
+async function logout() {
+    await firebaseService.logout();
+    return sessionService.clearStorage();
 }
 
 async function purchaseCoin(purchaseData) {
@@ -65,17 +75,12 @@ async function purchaseCoin(purchaseData) {
                 user.coins.push(coin);
             }
         }
-        const transaction = {
-            usdAmount: totalCost.usdAmount,
-            coinAmount: totalCost.coinAmount,
-            coinValue: price,
-            symbol,
-            timestamp: Date.now(),
-        };
+        const transaction = _createTransaction(-totalCost.usdAmount, -totalCost.coinAmount, price, symbol);
+
         user.transactions.unshift(transaction);
         user.usdBalance = user.usdBalance - totalCost.usdAmount;
         try {
-            const updatedUser = await updateUser(user);
+            const updatedUser = await _updateUser(user);
             return updatedUser;
         } catch (err) {
             console.log('had an error while getting your data', err.message);
@@ -84,20 +89,22 @@ async function purchaseCoin(purchaseData) {
 
 }
 
-async function sellCoins({ uid, amount, symbol, sellValue }) {
+async function sellCoins({ uid, amount, symbol, sellValue, coinValue }) {
     try {
         const loggedUser = await firebaseService.checkCurrUser();
         if (loggedUser.uid === uid && loggedUser.emailVerified) {
             const userData = await firebaseService.getCurrUserData(loggedUser.uid);
             const coinToUpdateIdx = userData.coins.findIndex(coin => coin.symbol === symbol);
-
+            const transaction = _createTransaction(sellValue, amount, coinValue, symbol);
+            console.log(transaction);
             userData.usdBalance += sellValue;
             userData.coins[coinToUpdateIdx].amount -= amount;
+            userData.transactions.unshift(transaction);
 
             if (userData.coins[coinToUpdateIdx].amount === 0) {
                 userData.coins.splice(coinToUpdateIdx, 1);
             }
-            return updateUser(userData);
+            return _updateUser(userData);
         } else {
             throw new Error('Had a problem getting your information');
         }
@@ -124,12 +131,12 @@ async function _processUser(user, { uid, email, displayName }) {
     }
 }
 
-async function updateUser(user) {
+async function _updateUser(user) {
     await firebaseService.updateUserWallet('users', user.uid, user);
     return sessionService.saveToStorage(SESSION_DB, user);
 }
 
-async function logout() {
-    await firebaseService.logout();
-    return sessionService.clearStorage();
+function _createTransaction(usdAmount, coinAmount, coinValue, symbol) {
+    const transaction = { usdAmount, coinAmount, coinValue, symbol, timestamp: Date.now() };
+    return transaction;
 }

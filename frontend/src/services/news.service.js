@@ -14,20 +14,14 @@ const options = {
 };
 
 
- async function getCryptoNews() {
-    let news = sessionService.loadFromStorage(LATEST_NEWS);
-    if (news) {
-        console.log('loaded from the db');
-        return news;
-    } else {
-        try {
-            const { data } = await axios.request(options);
-            sessionService.saveToStorage(LATEST_NEWS, data);
-            console.log('loaded from the api');
-            return data;
-        } catch (err) {
-            console.log('had an error getting the latest news',err);
-        }
+async function getCryptoNews() {
+    try {
+        const { data } = await axios.request(options);
+        sessionService.saveToStorage(LATEST_NEWS, data);
+        console.log('loaded from the api');
+        return data;
+    } catch (err) {
+        console.log('had an error getting the latest news', err);
     }
 }
 

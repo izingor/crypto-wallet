@@ -19,13 +19,14 @@ export const SellMenu = ({
 	onSellCoinsClicked,
 	uid,
 }) => {
+	const coinValue = walletCoinValues[symbol];
 
 	return (
 		<div className="relative  w-9/12 inset-y-auto right-1/4 t md:w-2/4 md:inset-x-auto bg-white rounded shadow translate-x-1/2 translate-y-1/4">
 			<div className="flex  justify-between items-center p-5 rounded-t border-b ">
 				<img src={currCoinIconUrl} className="mr-4 w-14 h-14" alt="" />
 				<p className="text-xs font-light text-gray-900 ">
-					1 {symbol} = ${walletCoinValues[symbol]}
+					1 {symbol} = ${coinValue}
 				</p>
 				<CloseXBtn handleClick={onSellModalClicked} />
 			</div>
@@ -54,6 +55,7 @@ export const SellMenu = ({
 							sellValue: coinsSellValue,
 							symbol,
 							amount,
+							coinValue,
 						})
 					}
 				/>

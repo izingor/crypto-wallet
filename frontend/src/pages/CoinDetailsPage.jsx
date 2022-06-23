@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { onBuyModalChanged } from '../store/modules/ui.store';
-import { coinState, getCoin } from '../store/modules/coin.store';
+import { coinState, getCoin, resetCoin } from '../store/modules/coin.store';
 import { userState } from '../store/modules/user.store';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { DataDisplayRow } from '../components/DataDisplayRow';
@@ -21,9 +21,16 @@ export const CoinDetailsPage = () => {
 	const marketCapBil = () => {
 		return (coin.marketCap / 10e8).toFixed(2) + ' Billion';
 	};
+	// useEffect(() => {
+	// 	if (history.location.pathname != `/cins/${coinId}`) {
+	// 		console.log('hello');
+	// 	}
+	// }, [history.location.pathname]);
+
 	useEffect(() => {
 		dispatch(getCoin(coinId));
-	}, []);
+		console.log('getting the coin')
+	}, [coinId]);
 
 	const color = utilsService.changeColor(coin?.change, true);
 
@@ -36,8 +43,8 @@ export const CoinDetailsPage = () => {
 	};
 
 	const onBackBtnClicked = () => {
-		history.goBack()
-	}
+		history.goBack();
+	};
 
 	const webSiteLink = coin && (
 		<a

@@ -29,7 +29,9 @@ const coinSlice = createSlice({
     name: 'coins',
     initialState,
     reducers: {
-        setUser
+        resetCoin: (state) => {
+            state.coin = null;
+        }
 
     },
     extraReducers: (builder) => {
@@ -54,4 +56,5 @@ const coinSlice = createSlice({
 
 
 export const coinState = (state) => state.coinStore;
+export const { resetCoin } = coinSlice.actions;
 export const coinReducer = coinSlice.reducer;

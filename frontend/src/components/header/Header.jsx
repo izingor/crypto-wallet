@@ -44,7 +44,7 @@ export function Header() {
 						/>
 					</div>
 				</div>
-				{isMobileMenu && <MobileMenu />}
+				{isMobileMenu && <MobileMenu mobileMenuClicked={mobileMenuClicked} />}
 			</nav>
 		</section>
 	)

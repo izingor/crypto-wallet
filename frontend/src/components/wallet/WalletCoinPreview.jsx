@@ -16,7 +16,7 @@ export const WalletCoinPreview = ({ asset }) => {
 				<img src={iconUrl} alt='' className='w-5 h-5 self-center mr-2' />
 				{symbol}
 			</th>
-			<td className='px-4 py-4'>{amount}</td>
+			<td className='px-4 py-4'>{amount.toPrecision(3)}</td>
 			<td className='px-4 py-4'>{coinsValue}</td>
 		</tr>
 	)

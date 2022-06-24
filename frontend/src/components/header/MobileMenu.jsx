@@ -1,11 +1,12 @@
 import { NavLink } from 'react-router-dom'
 
-export const MobileMenu = () => {
+export const MobileMenu = ({ mobileMenuClicked }) => {
 	return (
 		<div className='sm:hidden' id='mobile-menu'>
 			<div className='px-2 pt-2 pb-3 space-y-1'>
 				{/* <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" --> */}
 				<NavLink
+					onClick={mobileMenuClicked}
 					exact
 					to='/'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
@@ -15,6 +16,7 @@ export const MobileMenu = () => {
 				</NavLink>
 
 				<NavLink
+					onClick={mobileMenuClicked}
 					to='/rates'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
 				>
@@ -22,6 +24,7 @@ export const MobileMenu = () => {
 				</NavLink>
 
 				<NavLink
+					onClick={mobileMenuClicked}
 					to='/news'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
 				>
@@ -29,6 +32,7 @@ export const MobileMenu = () => {
 				</NavLink>
 
 				<NavLink
+					onClick={mobileMenuClicked}
 					to='/ladder'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
 				>

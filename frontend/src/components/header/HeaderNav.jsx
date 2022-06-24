@@ -20,7 +20,7 @@ export const HeaderNav = () => {
 					to='/rates'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
 				>
-					Rates
+					Coins
 				</NavLink>
 				<NavLink
 					to='/news'

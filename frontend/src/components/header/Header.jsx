@@ -30,7 +30,7 @@ export function Header() {
 	}
 
 	return (
-		<section className='sticky top-0 w-full bg-blue-600 z-50 border-b-1 border-b-white  '>
+		<section className='sticky top-0 w-full bg-blue-600 z-50 border-b-1 border-b-white  font-mono'>
 			<nav className='bg-blue-600 container'>
 				<div className='max-w-7xl mx-auto '>
 					<div className='relative flex items-center justify-between h-16'>

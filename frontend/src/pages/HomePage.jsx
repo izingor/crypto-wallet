@@ -12,7 +12,7 @@ export function HomePage() {
 		// 	style={{ backgroundImage: `url(${homeHeroImage})` }}
 		// 	className='w-full h-full bg-no-repeat bg-cover'
 		// >
-		<div className='w-full h-full container grid grid-cols-6 grid-rows-4 sm:grid-rows-6 gap-4 '>
+		<div className='w-full h-full container grid grid-cols-6 grid-rows-4 sm:grid-rows-6 gap-4 font-mono'>
 			<div className='col-start-2 col-end-7 row-start-1 row-end-2 flex flex-col items-start justify-center '>
 				{!user ? (
 					<>

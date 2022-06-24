@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { coinService } from '../../services/coin.service';
-import { setUser } from './user.store';
 
 const initialState = {
     coins: null,

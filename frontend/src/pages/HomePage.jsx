@@ -1,6 +1,5 @@
 import Lottie from 'lottie-react'
 import homepageAnimation from '../assets/lottie-animations/homepage.json'
-import homeHeroImage from '../assets/images/homepage-hero.jpeg'
 import { NavLink } from 'react-router-dom'
 
 export function HomePage() {

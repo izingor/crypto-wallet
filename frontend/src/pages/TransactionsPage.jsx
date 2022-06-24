@@ -3,7 +3,6 @@ import { userState } from '../store/modules/user.store'
 import { TransactionDataPreview } from '../components/transactions/TransactionDataPreview'
 import { SmallBtn } from '../components/buttons/SmallBtn'
 import { useHistory } from 'react-router-dom'
-import { LargeBtn } from '../components/buttons/LargeBtn'
 
 export const TransactionsPage = () => {
 	const history = useHistory()

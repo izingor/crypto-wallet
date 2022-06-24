@@ -14,7 +14,6 @@ import { BuyModal } from './components/modals/BuyModal';
 import { WalletPage } from './pages/WalletPage';
 import { TransactionsPage } from './pages/TransactionsPage';
 import './assets/scss/global.scss';
-import heroImage from './assets/images/homepage-hero4.jpeg';
 
 export function App() {
   const dispatch = useDispatch();

@@ -15,13 +15,13 @@ import { WalletCoinList } from '../components/wallet/WalletCoinList'
 import { ActionsBar } from '../components/actions-bar/ActionsBar'
 import { coinService } from '../services/coin.service'
 import { SellModal } from '../components/modals/sell/SellModal'
-import { ConvertModal } from '../components/modals/convert/ConvertModal'
+// import { ConvertModal } from '../components/modals/convert/ConvertModal'
 import { useHistory } from 'react-router-dom'
 
 export const WalletPage = () => {
 	const history = useHistory()
 	const [isSellOpen, setIsSellOpen] = useState(false)
-	const [isConverOpen, setIsConvertOpen] = useState(false)
+	// const [isConverOpen, setIsConvertOpen] = useState(false)
 	const { user, sellStatus } = useSelector(userState)
 	const { walletCoinValues } = useSelector(coinState)
 	const dispatch = useDispatch()
@@ -119,7 +119,7 @@ export const WalletPage = () => {
 					sellStatus={sellStatus}
 				/>
 			)}
-			{isConverOpen && <ConvertModal />}
+			{/* {isConverOpen && <ConvertModal />} */}
 		</div>
 	)
 }

@@ -14,6 +14,7 @@ import { BuyModal } from './components/modals/BuyModal';
 import { WalletPage } from './pages/WalletPage';
 import { TransactionsPage } from './pages/TransactionsPage';
 import './assets/scss/global.scss';
+import heroImage from './assets/images/homepage-hero4.jpeg';
 
 export function App() {
   const dispatch = useDispatch();
@@ -24,7 +25,11 @@ export function App() {
 
   return (
     <Router>
-      <section className="flex flex-col h-screen justify-between relative">
+      <section
+        // style={{ backgroundImage: `url(${heroImage})` }}
+        className="flex flex-col h-screen justify-between relative
+       bg-no-repeat bg-cover
+      ">
         <Header />
         <Switch>
           <Route path='/coins/:coinId' component={CoinDetailsPage} />

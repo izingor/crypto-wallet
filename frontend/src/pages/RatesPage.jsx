@@ -15,7 +15,7 @@ export const RatesPage = () => {
 	}, [])
 
 	return (
-		<section className=' container flex flex-col min-h-fit items-center'>
+		<section className='h-5/6 container flex flex-col min-h-fit items-center'>
 			{coins ? <CoinList coins={coins} /> : <LoadingSpinner />}
 		</section>
 	)

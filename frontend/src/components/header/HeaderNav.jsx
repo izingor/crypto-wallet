@@ -7,7 +7,7 @@ export const HeaderNav = () => {
 				<img className='block h-20  w-auto' src={logo} alt='Logo' />
 			</div>
 			<div className='hidden  sm:ml-6 sm:flex justify-center items-center '>
-				{/* <div className='flex justify-center items-center space-x-4'> */}
+				<div className='flex space-x-4'>
 
 				<NavLink
 					exact
@@ -32,9 +32,9 @@ export const HeaderNav = () => {
 					to='/ladder'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
 				>
-					Ladder
+					Leaderboard
 				</NavLink>
-				{/* </div> */}
+				</div>
 			</div>
 		</div>
 	)

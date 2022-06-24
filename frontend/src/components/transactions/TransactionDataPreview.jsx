@@ -43,12 +43,12 @@ export const TransactionDataPreview = ({ transaction }) => {
 			<td className='pl-4 py-5 flex flex-col'>
 				<div>
 					<p className='mb-2'>{date(transaction.timestamp)}</p>
-					{isExpanded && <p>Symbol:{transaction.symbol}</p>}
 				</div>
 			</td>
 			<td className='py-5 w-2/5'>
 				<div>
 					<p className='mb-2'>${transaction.usdAmount.toFixed(3)}</p>
+					{isExpanded && <p className='mb-2'>Symbol:{transaction.symbol}</p>}
 					{isExpanded && <p className='mb-2'>Coins:{transaction.coinAmount}</p>}
 					{isExpanded && <p>Value:${transaction.coinValue}</p>}
 				</div>

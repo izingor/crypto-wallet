@@ -77,7 +77,7 @@ export const WalletPage = () => {
 						<DataDisplayRow key='userName' dt='Name' dd={user.displayName} />,
 						<DataDisplayRow
 							key='userBalance'
-							dt='Your Currents USD Balance:'
+							dt='Your USD Balance:'
 							dd={`$${user.usdBalance}`}
 							isGrey={true}
 						/>,

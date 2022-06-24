@@ -10,7 +10,7 @@ export const TransactionsPage = () => {
 	const { user } = useSelector(userState)
 	// const { transactions } = user
 	const onBackBtnClicked = () => {
-		history.push('/wallet')
+		history.goBack()
 	}
 
 	return (

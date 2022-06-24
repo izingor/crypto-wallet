@@ -4,7 +4,6 @@ const initialState = {
     isDarkMode: false,
     isBuyModaLOpen: false,
     isWalletModal: false,
-    clickedCoin: null
 };
 
 

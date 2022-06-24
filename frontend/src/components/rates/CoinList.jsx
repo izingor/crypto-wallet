@@ -2,7 +2,7 @@ import { CoinDataPreview } from './CoinDataPreview'
 
 export const CoinList = ({ coins }) => {
 	return (
-		<div className='w-full relative overflow-x-auto shadow-md sm:rounded-lg my-5'>
+		<div className='w-full h-full relative overflow-x-auto shadow-md sm:rounded-lg my-5 overflow-y-scroll'>
 			<table className='w-full text-sm text-left text-gray-500 '>
 				<thead className='text-xs text-gray-700 uppercase bg-gray-50 '>
 					<tr>

@@ -22,7 +22,7 @@ export const TransactionsPage = () => {
 								Date
 							</th>
 							<th scope='col' className=' py-5'></th>
-							<th scope='col' className=' py-5'>
+							<th scope='col' className=' py-5 flex justify-center'>
 								<SmallBtn
 									isGrey={false}
 									txt='Back'

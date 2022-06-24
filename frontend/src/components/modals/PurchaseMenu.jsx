@@ -11,7 +11,7 @@ export function PurchaseMenu({
 	totalCost,
 }) {
 	return (
-		<div className='relative  w-9/12 inset-y-auto right-1/4 t md:w-2/4 md:inset-x-auto bg-white rounded-lg shadow translate-x-1/2 translate-y-1/4'>
+		<div className='relative translate-y-1/3 sm:w-9/12 inset-y-auto sm:right-1/4 t md:w-2/4 md:inset-x-auto bg-white rounded-lg shadow sm:translate-x-1/2 sm:translate-y-1/4'>
 			<div className='flex justify-between items-center p-5 rounded-t border-b '>
 				<img src={coin.iconUrl} className=' mr-4 w-14 h-14' alt='' />
 				<p className='text-xs font-light text-gray-900 '>

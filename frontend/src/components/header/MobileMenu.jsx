@@ -20,7 +20,7 @@ export const MobileMenu = ({ mobileMenuClicked }) => {
 					to='/rates'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
 				>
-					Rates
+					Coins
 				</NavLink>
 
 				<NavLink

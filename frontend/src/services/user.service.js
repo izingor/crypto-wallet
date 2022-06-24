@@ -58,7 +58,7 @@ async function purchaseCoin(purchaseData) {
     if (!user) {
         return Promise.reject('NO_USER');
     } else {
-        if (user.usdBalance < totalCost.usdAmount) {
+        if ((user.usdBalance < totalCost.usdAmount)) {
             return Promise.reject('NO_FUNDS');
         } else {
             const coinAsset = user.coins.find(asset => asset.uuid === purchaseData.uuid);

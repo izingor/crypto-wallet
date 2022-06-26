@@ -46,6 +46,7 @@ export const WalletPage = () => {
 	}
 
 	const onSellCoinsClicked = (sellData) => {
+		if (!sellData || sellData.amount === 0) return
 		dispatch(sellCoins(sellData))
 	}
 
@@ -57,6 +58,8 @@ export const WalletPage = () => {
 	useEffect(() => {
 		user && dispatch(getWalletCoins(coinLabels))
 	}, [user])
+
+	const isSellBtnBlocked = user?.coins.length ? false : true
 
 	return (
 		<div className='container flex flex-col justify-center min-h-fit items-center'>
@@ -71,6 +74,7 @@ export const WalletPage = () => {
 								<ActionsBar
 									onTransactionsClicked={onTransactionsClicked}
 									onSellModalClicked={onSellModalClicked}
+									isSellBtnBlocked={isSellBtnBlocked}
 								/>
 							}
 						/>,

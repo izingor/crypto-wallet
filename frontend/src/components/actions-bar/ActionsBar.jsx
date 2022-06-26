@@ -1,6 +1,10 @@
 import { SmallBtn } from '../buttons/SmallBtn'
 
-export const ActionsBar = ({ onSellModalClicked, onTransactionsClicked }) => {
+export const ActionsBar = ({
+	onSellModalClicked,
+	onTransactionsClicked,
+	isSellBtnBlocked,
+}) => {
 	return (
 		<div
 			className='w-full flex justify-between rounded-md  border-gray-200'
@@ -13,6 +17,7 @@ export const ActionsBar = ({ onSellModalClicked, onTransactionsClicked }) => {
 			/>
 			<SmallBtn txt='Convert' type='walletAction' />
 			<SmallBtn
+				isSellBtnBlocked={isSellBtnBlocked}
 				txt='Sell'
 				type='walletAction'
 				handleClick={onSellModalClicked}

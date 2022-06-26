@@ -75,7 +75,7 @@ async function purchaseCoin(purchaseData) {
                 user.coins.push(coin);
             }
         }
-        const transaction = _createTransaction(-totalCost.usdAmount, -totalCost.coinAmount, price, symbol);
+        const transaction = _createTransaction(-totalCost.usdAmount, totalCost.coinAmount, price, symbol);
 
         user.transactions.unshift(transaction);
         user.usdBalance = user.usdBalance - totalCost.usdAmount;

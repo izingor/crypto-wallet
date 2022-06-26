@@ -54,26 +54,28 @@ const userSlice = createSlice({
         },
         resetSellStatus: (state) => {
             state.sellStatus = '';
-        },
+        }, 
+        resetLoginStatus: (state) => {
+            state.loginStatus = '';
+        }
 
     },
     extraReducers: (builder) => {
         builder.addCase(loginUser.pending, (state) => {
-            state.loginStatus = 'Signing in';
+            state.loginStatus = 'processing';
         })
             .addCase(loginUser.fulfilled, (state, { payload }) => {
                 state.user = payload;
-                state.loginStatus = 'Logged';
+                state.loginStatus = 'success';
             })
             .addCase(loginUser.rejected, (state) => {
-                state.loginStatus = 'Failed';
+                state.loginStatus = 'failed';
             })
             .addCase(signupUser.pending, (state) => {
                 state.signupStatus = 'Loading';
             })
             .addCase(signupUser.fulfilled, (state) => {
                 state.signupStatus = 'Successful';
-                console.log('singning up');
             })
             .addCase(signupUser.rejected, (state) => {
                 state.signupStatus = 'Failed';
@@ -112,5 +114,5 @@ const userSlice = createSlice({
 
 });
 export const userState = (state) => state.userStore;
-export const { setUser, resetPurchaseStatus, resetSellStatus } = userSlice.actions;
+export const { setUser, resetPurchaseStatus, resetSellStatus, resetLoginStatus } = userSlice.actions;
 export default userSlice.reducer;

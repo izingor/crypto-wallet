@@ -1,9 +1,9 @@
 // import React from 'react'
-import { CloseXBtn } from '../../buttons/CloseXBtn';
-import { TypeAndAmount } from '../../inputs/TypeAndAmount';
-import { SmallBtn } from '../../buttons/SmallBtn';
-import Lottie from 'lottie-react';
-import calculator from '../../../assets/lottie-animations/calculator.json';
+import { CloseXBtn } from '../../buttons/CloseXBtn'
+import { TypeAndAmount } from '../../inputs/TypeAndAmount'
+import { SmallBtn } from '../../buttons/SmallBtn'
+import Lottie from 'lottie-react'
+import calculator from '../../../assets/lottie-animations/calculator.json'
 
 export const SellMenu = ({
 	symbol,
@@ -19,13 +19,13 @@ export const SellMenu = ({
 	onSellCoinsClicked,
 	uid,
 }) => {
-	const coinValue = walletCoinValues[symbol];
+	const coinValue = walletCoinValues[symbol]
 
 	return (
-		<div className="relative  w-9/12 inset-y-auto right-1/4 t md:w-2/4 md:inset-x-auto bg-white rounded shadow translate-x-1/2 translate-y-1/4">
-			<div className="flex  justify-between items-center p-5 rounded-t border-b ">
-				<img src={currCoinIconUrl} className="mr-4 w-14 h-14" alt="" />
-				<p className="text-xs font-light text-gray-900 ">
+		<div className='relative translate-y-1/3 sm:w-9/12 inset-y-auto sm:right-1/4 t md:w-2/4 md:inset-x-auto bg-white rounded-lg shadow sm:translate-x-1/2 sm:translate-y-1/4'>
+			<div className='flex  justify-between items-center p-5 rounded-t border-b '>
+				<img src={currCoinIconUrl} className='mr-4 w-14 h-14' alt='' />
+				<p className='text-xs font-light text-gray-900 '>
 					1 {symbol} = ${coinValue}
 				</p>
 				<CloseXBtn handleClick={onSellModalClicked} />
@@ -38,17 +38,17 @@ export const SellMenu = ({
 				handleInputsChange={handleInputsChange}
 				coins={coins}
 			/>
-			<div className="flex flex-col items-center p-4 space-x-2 rounded-b border-t border-gray-200">
-				<div className="w-10 h-10">
+			<div className='flex flex-col items-center p-4 space-x-2 rounded-b border-t border-gray-200'>
+				<div className='w-10 h-10'>
 					<Lottie animationData={calculator} loop={true} />
 				</div>
-				<p className="text-gray-500">${coinsSellValue}</p>
+				<p className='text-gray-500'>${coinsSellValue}</p>
 			</div>
 
-			<div className="flex items-center p-6 space-x-2 rounded-b border-t border-gray-200">
+			<div className='flex items-center p-6 space-x-2 rounded-b border-t border-gray-200'>
 				<SmallBtn
-					type="buy"
-					txt="Sell"
+					type='buy'
+					txt='Sell'
 					handleClick={() =>
 						onSellCoinsClicked({
 							uid,
@@ -59,8 +59,8 @@ export const SellMenu = ({
 						})
 					}
 				/>
-				<SmallBtn type="back" txt="Back" handleClick={onSellModalClicked} />
+				<SmallBtn type='back' txt='Back' handleClick={onSellModalClicked} />
 			</div>
 		</div>
-	);
-};
+	)
+}

@@ -1,20 +1,24 @@
-import React from 'react'
 import { LeaderboardList } from '../components/leaderboard/LeaderboardList'
-import { useSelector,useDispatch } from 'react-redux'
-import { userState } from '../store/modules/user.store'
-import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { userState, getMiniUsers } from '../store/modules/user.store'
+import { useEffect } from 'react'
+import { LoadingSpinner } from '../components/LoadingSpinner'
 
 export const LeaderboardPage = () => {
-	const users = useSelector(userState)
+	const {miniUsers} = useSelector(userState)
+	const dispatch = useDispatch()
 
-
-    useEffect(() => {
-
-    })
+	useEffect(() => {
+		dispatch(getMiniUsers())
+	}, [])
 
 	return (
-		<div className='container flex flex-col min-h-fit items-center'>
-			<LeaderboardList />
+		<div className='container flex flex-col min-h-fit items-center justify-center'>
+			{miniUsers ? (
+				<LeaderboardList miniUsers={miniUsers} />
+			) : (
+				<LoadingSpinner />
+			)}
 		</div>
 	)
 }

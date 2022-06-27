@@ -1,17 +1,19 @@
 import { sessionService } from './session.service';
+import { coinService } from './coin.service';
 import { firebaseService } from './firebase.service';
 
 const SESSION_DB = 'loggedDB';
 
 export const userService = {
     getUser,
+    getMiniUsers,
     logout,
     _updateUser,
     purchaseCoin,
     sellCoins,
     loginWithGoogle,
     loginWithFacebook,
-    loginWithGithub
+    loginWithGithub,
 };
 
 async function getUser() {
@@ -26,6 +28,27 @@ async function getUser() {
     return userSession ? userSession : null;
 
 };
+
+async function getMiniUsers() {
+    const [users, { coins }] = await Promise.all([firebaseService.getUsers(), coinService.getCoins()]);
+    let miniUsers = users.map(user => ({ uid: user.uid, name: user.displayName, walletValue: _getWalletValue(user, coins) }));
+    miniUsers.sort((a, b) => b.walletValue - a.walletValue);
+    return miniUsers;
+}
+
+function _getWalletValue(user, coins) {
+    let coinsMap = {};
+    let walletValue = 0;
+
+    for (let coin of coins) {
+        coinsMap[coin.symbol] = +coin.price;
+    }
+    user.coins.forEach(userCoin => {
+        return walletValue += userCoin.amount * coinsMap[userCoin.symbol];
+    });
+    walletValue += user.usdBalance
+    return walletValue;
+}
 
 async function loginWithGithub() {
     const res = await firebaseService.loginWithGithub();
@@ -96,7 +119,7 @@ async function sellCoins({ uid, amount, symbol, sellValue, coinValue }) {
             const userData = await firebaseService.getCurrUserData(loggedUser.uid);
             const coinToUpdateIdx = userData.coins.findIndex(coin => coin.symbol === symbol);
             const transaction = _createTransaction(sellValue, amount, coinValue, symbol);
-            console.log(transaction);
+
             userData.usdBalance += sellValue;
             userData.coins[coinToUpdateIdx].amount -= amount;
             userData.transactions.unshift(transaction);

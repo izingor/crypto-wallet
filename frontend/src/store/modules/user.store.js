@@ -4,11 +4,12 @@ import { userService } from '../../services/user.service';
 
 const initialState = {
     user: null,
-    users: null,
+    miniUsers: null,
     loginStatus: '',
     signupStatus: '',
     purchaseStatus: '',
-    sellStatus: ''
+    sellStatus: '',
+    usersListStatus: ''
 };
 
 export const loginUser = createAsyncThunk('user/loginUser', async () => {
@@ -33,8 +34,6 @@ export const logout = createAsyncThunk('user/logout', async () => {
 export const purchaseCoin = createAsyncThunk('coin/buyCoin', async (purchaseData) => {
     const res = await userService.purchaseCoin(purchaseData);
     return res;
-
-
 });
 
 export const sellCoins = createAsyncThunk('coin/sellCoins', async (sellData) => {
@@ -42,8 +41,8 @@ export const sellCoins = createAsyncThunk('coin/sellCoins', async (sellData) => 
     return res;
 });
 
-export const getUsers = createAsyncThunk('user/getUsers', async () => {
-    const res = await userService.getUsers();
+export const getMiniUsers = createAsyncThunk('user/getUsers', async () => {
+    const res = await userService.getMiniUsers();
     return res;
 });
 
@@ -97,7 +96,7 @@ const userSlice = createSlice({
                 state.purchaseStatus = 'success';
             })
             .addCase((purchaseCoin.pending), state => {
-                state.purchaseStatus = 'proccessing';
+                state.purchaseStatus = 'processing';
             })
             .addCase((purchaseCoin.rejected), (state, { error }) => {
                 if (error.message === 'NO_FUNDS') state.purchaseStatus = 'funds';
@@ -108,13 +107,20 @@ const userSlice = createSlice({
                 state.sellStatus = 'success';
             })
             .addCase((sellCoins.pending), state => {
-                state.sellStatus = 'proccessing';
+                state.sellStatus = 'processing';
 
             }).addCase((sellCoins.rejected), state => {
                 state.sellStatus = 'failed';
             })
-            .addCase((getUsers.fulfilled), (state, { payload }) => {
-                state.users = payload;
+            .addCase((getMiniUsers.fulfilled), (state, { payload }) => {
+                state.miniUsers = payload;
+                state.usersListStatus = 'success';
+            })
+            .addCase((getMiniUsers.pending), (state) => {
+                state.usersListStatus = 'processing';
+            })
+            .addCase((getMiniUsers.rejected), (state) => {
+                state.usersListStatus = 'failed';
             });
 
 

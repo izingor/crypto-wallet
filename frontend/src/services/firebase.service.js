@@ -1,6 +1,6 @@
 import { db, auth, googleProvider, facebookProvider, githubProvider } from '../firebase/firebase.config';
-import { signInWithPopup, signOut, onAuthStateChanged,linkWithPopup } from 'firebase/auth';
-import { doc, updateDoc, setDoc, getDoc } from '@firebase/firestore';
+import { signInWithPopup, signOut, onAuthStateChanged, linkWithPopup } from 'firebase/auth';
+import { doc, updateDoc, setDoc, getDoc, getDocs, collection } from '@firebase/firestore';
 
 export const firebaseService = {
     loginWithGoogle,
@@ -11,6 +11,7 @@ export const firebaseService = {
     getCurrUserData,
     loginWithFacebook,
     loginWithGithub,
+    getUsers
 };
 
 
@@ -19,7 +20,7 @@ async function loginWithGithub() {
     try {
         const user = await linkWithPopup(auth.currentUser, githubProvider);
         console.log(user);
-        return user
+        return user;
     } catch (err) {
         console.log('Had an error while logging in with github', err);
     }
@@ -44,6 +45,18 @@ async function loginWithFacebook() {
     }
 
 }
+
+async function getUsers() {
+    const users = [];
+    try {
+        const data = await getDocs(collection(db, 'users'));
+        data.forEach(doc => { users.push(doc.data()); });
+        return users;
+    } catch (err) {
+        console.log('Had an error while getting users for the leaderboard', err);
+    }
+}
+
 
 async function setDocument(collection, id, document) {
     try {

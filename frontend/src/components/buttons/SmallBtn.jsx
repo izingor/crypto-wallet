@@ -4,7 +4,6 @@ export const SmallBtn = ({
 	handleClick = null,
 	isSellBtnBlocked = null,
 }) => {
-	console.log(isSellBtnBlocked)
 	const btnClass = () => {
 		if (isSellBtnBlocked) {
 			return 'hidden'

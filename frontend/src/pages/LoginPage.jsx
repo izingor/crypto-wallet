@@ -1,13 +1,10 @@
-import { useHandleChange } from '../hooks/useHandleChange'
-import { NavLink, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import {
 	loginUser,
 	userState,
 	resetLoginStatus,
 } from '../store/modules/user.store'
-import { LargeInput } from '../components/inputs/LargeInput'
-import { LargeBtn } from '../components/buttons/LargeBtn'
 import { GoogleSignInBtn } from '../components/buttons/GoogleSignInBtn'
 import { StatusMsg } from '../components/modals/status-msg/StatusMsg'
 

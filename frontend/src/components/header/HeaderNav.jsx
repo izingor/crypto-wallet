@@ -29,7 +29,7 @@ export const HeaderNav = () => {
 					News
 				</NavLink>
 				<NavLink
-					to='/ladder'
+					to='/leaderboard'
 					className='text-gray-100 hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
 				>
 					Leaderboard

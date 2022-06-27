@@ -13,6 +13,7 @@ import { CoinDetailsPage } from './pages/CoinDetailsPage';
 import { BuyModal } from './components/modals/BuyModal';
 import { WalletPage } from './pages/WalletPage';
 import { TransactionsPage } from './pages/TransactionsPage';
+import { LeaderboardPage } from './pages/LeaderboardPage';
 import './assets/scss/global.scss';
 
 export function App() {
@@ -33,6 +34,7 @@ export function App() {
         <Switch>
           <Route path='/coins/:coinId' component={CoinDetailsPage} />
           <Route path='/transactions' component={TransactionsPage} />
+          <Route path='/leaderboard' component={LeaderboardPage} />
           <Route path='/signup' component={SignupPage} />
           <Route path='/wallet' component={WalletPage} />
           <Route path='/login' component={LoginPage} />

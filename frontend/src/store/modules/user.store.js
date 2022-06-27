@@ -4,6 +4,7 @@ import { userService } from '../../services/user.service';
 
 const initialState = {
     user: null,
+    users: null,
     loginStatus: '',
     signupStatus: '',
     purchaseStatus: '',
@@ -41,6 +42,11 @@ export const sellCoins = createAsyncThunk('coin/sellCoins', async (sellData) => 
     return res;
 });
 
+export const getUsers = createAsyncThunk('user/getUsers', async () => {
+    const res = await userService.getUsers();
+    return res;
+});
+
 
 const userSlice = createSlice({
     name: 'user',
@@ -54,7 +60,7 @@ const userSlice = createSlice({
         },
         resetSellStatus: (state) => {
             state.sellStatus = '';
-        }, 
+        },
         resetLoginStatus: (state) => {
             state.loginStatus = '';
         }
@@ -106,6 +112,9 @@ const userSlice = createSlice({
 
             }).addCase((sellCoins.rejected), state => {
                 state.sellStatus = 'failed';
+            })
+            .addCase((getUsers.fulfilled), (state, { payload }) => {
+                state.users = payload;
             });
 
 

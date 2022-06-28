@@ -1,6 +1,9 @@
 import { NavLink } from 'react-router-dom'
 
 export const MobileMenu = ({ mobileMenuClicked }) => {
+	const navLinkClass =
+		'text-gray-100 transition duration-150 ease-out hover:ease-in hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+
 	return (
 		<div className='sm:hidden' id='mobile-menu'>
 			<div className='px-2 pt-2 pb-3 space-y-1'>
@@ -9,7 +12,7 @@ export const MobileMenu = ({ mobileMenuClicked }) => {
 					onClick={mobileMenuClicked}
 					exact
 					to='/'
-					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+					className={navLinkClass}
 					aria-current='page'
 				>
 					Home
@@ -18,7 +21,7 @@ export const MobileMenu = ({ mobileMenuClicked }) => {
 				<NavLink
 					onClick={mobileMenuClicked}
 					to='/rates'
-					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+					className={navLinkClass}
 				>
 					Coins
 				</NavLink>
@@ -26,7 +29,7 @@ export const MobileMenu = ({ mobileMenuClicked }) => {
 				<NavLink
 					onClick={mobileMenuClicked}
 					to='/news'
-					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+					className={navLinkClass}
 				>
 					News
 				</NavLink>
@@ -34,7 +37,7 @@ export const MobileMenu = ({ mobileMenuClicked }) => {
 				<NavLink
 					onClick={mobileMenuClicked}
 					to='/leaderboard'
-					className='text-gray-100 hover:bg-blue-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium'
+					className={navLinkClass}
 				>
 					Leaderboard
 				</NavLink>

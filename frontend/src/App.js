@@ -14,6 +14,7 @@ import { BuyModal } from './components/modals/BuyModal';
 import { WalletPage } from './pages/WalletPage';
 import { TransactionsPage } from './pages/TransactionsPage';
 import { LeaderboardPage } from './pages/LeaderboardPage';
+import { ScrollToTheTop } from './components/ScrollToTheTop';
 import './assets/scss/global.scss';
 
 export function App() {
@@ -25,8 +26,8 @@ export function App() {
 
   return (
     <Router>
+      <ScrollToTheTop />
       <section
-        // style={{ backgroundImage: `url(${heroImage})` }}
         className="flex flex-col h-screen justify-between relative
        bg-no-repeat bg-cover
       ">

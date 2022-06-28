@@ -30,7 +30,7 @@ export const UserBadge = ({
 						</button>
 					) : (
 						<NavLink
-							className='text-gray-100 hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium'
+							className='text-gray-100 hover:bg-blue-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium border transition duration-150 ease-out hover:ease-in'
 							to='/login'
 						>
 							Sign in

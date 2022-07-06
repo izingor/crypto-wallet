@@ -4,6 +4,7 @@ export const ActionsBar = ({
 	onSellModalClicked,
 	onTransactionsClicked,
 	isSellBtnBlocked,
+	onConvertModalClicked,
 }) => {
 	return (
 		<div
@@ -15,7 +16,11 @@ export const ActionsBar = ({
 				type='walletAction'
 				handleClick={onTransactionsClicked}
 			/>
-			<SmallBtn txt='Convert' type='walletAction' />
+			<SmallBtn
+				handleClick={onConvertModalClicked}
+				txt='Convert'
+				type='walletAction'
+			/>
 			<SmallBtn
 				isSellBtnBlocked={isSellBtnBlocked}
 				txt='Sell'

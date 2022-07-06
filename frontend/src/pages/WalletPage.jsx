@@ -15,13 +15,13 @@ import { WalletCoinList } from '../components/wallet/WalletCoinList'
 import { ActionsBar } from '../components/actions-bar/ActionsBar'
 import { coinService } from '../services/coin.service'
 import { SellModal } from '../components/modals/sell/SellModal'
-// import { ConvertModal } from '../components/modals/convert/ConvertModal'
+import { ConvertModal } from '../components/modals/convert/ConvertModal'
 import { useHistory } from 'react-router-dom'
 
 export const WalletPage = () => {
 	const history = useHistory()
 	const [isSellOpen, setIsSellOpen] = useState(false)
-	// const [isConverOpen, setIsConvertOpen] = useState(false)
+	const [isConvertOpen, setIsConvertOpen] = useState(false)
 	const { user, sellStatus } = useSelector(userState)
 	const { walletCoinValues } = useSelector(coinState)
 	const dispatch = useDispatch()
@@ -55,6 +55,11 @@ export const WalletPage = () => {
 		history.push('/transactions')
 	}
 
+	const onConvertModalClicked = () => {
+		setIsConvertOpen(!isConvertOpen)
+		// console.log('conver clicked')
+	}
+
 	useEffect(() => {
 		user && dispatch(getWalletCoins(coinLabels))
 	}, [user])
@@ -72,6 +77,7 @@ export const WalletPage = () => {
 							isGrey={true}
 							actionsBar={
 								<ActionsBar
+									onConvertModalClicked={onConvertModalClicked}
 									onTransactionsClicked={onTransactionsClicked}
 									onSellModalClicked={onSellModalClicked}
 									isSellBtnBlocked={isSellBtnBlocked}
@@ -123,7 +129,7 @@ export const WalletPage = () => {
 					sellStatus={sellStatus}
 				/>
 			)}
-			{/* {isConverOpen && <ConvertModal />} */}
+			{isConvertOpen && <ConvertModal  />}
 		</div>
 	)
 }
